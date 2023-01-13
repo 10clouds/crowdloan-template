@@ -1,15 +1,58 @@
 module.exports = {
   env: {
-    node: true,
-    es2022: true,
     browser: true,
+    es2021: true,
+    node: true,
   },
-  extends: ['eslint:recommended', 'plugin:astro/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:astro/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+  ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
+  plugins: [
+    'astro',
+    '@typescript-eslint',
+    'react',
+    'react-hooks',
+    'tailwindcss',
+  ],
+  rules: {
+    // ESLint: https://eslint.org/docs/latest/rules/
+    // TypeScript: https://typescript-eslint.io/rules/
+    // Astro: https://ota-meshi.github.io/eslint-plugin-astro/rules/
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'react/prop-types': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
   overrides: [
+    {
+      files: ['*.*'],
+      excludedFiles: ['*.astro'],
+      extends: ['plugin:react/recommended'],
+      rules: {
+        // React: https://github.com/jsx-eslint/eslint-plugin-react#list-of-supported-rules
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
+        'react/prop-types': 'off',
+        'react/react-in-jsx-scope': 'off',
+      },
+      settings: {
+        react: {
+          version: 'detect',
+        },
+      },
+    },
     {
       // Define the configuration for `.astro` file.
       files: ['*.astro'],
@@ -48,39 +91,6 @@ module.exports = {
       rules: {
         // override/add rules settings here, such as:
         'no-unused-vars': 'warn',
-      },
-    },
-    {
-      files: ['*.ts'],
-      parser: '@typescript-eslint/parser',
-      extends: ['plugin:@typescript-eslint/recommended'],
-      rules: {
-        '@typescript-eslint/no-unused-vars': [
-          'error',
-          { argsIgnorePattern: '^_', destructuredArrayIgnorePattern: '^_' },
-        ],
-        '@typescript-eslint/no-non-null-assertion': 'off',
-      },
-    },
-    {
-      files: ['.jsx', '.tsx'],
-      extends: ['plugin:react/recommended'],
-      plugins: ['react'],
-      rules: {
-        'react/jsx-wrap-multilines': [
-          2,
-          {
-            declaration: 'parens-new-line',
-            assignment: 'parens-new-line',
-            return: 'parens-new-line',
-            arrow: 'parens-new-line',
-            condition: 'ignore',
-            logical: 'ignore',
-            prop: 'ignore',
-          },
-        ],
-        'react/react-in-jsx-scope': 'off',
-        'react/jsx-indent': [1, 2],
       },
     },
   ],
