@@ -1,0 +1,11 @@
+---
+import Section from '@/components/ui/Section.astro';
+
+export interface Props {
+  id: string;
+}
+
+const { id = 'rewards' } = Astro.props;
+---
+
+<Section id={id}>Rewards</Section>
