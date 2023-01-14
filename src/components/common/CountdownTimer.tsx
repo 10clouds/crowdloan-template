@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { Fragment } from 'react';
 import { useCountdown } from '@/hooks';
 
 interface Props {
@@ -6,22 +7,24 @@ interface Props {
 }
 
 const CountdownTimer: FC<Props> = ({ date }) => {
-  // this date should be imported from config file
   const timeLeft = useCountdown(date);
 
   return (
-    <div className="mx-auto flex w-[524px] justify-center gap-4 rounded-t-xl bg-timer-gradient px-20 py-12">
-      {Object.entries(timeLeft).map(([key, value]) => (
-        <div
-          key={key}
-          className="flex flex-col items-center justify-center text-white"
-        >
-          <div className="text-6xl font-medium">
-            {Math.floor(Number(value))}
+    <div className="mx-auto flex w-fit justify-center gap-4 rounded-t-xl bg-timer-gradient px-20 py-12 md:w-[524px]">
+      {Object.entries(timeLeft).map(([key, value], idx, arr) => (
+        <Fragment key={key}>
+          <div className="flex w-16 flex-col items-center justify-center text-white">
+            <div className="text-[40px] font-medium md:text-6xl">
+              {Math.floor(Number(value))}
+            </div>
+            <span className="text-sm">{key}</span>
           </div>
-          <span className="text-sm"></span>
-          {key}
-        </div>
+          {idx !== arr.length - 1 && (
+            <span className="text-[40px] font-medium leading-[14px] text-white md:text-6xl md:leading-[48px]">
+              :
+            </span>
+          )}
+        </Fragment>
       ))}
     </div>
   );
