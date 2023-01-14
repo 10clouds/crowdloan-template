@@ -8,7 +8,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:astro/recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+    'prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -34,6 +34,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
   },
   overrides: [
     {

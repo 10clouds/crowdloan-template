@@ -1,0 +1,30 @@
+---
+export interface Props {
+  ariaLabel?: string;
+  class?: string;
+  label?: string;
+  variant?: ButtonVariants;
+}
+
+type ButtonVariants = 'default' | 'disabled';
+
+const {
+  ariaLabel = 'Button',
+  class: className = '',
+  label = 'Contribute',
+  variant = 'default',
+} = Astro.props;
+
+const variants = {
+  default: '',
+  disabled: '',
+} as const;
+---
+
+<button
+  type="button"
+  class={`${className} ${variants[variant]}`}
+  aria-label={ariaLabel}
+>
+  {label}
+</button>

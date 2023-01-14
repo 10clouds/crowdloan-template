@@ -1,0 +1,9 @@
+---
+export interface Props {
+  id: string;
+}
+
+const { id = 'hero' } = Astro.props;
+---
+
+<div id={id}>Test</div>
