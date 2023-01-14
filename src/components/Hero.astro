@@ -1,4 +1,6 @@
 ---
+import CountdownTimer from '@/components/common/CountdownTimer';
+
 export interface Props {
   id: string;
 }
@@ -6,4 +8,6 @@ export interface Props {
 const { id = 'hero' } = Astro.props;
 ---
 
-<div id={id}>Test</div>
+<div id={id}>
+  <CountdownTimer client:load />
+</div>

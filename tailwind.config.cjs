@@ -24,6 +24,10 @@ module.exports = {
         base: { DEFAULT: '#131115;', light: '#CFCFCF' },
         primary: { DEFAULT: '#3B5EEA', light: '#8D9ACD' },
       },
+      backgroundImage: {
+        'timer-gradient':
+          'linear-gradient(251.25deg, #436EE7 37.33%, #5043E7 87.85%);',
+      },
     },
     fontFamily: {
       sans: ['Outfit', ...defaultTheme.fontFamily.sans],
