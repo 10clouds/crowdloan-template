@@ -17,7 +17,7 @@ const CountdownTimer: FC<Props> = ({ date }) => {
           className="flex flex-col items-center justify-center text-white"
         >
           <div className="text-6xl font-medium">
-            {Math.floor(value as number)}
+            {Math.floor(Number(value))}
           </div>
           <span className="text-sm"></span>
           {key}
