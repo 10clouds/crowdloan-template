@@ -1,10 +1,11 @@
-import { DateTime, DurationObjectUnits } from 'luxon';
+import { DateTime, DurationObjectUnits, DurationUnits } from 'luxon';
 
-export function getDuration(date: string | Date): DurationObjectUnits {
+export function getDuration(
+  date: string | Date,
+  unit: DurationUnits = ['months', 'days', 'hours', 'minutes', 'seconds']
+): DurationObjectUnits {
   const end = DateTime.fromISO(new Date(date).toISOString());
   const start = DateTime.fromISO(new Date().toISOString());
-  const duration = end
-    .diff(start, ['months', 'days', 'hours', 'minutes', 'seconds'])
-    .toObject();
+  const duration = end.diff(start, unit).toObject();
   return duration;
 }
