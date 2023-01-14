@@ -1,11 +1,9 @@
 ---
 import ToggleMenu from '@/components/common/ToggleMenu.astro';
+import type { navLink } from '@/types';
 
 export interface Props {
-  navLinks: {
-    title: string;
-    url: string;
-  }[];
+  navLinks: navLink[];
 }
 
 const { navLinks = [] } = Astro.props;
@@ -37,7 +35,7 @@ const { navLinks = [] } = Astro.props;
           navLinks.map(({ title, url }) => (
             <li>
               <a
-                class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-base-light"
+                class="hover:text-base-light flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out"
                 href={url}
               >
                 {title}
