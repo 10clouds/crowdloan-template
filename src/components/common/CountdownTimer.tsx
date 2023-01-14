@@ -1,9 +1,13 @@
 import type { FC } from 'react';
 import { useCountdown } from '@/hooks';
 
-const CountdownTimer: FC = () => {
+interface Props {
+  date: string | Date;
+}
+
+const CountdownTimer: FC<Props> = ({ date }) => {
   // this date should be imported from config file
-  const timeLeft = useCountdown('2023-03-13');
+  const timeLeft = useCountdown(date);
 
   return (
     <div className="mx-auto flex w-[524px] justify-center gap-4 rounded-t-xl bg-timer-gradient px-20 py-12">
