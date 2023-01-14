@@ -2,9 +2,13 @@
 import Layout from '@/layouts/PageLayout.astro';
 import Card from '@/components/Card.astro';
 import Hero from '@/components/Hero.astro';
+import About from '@/components/About.astro';
+import Rewards from '@/components/Rewards.astro';
+import Contributors from '@/components/Contributors.astro';
+import { SITE } from '@/config';
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout navLinks={SITE.navLinks} title="Welcome to Astro.">
   <main>
     <div>
       <h1 class="font-sans">
@@ -40,6 +44,9 @@ import Hero from '@/components/Hero.astro';
     </div>
   </main>
   <Hero id="hero" />
+  <About id="about" />
+  <Rewards id="rewards" />
+  <Contributors id="contributors" />
 </Layout>
 
 <style>
@@ -47,7 +54,7 @@ import Hero from '@/components/Hero.astro';
     margin: auto;
     padding: 1.5rem;
     max-width: 60ch;
-    height: 500vh;
+    height: 100vh;
   }
   h1 {
     font-size: 3rem;
