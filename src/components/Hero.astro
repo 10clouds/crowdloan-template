@@ -10,13 +10,17 @@ export interface Props {
   id: string;
 }
 
+// TODO import all content from file
 const { id = 'hero' } = Astro.props;
 
 const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
 ---
 
-<Section id={id} class="bg-primary flex flex-col md:flex-row">
-  <div class="mx-auto w-1/2 pr-24">
+<Section
+  id={id}
+  class="bg-primary flex flex-col md:flex-row relative h-[calc(100vh-72px)]"
+>
+  <div class="mr-auto w-1/2 pr-24">
     <h1 class="text-8xl">
       Building the future <span class="text-primary">of fin experiences</span>
     </h1>
@@ -27,7 +31,7 @@ const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
     </p>
     <Button class="mt-10" />
   </div>
-  <div class="mx-auto h-min w-1/2 min-w-min max-w-min drop-shadow-primary">
+  <div class="ml-auto h-min w-1/2 min-w-min max-w-min drop-shadow-primary">
     <CountdownTimer date={SITE.crowdLoadEndDate} client:load />
     <div class="mb-px flex flex-col rounded-b-lg bg-white px-8 py-6">
       <div class="flex">
@@ -58,4 +62,5 @@ const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
       </div>
     </div>
   </div>
+  <div class="absolute bottom-0">aoisjdajsdjoaj</div>
 </Section>
