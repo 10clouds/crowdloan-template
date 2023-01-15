@@ -1,6 +1,7 @@
 ---
 import ToggleMenu from '@/components/common/ToggleMenu.astro';
 import type { navLink } from '@/types';
+import Button from '@/components/ui/Button.astro';
 
 export interface Props {
   navLinks: navLink[];
@@ -10,7 +11,7 @@ const { navLinks = [] } = Astro.props;
 ---
 
 <header
-  class="sticky top-0 z-40 mx-auto w-full flex-none transition-all duration-100 ease-in"
+  class="sticky top-0 z-40 mx-auto w-full flex-none bg-primary transition-all duration-100 ease-in"
   id="header"
 >
   <div
@@ -35,7 +36,7 @@ const { navLinks = [] } = Astro.props;
           navLinks.map(({ title, url }) => (
             <li>
               <a
-                class="hover:text-base-light flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out"
+                class="hover:text-base-light flex items-center px-4 py-3 text-lg font-medium transition duration-150 ease-in-out"
                 href={url}
               >
                 {title}
@@ -49,7 +50,7 @@ const { navLinks = [] } = Astro.props;
           <!-- TODO logic for contribute btn -->
           <a
             class="btn ml-3 w-full py-2.5 px-5 text-sm font-semibold text-gray-600 shadow-none"
-            href="#">Contribute</a
+            href="#"><Button /></a
           >
         </div>
       </div>

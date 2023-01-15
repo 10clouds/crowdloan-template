@@ -29,6 +29,9 @@ module.exports = {
         'timer-gradient':
           'linear-gradient(251.25deg, #436EE7 37.33%, #5043E7 87.85%);',
       },
+      backgroundColor: {
+        base: { DEFAULT: '#3B5EEA', light: '#506FEC' },
+      },
       dropShadow: {
         primary: '0px 24px 70px rgba(59, 107, 181, 0.15)',
       },

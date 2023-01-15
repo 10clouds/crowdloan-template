@@ -9,6 +9,10 @@ import { SITE } from '@/config';
 ---
 
 <Layout navLinks={SITE.navLinks} title="Welcome to Astro.">
+  <Hero id="hero" />
+  <About id="about" />
+  <Rewards id="rewards" />
+  <Contributors id="contributors" />
   <main>
     <div>
       <h1 class="font-sans">
@@ -43,10 +47,6 @@ import { SITE } from '@/config';
       </ul>
     </div>
   </main>
-  <Hero id="hero" />
-  <About id="about" />
-  <Rewards id="rewards" />
-  <Contributors id="contributors" />
 </Layout>
 
 <style>
