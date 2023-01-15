@@ -10,7 +10,7 @@ const CountdownTimer: FC<Props> = ({ date }) => {
   const timeLeft = useCountdown(date);
 
   return (
-    <div className="mx-auto flex w-fit justify-center gap-4 rounded-t-xl bg-timer-gradient px-20 py-12 md:w-[524px]">
+    <div className="mx-auto flex w-fit justify-center gap-4 rounded-t-xl bg-timer-gradient px-20 py-12 md:w-fit">
       {Object.entries(timeLeft).map(([key, value], idx, arr) => (
         <Fragment key={key}>
           <div className="flex w-16 flex-col items-center justify-center text-white">
