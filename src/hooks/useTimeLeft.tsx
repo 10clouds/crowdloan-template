@@ -12,15 +12,15 @@ const defaultState = {
 };
 
 export function useTimeLeft(eventDate: Date | string): DurationObjectUnits {
-  const [date, setDate] = useState<DurationObjectUnits>(defaultState);
+  const [timeLeft, setTimeLeft] = useState<DurationObjectUnits>(defaultState);
 
   useEffect(() => {
     const interval = setInterval(() => {
       const duration = getDuration(eventDate);
-      setDate(duration);
+      setTimeLeft(duration);
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
-  return date;
+  return timeLeft;
 }
