@@ -1,0 +1,47 @@
+---
+import type { FooterLink } from '@/types';
+import { SITE } from '@/config';
+
+export interface Props {
+  links: FooterLink[];
+  socials: FooterLink[];
+}
+
+const { links = [], socials = [] } = Astro.props;
+
+const commonLinkClass = 'mx-auto flex flex-wrap items-center text-lg';
+---
+
+<footer class="bg-cream px-4 shadow md:px-32">
+  <div
+    class="mx-auto flex flex-col gap-4 py-6 sm:items-center sm:justify-between md:gap-10 md:py-16"
+  >
+    <ul class={`${commonLinkClass} text-[#3B3842]`}>
+      {
+        links.map((link) => (
+          <li>
+            <a href={link.href} class="mr-4 hover:underline md:mr-6">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <ul class={`${commonLinkClass}`}>
+      {
+        socials.map((link) => (
+          <li>
+            <a href={link.href} class="mr-4 hover:underline md:mr-6">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <hr class="border-[#E7E7ED] px-4 md:px-32" />
+  <span class="block p-6 text-center font-normal text-base opacity-50"
+    >© {new Date().getFullYear()}
+    {SITE.name}. All Rights Reserved.</span
+  >
+</footer>

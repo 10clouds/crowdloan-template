@@ -22,4 +22,21 @@ const CONFIG = {
   crowdLoadEndDate: '2023-03-13',
 };
 
-export const SITE = { ...CONFIG };
+const footerLinks = {
+  links: [
+    { label: 'Link1', href: '#' },
+    { label: 'Link2', href: '#' },
+    { label: 'link3', href: '#' },
+    { label: 'Link4', href: '#' },
+    { label: 'Link5', href: '#' },
+  ],
+
+  socials: [
+    { label: 'Twitter', href: '#' },
+    { label: 'LinkedIn', href: '#' },
+    { label: 'Facebook', href: '#' },
+    { label: 'Github', href: '#' },
+  ],
+};
+
+export const SITE = { ...CONFIG, footerLinks };

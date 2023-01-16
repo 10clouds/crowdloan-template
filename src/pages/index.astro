@@ -8,7 +8,12 @@ import Contributors from '@/components/sections/Contributors.astro';
 import { SITE } from '@/config';
 ---
 
-<Layout navLinks={SITE.navLinks} title="Welcome to Astro.">
+<Layout
+  navLinks={SITE.navLinks}
+  title="Welcome to Crowdload."
+  description="Crowdload is a simple lorem ipsum es dolor "
+  footerLinks={SITE.footerLinks}
+>
   <Hero id="hero" />
   <About id="about" />
   <Rewards id="rewards" />
