@@ -5,6 +5,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
+    "types": ["@astrojs/image/client"],
     // Enable top-level await, and other modern ESM features.
     "target": "ESNext",
     "module": "ESNext",

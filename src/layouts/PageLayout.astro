@@ -1,11 +1,11 @@
 ---
 import Navbar from '@/components/common/Navbar.astro';
 import Layout from '@/layouts/BaseLayout.astro';
-import type { navLink } from '@/types';
+import type { NavLink } from '@/types';
 
 export interface Props {
   title: string;
-  navLinks: navLink[];
+  navLinks: NavLink[];
 }
 
 const { title = '', navLinks = [] } = Astro.props;

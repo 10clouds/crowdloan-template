@@ -1,10 +1,10 @@
 ---
 import ToggleMenu from '@/components/common/ToggleMenu.astro';
-import type { navLink } from '@/types';
+import type { NavLink } from '@/types';
 import Button from '@/components/ui/Button.astro';
 
 export interface Props {
-  navLinks: navLink[];
+  navLinks: NavLink[];
 }
 
 const { navLinks = [] } = Astro.props;
