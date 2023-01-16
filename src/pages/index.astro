@@ -38,6 +38,23 @@ const tempCardsData = [
       'Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward.',
   },
 ];
+
+const tempAboutData = {
+  projectDescription:
+    'The rise of the crypto economy promises a world where everyone has access to open and secure financial systems. But this future isn’t guaranteed, the bridge to this new world must be built.',
+  cards: [
+    {
+      title: '12',
+      description:
+        'This is a feature description. How would that work?  Why would that be useful? Who could use it? Think of the value. ',
+    },
+    {
+      title: '2x',
+      description:
+        'This is a feature description. How would that work?  Why would that be useful? Who could use it? Think of the value. ',
+    },
+  ],
+};
 ---
 
 <Layout
@@ -47,7 +64,11 @@ const tempCardsData = [
   footerLinks={SITE.footerLinks}
 >
   <Hero id="hero" />
-  <About id="about" />
+  <About
+    id="about"
+    projectDescription={tempAboutData.projectDescription}
+    cards={tempAboutData.cards}
+  />
   <Rewards id="rewards" />
   <Contributors id="contributors" />
   <main>

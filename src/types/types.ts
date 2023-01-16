@@ -19,3 +19,8 @@ export type Card = {
   description?: string;
   href: string;
 };
+
+export type AboutCard = {
+  title: string;
+  description: string;
+};
