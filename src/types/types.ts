@@ -12,3 +12,10 @@ export type FooterLink = {
   label: string;
   href: string;
 };
+
+export type Card = {
+  title: string;
+  bulletList?: string[];
+  description?: string;
+  href: string;
+};

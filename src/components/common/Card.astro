@@ -1,13 +1,9 @@
 ---
 import { Icon } from 'astro-icon';
 import ArrowIcon from '../ui/ArrowIcon.astro';
+import type { Card } from '@/types';
 
-export interface Props {
-  title: string;
-  bulletList?: string[];
-  description?: string;
-  href: string;
-}
+export type Props = Card;
 
 const {
   title = '',
@@ -20,19 +16,32 @@ const {
 <a
   rel="noopener noreferrer"
   class="w-[30%] rounded-lg bg-white drop-shadow-primary transition-all duration-300 ease-in-out hover:cursor-pointer hover:drop-shadow-primary-hover"
+  href={href}
 >
-  <div class="flex flex-1 flex-col justify-between p-8 pb-12">
-    <span class="text-[40px] font-medium leading-[120%] tracking-tight"
+  <div class="flex h-full flex-col px-8 py-6">
+    <span
+      class="break-words text-[40px] font-medium leading-[120%] tracking-tight"
       >{title}</span
     >
     <div class="flex flex-col gap-4">
-      {bulletList.length ? bulletList.map((item) => <div>{item}</div>) : null}
+      {
+        bulletList.length
+          ? bulletList.map((item) => (
+              <div class="flex first-of-type:mt-8">
+                <Icon name="tabler:check" color="#3b5eea" class="h-6 w-6" />
+                <span class="pl-3">{item}</span>
+              </div>
+            ))
+          : null
+      }
     </div>
     {
       description && (
         <p class="mt-6 font-normal leading-[140%]">{description}</p>
       )
     }
-    <ArrowIcon />
+    <div class="ml-auto mt-auto -mr-2 pt-6">
+      <ArrowIcon />
+    </div>
   </div>
 </a>
