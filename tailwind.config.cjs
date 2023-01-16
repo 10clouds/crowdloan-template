@@ -36,9 +36,6 @@ module.exports = {
         primary: '0px 24px 70px rgba(59, 107, 181, 0.15)',
       },
     },
-    fontFamily: {
-      sans: ['Outfit', ...defaultTheme.fontFamily.sans],
-    },
   },
   plugins: [],
 };
