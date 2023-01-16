@@ -6,6 +6,9 @@ import About from '@/components/sections/About.astro';
 import Rewards from '@/components/sections/Rewards.astro';
 import Contributors from '@/components/sections/Contributors.astro';
 import { SITE } from '@/config';
+import TimeLeftTimer from '@/components/common/TimeLeftTimer';
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
 ---
 
 <Layout
@@ -52,6 +55,16 @@ import { SITE } from '@/config';
       </ul>
     </div>
   </main>
+  <div class="mx-auto w-full bg-vector-1 bg-cover bg-center bg-no-repeat py-20">
+    <div class="flex flex-col items-center justify-center py-40">
+      <TimeLeftTimer
+        client:visible
+        date={SITE.crowdLoadEndDate}
+        variant="big"
+      />
+      <Button variant="default-light" class="mt-12" />
+    </div>
+  </div>
 </Layout>
 
 <style>

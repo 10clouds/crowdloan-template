@@ -11,6 +11,7 @@ import MobbinLogo from '@/assets/images/logos/Mobbin.png';
 import StripeLogo from '@/assets/images/logos/Stripe.png';
 import WebflowLogo from '@/assets/images/logos/Webflow.png';
 import MondayLogo from '@/assets/images/logos/Monday.png';
+import Container from '@/components/ui/Container.astro';
 
 export interface Props {
   id: string;
@@ -66,7 +67,9 @@ let logos = [
         <Button class="mt-10" />
       </div>
       <div class="ml-auto h-min w-1/2 min-w-min max-w-min drop-shadow-primary">
-        <TimeLeftTimer date={SITE.crowdLoadEndDate} client:load />
+        <Container>
+          <TimeLeftTimer date={SITE.crowdLoadEndDate} client:load />
+        </Container>
         <div class="mb-px flex flex-col rounded-b-lg bg-white px-8 py-6">
           <div class="flex">
             <div class="flex flex-col">
