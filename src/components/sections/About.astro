@@ -8,4 +8,27 @@ export interface Props {
 const { id = 'about' } = Astro.props;
 ---
 
-<Section id={id}>About</Section>
+<Section id={id}>
+  <div class="flex w-full flex-col md:flex-row">
+    <div class="w-full md:w-1/2">
+      <span class="section-title"> About the Project</span>
+      <p>
+        The rise of the crypto economy promises a world where everyone has
+        access to open and secure financial systems. But this future isn’t
+        guaranteed, the bridge to this new world must be built.
+      </p>
+    </div>
+    <div class="flex w-full flex-col md:w-1/2">
+      <span class="">12</span>
+      <p>
+        This is a feature description. How would that work? Why would that be
+        useful? Who could use it? Think of the value.
+      </p>
+      <span>2x</span>
+      <p>
+        This is a feature description. How would that work? Why would that be
+        useful? Who could use it? Think of the value.
+      </p>
+    </div>
+  </div>
+</Section>

@@ -46,12 +46,9 @@ let logos = [
 ];
 ---
 
-<Section
-  id={id}
-  class="bg-primary flex flex-col md:flex-row relative h-[calc(100vh-92px)]"
->
+<Section id={id} class="bg-primary flex flex-col md:flex-row relative">
   <div class="flex h-full w-full flex-col">
-    <div class="flex flex-1 flex-col md:flex-row">
+    <div class="flex h-fit flex-col md:flex-row">
       <div
         class="mr-0 w-full pr-0 tracking-tighter md:mr-auto md:w-1/2 md:pr-24"
       >
@@ -70,7 +67,7 @@ let logos = [
         <Button class="mt-10" />
       </div>
       <div
-        class="ml-auto h-min w-full min-w-min max-w-min drop-shadow-primary md:w-1/2"
+        class="mx-auto h-min w-full min-w-min max-w-max drop-shadow-primary md:ml-auto md:w-1/2 md:max-w-min"
       >
         <Container class="mt-6">
           <TimeLeftTimer date={SITE.crowdLoadEndDate} client:load />
@@ -114,6 +111,6 @@ let logos = [
         </div>
       </div>
     </div>
-    <Logos logos={logos} />
+    <Logos logos={logos} class="mt-auto" />
   </div>
 </Section>

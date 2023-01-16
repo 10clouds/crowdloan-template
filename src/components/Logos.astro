@@ -4,16 +4,22 @@ import type { Logo } from '@/types';
 
 export interface Props {
   logos: Logo[];
+  class?: string;
 }
 
-const { logos = [] } = Astro.props;
+const { logos = [], class: className = '' } = Astro.props;
 ---
 
-<div class="flex w-screen items-center justify-evenly bg-white md:-mx-32">
+<div
+  class:list={[
+    '-mx-4 flex w-screen flex-1 flex-wrap items-center justify-evenly bg-white pt-6 md:-mx-32 md:flex-none',
+    { [className]: className },
+  ]}
+>
   {
     logos.map((logo) => (
       <Image
-        class="aspect-[3/2] w-[10%] object-contain"
+        class="aspect-[3/2] w-[35%] object-contain md:w-[10%]"
         src={logo.src}
         alt={logo.alt}
         aspectRatio="3/2"
