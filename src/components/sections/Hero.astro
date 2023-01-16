@@ -51,10 +51,13 @@ let logos = [
   class="bg-primary flex flex-col md:flex-row relative h-[calc(100vh-92px)]"
 >
   <div class="flex h-full w-full flex-col">
-    <div class="flex flex-1">
-      <div class="mr-auto w-1/2 pr-24 tracking-tighter">
-        <h1 class="text-8xl">
-          Building the future <span class="text-primary"
+    <div class="flex flex-1 flex-col md:flex-row">
+      <div
+        class="mr-0 w-full pr-0 tracking-tighter md:mr-auto md:w-1/2 md:pr-24"
+      >
+        <h1 class="text-[40px] leading-10 md:text-8xl md:leading-[90%]">
+          Building the future <span
+            class="bg-timer-gradient bg-clip-text text-transparent"
             >of fin experiences</span
           >
         </h1>
@@ -66,7 +69,9 @@ let logos = [
         </p>
         <Button class="mt-10" />
       </div>
-      <div class="ml-auto h-min w-1/2 min-w-min max-w-min drop-shadow-primary">
+      <div
+        class="ml-auto h-min w-full min-w-min max-w-min drop-shadow-primary md:w-1/2"
+      >
         <Container>
           <TimeLeftTimer date={SITE.crowdLoadEndDate} client:load />
         </Container>
