@@ -12,10 +12,10 @@ const { id = 'additinalLinks', cardsData = [] } = Astro.props;
 ---
 
 <Section id={id} class="bg-primary">
-  <div class="text-center text-7xl font-medium leading-[100%] tracking-tight">
-    Additinal links
-  </div>
-  <div class="flex-column mt-16 flex justify-evenly md:flex-row md:flex-wrap">
+  <div class="section-title">Additinal links</div>
+  <div
+    class="flex-column mt-16 flex flex-wrap justify-evenly gap-6 md:flex-row md:gap-0"
+  >
     {
       cardsData.map(({ title, description, href, bulletList }) => (
         <Card

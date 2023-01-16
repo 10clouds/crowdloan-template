@@ -15,12 +15,12 @@ const {
 
 <a
   rel="noopener noreferrer"
-  class="w-[30%] rounded-lg bg-white drop-shadow-primary transition-all duration-300 ease-in-out hover:cursor-pointer hover:drop-shadow-primary-hover"
+  class="w-full rounded-lg bg-white drop-shadow-primary transition-all duration-300 ease-in-out hover:cursor-pointer hover:drop-shadow-primary-hover md:w-[30%]"
   href={href}
 >
-  <div class="flex h-full flex-col px-8 py-6">
+  <div class="flex h-full flex-col px-4 py-6 md:px-8">
     <span
-      class="break-words text-[40px] font-medium leading-[120%] tracking-tight"
+      class="break-words text-2xl font-medium leading-[120%] tracking-tight md:text-[40px]"
       >{title}</span
     >
     <div class="flex flex-col gap-4">
@@ -28,7 +28,11 @@ const {
         bulletList.length
           ? bulletList.map((item) => (
               <div class="flex first-of-type:mt-8">
-                <Icon name="tabler:check" color="#3b5eea" class="h-6 w-6" />
+                <Icon
+                  name="tabler:check"
+                  color="#3b5eea"
+                  class="h-3 w-3 md:h-6 md:w-6"
+                />
                 <span class="pl-3">{item}</span>
               </div>
             ))
