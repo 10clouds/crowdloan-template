@@ -1,5 +1,5 @@
 ---
-import CountdownTimer from '@/components/common/CountdownTimer';
+import TimeLeftTimer from '@/components/common/TimeLeftTimer';
 import Section from '@/components/ui/Section.astro';
 import { getDuration } from '@/utils';
 import { SITE } from '@/config';
@@ -32,7 +32,7 @@ const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
     <Button class="mt-10" />
   </div>
   <div class="ml-auto h-min w-1/2 min-w-min max-w-min drop-shadow-primary">
-    <CountdownTimer date={SITE.crowdLoadEndDate} client:load />
+    <TimeLeftTimer date={SITE.crowdLoadEndDate} client:load />
     <div class="mb-px flex flex-col rounded-b-lg bg-white px-8 py-6">
       <div class="flex">
         <div class="flex flex-col">

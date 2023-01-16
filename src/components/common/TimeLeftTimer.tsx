@@ -1,13 +1,13 @@
 import type { FC } from 'react';
 import { Fragment } from 'react';
-import { useCountdown } from '@/hooks';
+import { useTimeLeft } from '@/hooks';
 
 interface Props {
   date: string | Date;
 }
 
-const CountdownTimer: FC<Props> = ({ date }) => {
-  const timeLeft = useCountdown(date);
+const TimeLeftTimer: FC<Props> = ({ date }) => {
+  const timeLeft = useTimeLeft(date);
 
   return (
     <div className="mx-auto flex w-fit justify-center gap-4 rounded-t-xl bg-timer-gradient px-20 py-12 md:w-fit">
@@ -30,4 +30,4 @@ const CountdownTimer: FC<Props> = ({ date }) => {
   );
 };
 
-export default CountdownTimer;
+export default TimeLeftTimer;

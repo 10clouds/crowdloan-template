@@ -11,7 +11,7 @@ const defaultState = {
   seconds: 0,
 };
 
-export function useCountdown(eventDate: Date | string): DurationObjectUnits {
+export function useTimeLeft(eventDate: Date | string): DurationObjectUnits {
   const [date, setDate] = useState<DurationObjectUnits>(defaultState);
 
   useEffect(() => {
