@@ -85,8 +85,10 @@ const tempCardsData = [
     </div>
   </main>
   <AdditionalLinks id="additinal" cardsData={tempCardsData} />
-  <div class="mx-auto w-full bg-vector-1 bg-cover bg-center bg-no-repeat py-20">
-    <div class="flex flex-col items-center justify-center py-40">
+  <div
+    class="mx-auto w-full bg-vector-1 bg-cover bg-center bg-no-repeat py-10 px-4 md:py-20"
+  >
+    <div class="flex flex-col items-center justify-center py-12 md:py-40">
       <TimeLeftTimer
         client:visible
         date={SITE.crowdLoadEndDate}
