@@ -1,0 +1,24 @@
+---
+import Section from '@/components/ui/Section.astro';
+import Card from '@/components/common/Card.astro';
+
+export interface Props {
+  id: string;
+}
+
+const { id = 'additinalLinks' } = Astro.props;
+
+const tempDesc = `Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 
+8 DOT per contributed DOT as a reward.`;
+---
+
+<Section id={id} class="bg-primary">
+  <div class="text-center text-7xl font-medium leading-[100%] tracking-tight">
+    Additinal links
+  </div>
+  <div class="flex-column mt-16 flex justify-evenly md:flex-row md:flex-wrap">
+    <Card title="Test" description={tempDesc} href="#" />
+    <Card title="Test" href="#" />
+    <Card title="Test" href="#" description={tempDesc} />
+  </div>
+</Section>

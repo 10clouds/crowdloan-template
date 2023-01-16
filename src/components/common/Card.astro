@@ -1,0 +1,38 @@
+---
+import { Icon } from 'astro-icon';
+import ArrowIcon from '../ui/ArrowIcon.astro';
+
+export interface Props {
+  title: string;
+  bulletList?: string[];
+  description?: string;
+  href: string;
+}
+
+const {
+  title = '',
+  bulletList = [],
+  description = '',
+  href = '',
+} = Astro.props;
+---
+
+<a
+  rel="noopener noreferrer"
+  class="w-[30%] rounded-lg bg-white drop-shadow-primary transition-all duration-300 ease-in-out hover:cursor-pointer hover:drop-shadow-primary-hover"
+>
+  <div class="flex flex-1 flex-col justify-between p-8 pb-12">
+    <span class="text-[40px] font-medium leading-[120%] tracking-tight"
+      >{title}</span
+    >
+    <div class="flex flex-col gap-4">
+      {bulletList.length ? bulletList.map((item) => <div>{item}</div>) : null}
+    </div>
+    {
+      description && (
+        <p class="mt-6 font-normal leading-[140%]">{description}</p>
+      )
+    }
+    <ArrowIcon />
+  </div>
+</a>
