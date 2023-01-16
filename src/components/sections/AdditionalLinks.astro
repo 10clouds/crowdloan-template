@@ -1,0 +1,30 @@
+---
+import Section from '@/components/ui/Section.astro';
+import Card from '@/components/common/Card.astro';
+import type { Card as CardType } from '@/types';
+
+export interface Props {
+  id: string;
+  cardsData: CardType[];
+}
+
+const { id = 'additinalLinks', cardsData = [] } = Astro.props;
+---
+
+<Section id={id} class="bg-primary">
+  <div class="section-title">Additinal links</div>
+  <div
+    class="flex-column mt-16 flex flex-wrap justify-evenly gap-6 md:flex-row md:gap-0"
+  >
+    {
+      cardsData.map(({ title, description, href, bulletList }) => (
+        <Card
+          title={title}
+          description={description}
+          bulletList={bulletList}
+          href={href}
+        />
+      ))
+    }
+  </div>
+</Section>

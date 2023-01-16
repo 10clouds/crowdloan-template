@@ -7,8 +7,37 @@ import Rewards from '@/components/sections/Rewards.astro';
 import Contributors from '@/components/sections/Contributors.astro';
 import { SITE } from '@/config';
 import TimeLeftTimer from '@/components/common/TimeLeftTimer';
-import Container from '@/components/ui/Container.astro';
 import Button from '@/components/ui/Button.astro';
+import AdditionalLinks from '@/components/sections/AdditionalLinks.astro';
+
+const tempCardsData = [
+  {
+    title: 'LitePpaer 2.0',
+    href: 'http://google.com/',
+    bulletList: [
+      'Access to all basic features',
+      'Basic reporting and analytics',
+      'Up to 10 individual users',
+    ],
+    description:
+      'Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward.',
+  },
+  {
+    title: 'WhitePaper',
+    href: 'http://google.com/',
+    bulletList: [
+      'Access to all basic features',
+      'Basic reporting and analytics',
+      'Up to 10 individual users',
+    ],
+  },
+  {
+    title: 'Documentation',
+    href: 'http://google.com/',
+    description:
+      'Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward.',
+  },
+];
 ---
 
 <Layout
@@ -55,8 +84,11 @@ import Button from '@/components/ui/Button.astro';
       </ul>
     </div>
   </main>
-  <div class="mx-auto w-full bg-vector-1 bg-cover bg-center bg-no-repeat py-20">
-    <div class="flex flex-col items-center justify-center py-40">
+  <AdditionalLinks id="additinal" cardsData={tempCardsData} />
+  <div
+    class="mx-auto w-full bg-vector-1 bg-cover bg-center bg-no-repeat py-10 px-4 md:py-20"
+  >
+    <div class="flex flex-col items-center justify-center py-12 md:py-40">
       <TimeLeftTimer
         client:visible
         date={SITE.crowdLoadEndDate}

@@ -24,3 +24,7 @@
 [data-toggle-menu].expanded g > path:last-child {
   @apply translate-y-[-8px] translate-x-[14px] rotate-45;
 }
+
+.section-title {
+  @apply text-center text-[32px] font-medium leading-[120%] tracking-tight md:text-7xl md:leading-[100%];
+}

@@ -9,7 +9,7 @@ export interface Props {
 const { logos = [] } = Astro.props;
 ---
 
-<div class="-mx-32 flex w-screen items-center justify-evenly bg-white">
+<div class="flex w-screen items-center justify-evenly bg-white md:-mx-32">
   {
     logos.map((logo) => (
       <Image

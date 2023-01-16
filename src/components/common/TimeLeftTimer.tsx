@@ -12,17 +12,17 @@ type TimerVariants = keyof typeof mapVariants;
 const mapVariants = {
   default: {
     timer: 'text-[40px] md:text-6xl',
-    wrapper: 'w-16',
+    wrapper: 'w-8 md:w-16',
     colon:
       'text-[40px] leading-[14px] text-white md:text-6xl md:leading-[48px]',
     gap: 'gap-2',
   },
   big: {
     timer: 'text-[40px] md:text-[100px]',
-    wrapper: 'w-20',
+    wrapper: 'w-8 md:w-20',
     colon:
       'text-[40px] leading-[14px] text-white md:text-[100px] md:leading-[68px]',
-    gap: 'gap-4',
+    gap: 'gap-2 md:gap-4',
   },
 } as const;
 

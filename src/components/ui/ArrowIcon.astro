@@ -1,0 +1,18 @@
+---
+import { Icon } from 'astro-icon';
+
+export interface Props {
+  color?: string;
+}
+
+const { color = '#3b5eea' } = Astro.props;
+---
+
+<div class="max-w-fit rounded-full border p-2">
+  <Icon
+    name="tabler:arrow-down-right"
+    color={color}
+    class="w-6 h-6 -rotate-90 hover:scale-125 transition-all duration-300 ease-in-out hover:cursor-pointer"
+    optimize={false}
+  />
+</div>
