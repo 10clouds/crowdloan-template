@@ -5,8 +5,7 @@ export interface Props {
   label?: string;
   variant?: ButtonVariants;
 }
-
-type ButtonVariants = 'default' | 'disabled';
+type ButtonVariants = keyof typeof variants;
 
 const {
   ariaLabel = 'Button',
@@ -15,19 +14,24 @@ const {
   variant = 'default',
 } = Astro.props;
 
-const commonStyles =
-  'flex justify-center px-[24px] py-[12px] rounded-2xl text-lg transition duration-150 ease-in-out';
-
 const variants = {
   default: 'bg-base text-white hover:bg-base-light',
+  'default-light': 'bg-white text-primary hover:bg-gray',
   primary: 'bg-white text-base',
   disabled: '',
 } as const;
+
+const commonStyles =
+  'flex justify-center px-[24px] py-[12px] rounded-2xl text-lg transition duration-150 ease-in-out';
 ---
 
 <button
   type="button"
-  class={`${className} ${variants[variant]} ${commonStyles}`}
+  class:list={[
+    commonStyles,
+    { [className]: className },
+    { [variants[variant]]: variant },
+  ]}
   aria-label={ariaLabel}
 >
   {label}
