@@ -72,35 +72,44 @@ let logos = [
       <div
         class="ml-auto h-min w-full min-w-min max-w-min drop-shadow-primary md:w-1/2"
       >
-        <Container>
+        <Container class="mt-6">
           <TimeLeftTimer date={SITE.crowdLoadEndDate} client:load />
         </Container>
-        <div class="mb-px flex flex-col rounded-b-lg bg-white px-8 py-6">
+        <div
+          class="mb-px flex flex-col rounded-b-lg bg-white px-4 py-6 md:px-8"
+        >
           <div class="flex">
             <div class="flex flex-col">
-              <div class="pb-2 text-sm opacity-50">Contributed</div>
-              <span class="text-[2rem] font-medium text-primary"
+              <div class="pb-2 text-xs opacity-50 md:text-sm">Contributed</div>
+              <span
+                class="text-xl font-medium leading-[90%] text-primary md:text-[2rem]"
                 >31,515,989<span class="px-1 opacity-50">/</span></span
               >
             </div>
             <div class="flex flex-col">
-              <div class="pb-2 text-sm opacity-50">CAP</div>
-              <span class="text-[2rem] font-medium">35,000,000 DOT</span>
+              <div class="pb-2 text-xs opacity-50 md:text-sm">CAP</div>
+              <span class="text-xl font-medium leading-[90%] md:text-[2rem]"
+                >35,000,000 DOT</span
+              >
             </div>
           </div>
           <Progress value={90} />
         </div>
 
-        <div class="flex rounded-lg bg-white px-8 py-6">
+        <div class="flex rounded-lg bg-white px-6 py-4 md:px-8">
           <div class="flex w-1/2 flex-col">
-            <div class="pb-2 text-sm opacity-50">Lease duration</div>
-            <span class="text-[2rem] font-medium"
+            <div class="pb-2 text-xs opacity-50 md:text-sm">Lease duration</div>
+            <span class="text-xl font-medium leading-[90%] md:text-[2rem]"
               >{Math.floor(Number(weeksLeft.weeks ?? 0))} weeks</span
             >
           </div>
           <div class="flex flex-col">
-            <div class="pb-2 text-sm opacity-50">Auction started</div>
-            <span class="text-[2rem] font-medium">LP15-LP8</span>
+            <div class="pb-2 text-xs opacity-50 md:text-sm">
+              Auction started
+            </div>
+            <span class="text-xl font-medium leading-[90%] md:text-[2rem]"
+              >LP15-LP8</span
+            >
           </div>
         </div>
       </div>
