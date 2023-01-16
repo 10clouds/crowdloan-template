@@ -1,25 +1,18 @@
 ---
 import Navbar from '@/components/common/Navbar.astro';
 import Layout from '@/layouts/BaseLayout.astro';
+import type { NavLink } from '@/types';
 
 export interface Props {
   title: string;
+  navLinks: NavLink[];
 }
 
-const { title } = Astro.props;
+const { title = '', navLinks = [] } = Astro.props;
 ---
 
 <Layout title={title}>
-  <Navbar
-    navLinks={[
-      { title: 'About', url: '#hero' },
-      { title: 'Rewards', url: '#' },
-      { title: 'Contributors', url: '#' },
-      { title: 'Additional', url: '#' },
-      { title: 'Tokenomics', url: '#' },
-      { title: 'FAQ', url: '#' },
-    ]}
-  />
+  <Navbar navLinks={navLinks} />
   <main>
     <slot />
   </main>

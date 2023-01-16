@@ -1,0 +1,23 @@
+---
+import { Image } from '@astrojs/image/components';
+import type { Logo } from '@/types';
+
+export interface Props {
+  logos: Logo[];
+}
+
+const { logos = [] } = Astro.props;
+---
+
+<div class="-mx-32 flex w-screen items-center justify-evenly bg-white">
+  {
+    logos.map((logo) => (
+      <Image
+        class="aspect-[3/2] w-[10%] object-contain"
+        src={logo.src}
+        alt={logo.alt}
+        aspectRatio="3/2"
+      />
+    ))
+  }
+</div>

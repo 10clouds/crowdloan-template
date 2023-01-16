@@ -24,9 +24,17 @@ module.exports = {
         base: { DEFAULT: '#131115;', light: '#CFCFCF' },
         primary: { DEFAULT: '#3B5EEA', light: '#8D9ACD' },
       },
-    },
-    fontFamily: {
-      sans: ['Outfit', ...defaultTheme.fontFamily.sans],
+      backgroundImage: {
+        primary: '#F9FAFF',
+        'timer-gradient':
+          'linear-gradient(251.25deg, #436EE7 37.33%, #5043E7 87.85%);',
+      },
+      backgroundColor: {
+        base: { DEFAULT: '#3B5EEA', light: '#506FEC' },
+      },
+      dropShadow: {
+        primary: '0px 24px 70px rgba(59, 107, 181, 0.15)',
+      },
     },
   },
   plugins: [],
