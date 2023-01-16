@@ -1,19 +1,32 @@
 ---
+import Footer from '@/components/common/Footer.astro';
 import Navbar from '@/components/common/Navbar.astro';
 import Layout from '@/layouts/BaseLayout.astro';
-import type { NavLink } from '@/types';
+import type { FooterLink, NavLink } from '@/types';
 
+type FooterLinks = {
+  links: FooterLink[];
+  socials: FooterLink[];
+};
 export interface Props {
   title: string;
+  description: string;
   navLinks: NavLink[];
+  footerLinks: FooterLinks;
 }
 
-const { title = '', navLinks = [] } = Astro.props;
+const {
+  title = '',
+  description = '',
+  navLinks = [],
+  footerLinks,
+} = Astro.props;
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description}>
   <Navbar navLinks={navLinks} />
   <main>
     <slot />
   </main>
+  <Footer links={footerLinks.links} socials={footerLinks.socials} />
 </Layout>
