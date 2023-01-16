@@ -5,14 +5,18 @@ export interface Props {
   isPaddingX?: boolean;
 }
 
-const { id = '', class: className, isPaddingX = true } = Astro.props;
+const { id = '', class: className = '', isPaddingX = true } = Astro.props;
 ---
 
 <section
   id={id}
-  class={`h-screen pt-[92px] w-full text-base ${
-    isPaddingX ? 'px-4 md:px-32' : ''
-  } ${className}`}
+  class:list={[
+    'h-screen pt-[92px] w-full text-base',
+    { [className]: className },
+    {
+      'px-4 md:px-32': isPaddingX,
+    },
+  ]}
 >
   <slot />
 </section>

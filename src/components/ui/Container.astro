@@ -1,0 +1,14 @@
+---
+export interface Props {
+  class?: string;
+  bg?: string;
+}
+
+const { class: className, bg = ' bg-timer-gradient' } = Astro.props;
+---
+
+<div
+  class={`mx-auto flex w-fit justify-evenly rounded-t-xl px-20 py-12 md:w-fit ${className} ${bg}`}
+>
+  <slot />
+</div>
