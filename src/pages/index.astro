@@ -9,6 +9,7 @@ import { SITE } from '@/config';
 import TimeLeftTimer from '@/components/common/TimeLeftTimer';
 import Button from '@/components/ui/Button.astro';
 import AdditionalLinks from '@/components/sections/AdditionalLinks.astro';
+import AboutToken from '@/components/sections/AboutToken.astro';
 
 const tempCardsData = [
   {
@@ -55,6 +56,45 @@ const tempAboutData = {
     },
   ],
 };
+
+let priceCard = [
+  {
+    label: 'Price',
+    body: '$0.0000 (1DOT - 10 XXX)',
+  },
+  {
+    label: 'Total Supply',
+    body: '35 000 000 000 DOT',
+  },
+  {
+    label: 'Crowdloan Reward Pool',
+    body: '20 000 000 DOT',
+    subLabel: '62% of Total Supply',
+  },
+];
+
+let progressCard = [
+  {
+    label: 'LP Rewards 40%',
+    progressValue: 90,
+  },
+  {
+    label: 'Team 11%',
+    progressValue: 20,
+  },
+  {
+    label: 'Ecosystem 4%',
+    progressValue: 10,
+  },
+  {
+    label: 'Validation Rewards 30%',
+    progressValue: 70,
+  },
+  {
+    label: 'Crowdloan Fund 15%',
+    progressValue: 50,
+  },
+];
 ---
 
 <Layout
@@ -69,42 +109,13 @@ const tempAboutData = {
     projectDescription={tempAboutData.projectDescription}
     cards={tempAboutData.cards}
   />
+  <AboutToken
+    id="tokenomics"
+    priceCard={priceCard}
+    progressCard={progressCard}
+  />
   <Rewards id="rewards" />
   <Contributors id="contributors" />
-  <main>
-    <div>
-      <h1 class="font-sans">
-        Welcome to <span class="text-gradient">Astro</span>
-      </h1>
-      <p class="instructions">
-        To get started, open the directory <code>src/pages</code> in your project.<br
-        />
-        <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-      </p>
-      <ul role="list" class="link-card-grid">
-        <Card
-          href="https://docs.astro.build/"
-          title="Documentation"
-          body="Learn how Astro works and explore the official API docs."
-        />
-        <Card
-          href="https://astro.build/integrations/"
-          title="Integrations"
-          body="Supercharge your project with new frameworks and libraries."
-        />
-        <Card
-          href="https://astro.build/themes/"
-          title="Themes"
-          body="Explore a galaxy of community-built starter themes."
-        />
-        <Card
-          href="https://astro.build/chat/"
-          title="Community"
-          body="Come say hi to our amazing Discord community. ❤️"
-        />
-      </ul>
-    </div>
-  </main>
   <AdditionalLinks id="additional" cardsData={tempCardsData} />
   <div
     class="mx-auto w-full bg-vector-1 bg-cover bg-center bg-no-repeat py-10 px-4 md:py-20"

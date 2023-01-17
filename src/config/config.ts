@@ -29,6 +29,7 @@ const footerLinks = {
     { label: 'link3', href: '#' },
     { label: 'Link4', href: '#' },
     { label: 'Link5', href: '#' },
+    { label: 'Link6', href: '#' },
   ],
 
   socials: [
