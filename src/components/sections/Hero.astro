@@ -6,44 +6,20 @@ import { SITE } from '@/config';
 import Progress from '@/components/ui/Progress.astro';
 import Button from '@/components/ui/Button.astro';
 import Logos from '@/components/Logos.astro';
-import MiroLogo from '@/assets/images/logos/Miro.png';
-import MobbinLogo from '@/assets/images/logos/Mobbin.png';
-import StripeLogo from '@/assets/images/logos/Stripe.png';
-import WebflowLogo from '@/assets/images/logos/Webflow.png';
-import MondayLogo from '@/assets/images/logos/Monday.png';
 import Container from '@/components/ui/Container.astro';
 
 export interface Props {
   id: string;
+  logos: {
+    src: string;
+    alt: string;
+  }[];
 }
 
 // TODO import all content from file
-const { id = 'hero' } = Astro.props;
+const { id = 'hero', logos = [] } = Astro.props;
 
 const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
-
-let logos = [
-  {
-    src: MiroLogo,
-    alt: '',
-  },
-  {
-    src: MobbinLogo,
-    alt: '',
-  },
-  {
-    src: StripeLogo,
-    alt: '',
-  },
-  {
-    src: WebflowLogo,
-    alt: '',
-  },
-  {
-    src: MondayLogo,
-    alt: '',
-  },
-];
 ---
 
 <Section id={id} class="bg-primary flex flex-col md:flex-row relative pb-0">

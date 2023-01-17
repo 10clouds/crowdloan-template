@@ -11,6 +11,36 @@ import AdditionalLinks from '@/components/sections/AdditionalLinks.astro';
 import AboutToken from '@/components/sections/AboutToken.astro';
 import Roadmap from '@/components/sections/Roadmap.astro';
 
+//  TODO hero logos - bump to JSON or JS file
+import MiroLogo from '@/assets/images/logos/Miro.png';
+import MobbinLogo from '@/assets/images/logos/Mobbin.png';
+import StripeLogo from '@/assets/images/logos/Stripe.png';
+import WebflowLogo from '@/assets/images/logos/Webflow.png';
+import MondayLogo from '@/assets/images/logos/Monday.png';
+
+let logos = [
+  {
+    src: MiroLogo,
+    alt: '',
+  },
+  {
+    src: MobbinLogo,
+    alt: '',
+  },
+  {
+    src: StripeLogo,
+    alt: '',
+  },
+  {
+    src: WebflowLogo,
+    alt: '',
+  },
+  {
+    src: MondayLogo,
+    alt: '',
+  },
+];
+
 const tempCardsData = [
   {
     title: 'LitePpaer 2.0',
@@ -123,7 +153,7 @@ let timelinePoints = [
   description="Crowdload is a simple lorem ipsum es dolor "
   footerLinks={SITE.footerLinks}
 >
-  <Hero id="hero" />
+  <Hero id="hero" logos={logos} />
   <About
     id="about"
     projectDescription={tempAboutData.projectDescription}
