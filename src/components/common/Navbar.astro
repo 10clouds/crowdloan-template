@@ -5,9 +5,10 @@ import Button from '@/components/ui/Button.astro';
 
 export interface Props {
   navLinks: NavLink[];
+  logo: string;
 }
 
-const { navLinks = [] } = Astro.props;
+const { navLinks = [], logo } = Astro.props;
 ---
 
 <header
@@ -17,7 +18,7 @@ const { navLinks = [] } = Astro.props;
   <div class="w-full max-w-full py-3 px-3 md:flex md:justify-between">
     <div class="flex justify-between">
       <a class="flex items-center" href="#">
-        <!-- <Logo /> -->LOGO
+        <img src={logo} alt="crowload logotype" />
       </a>
       <div class="flex items-center md:hidden">
         <ToggleMenu />
