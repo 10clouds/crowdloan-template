@@ -1,14 +1,36 @@
 ---
 export interface Props {
   class?: string;
-  bg?: string;
+  variant?: ContainerVariants;
+  isHoverAnimation?: boolean;
 }
 
-const { class: className, bg = ' bg-timer-gradient' } = Astro.props;
+type ContainerVariants = keyof typeof variants;
+
+const variants = {
+  default:
+    'mx-auto flex w-full justify-evenly rounded-t-xl px-10 bg-timer-gradient md:px-20 py-6 md:py-12 md:w-fit',
+  cardContainer: 'w-full rounded-lg bg-white drop-shadow-primary 2xl:w-[40%]',
+} as const;
+
+const {
+  class: className = '',
+  variant = 'default',
+  isHoverAnimation = false,
+} = Astro.props;
+
+const hoverStyle =
+  'transition-all duration-300 ease-in-out hover:cursor-pointer hover:drop-shadow-primary-hover ';
 ---
 
 <div
-  class={`mx-auto flex w-full justify-evenly rounded-t-xl px-10 md:px-20 py-6 md:py-12 md:w-fit ${className} ${bg}`}
+  class:list={[
+    {
+      [className]: className,
+      [variants[variant]]: variant,
+      [hoverStyle]: isHoverAnimation,
+    },
+  ]}
 >
   <slot />
 </div>

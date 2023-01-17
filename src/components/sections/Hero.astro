@@ -46,7 +46,7 @@ let logos = [
 ];
 ---
 
-<Section id={id} class="bg-primary flex flex-col md:flex-row relative">
+<Section id={id} class="bg-primary flex flex-col md:flex-row relative pb-0">
   <div class="flex w-full flex-1 flex-col justify-between">
     <div class="flex h-fit flex-col md:flex-row">
       <div
@@ -90,7 +90,7 @@ let logos = [
               >
             </div>
           </div>
-          <Progress value={90} />
+          <Progress value={90} class="mt-4" />
         </div>
 
         <div class="flex rounded-lg bg-white px-6 py-4 md:px-8">
@@ -114,3 +114,10 @@ let logos = [
     <Logos logos={logos} class="mt-auto" />
   </div>
 </Section>
+
+<style>
+  section#hero {
+    /* this only applies to hero */
+    padding-bottom: 0;
+  }
+</style>

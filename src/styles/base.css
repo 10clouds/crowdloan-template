@@ -43,3 +43,7 @@ img {
 .section-title {
   @apply text-center text-[32px] font-medium leading-[120%] tracking-tight md:text-7xl md:leading-[100%];
 }
+
+.section-description {
+  @apply mx-auto mt-6 text-center text-lg opacity-70 md:w-2/3;
+}

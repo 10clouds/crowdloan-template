@@ -2,15 +2,20 @@
 export interface Props {
   value: number;
   isRemainingSpaceVisible?: boolean;
+  class?: string;
 }
 
-const { value = 10, isRemainingSpaceVisible = true } = Astro.props;
+const {
+  value = 10,
+  isRemainingSpaceVisible = true,
+  class: className = '',
+} = Astro.props;
 ---
 
 <div
-  class={`mt-4 h-2.5 w-full rounded-full transition duration-150 ease-in-out ${
+  class={`h-2.5 w-full rounded-full transition duration-150 ease-in-out ${
     isRemainingSpaceVisible ? 'bg-gray-200 ' : ''
-  }`}
+  } ${className}`}
 >
   <div class="h-2.5 rounded-full bg-timer-gradient" style={`width: ${value}%`}>
   </div>

@@ -1,0 +1,59 @@
+---
+import Section from '@/components/ui/Section.astro';
+import Container from '@/components/ui/Container.astro';
+import Progress from '@/components/ui/Progress.astro';
+
+export interface Props {
+  id: string;
+  priceCard: { label: string; body: string; subLabel?: string }[];
+  progressCard: { label: string; progressValue: number }[];
+}
+
+const { id = 'tokenomics', priceCard = [], progressCard = [] } = Astro.props;
+---
+
+<Section id={id} class="bg-primary">
+  <div>
+    <div class="section-title">About the token</div>
+    <p class="section-description">
+      Share some details about tokenomics. Lorem ipsum dolor sit amet,
+      consectetur adipiscing elit. Donec at ligula consequat ante pharetra
+      eleifend ut et diam.
+    </p>
+    <div
+      class="mx-auto mt-14 flex w-full flex-col justify-center gap-6 lg:flex-row"
+    >
+      <Container variant="cardContainer">
+        <div class="cardContainer">
+          {
+            priceCard.map(({ label, subLabel, body }) => (
+              <div>
+                <label class="text-lg opacity-50">{label}</label>
+                <div class="text-3xl font-medium tracking-tight">{body}</div>
+                {subLabel && <p>{subLabel}</p>}
+              </div>
+            ))
+          }
+        </div>
+      </Container>
+      <Container variant="cardContainer">
+        <div class="cardContainer">
+          {
+            progressCard.map(({ label, progressValue }) => (
+              <div>
+                <label class="text-lg">{label}</label>
+                <Progress value={progressValue} />
+              </div>
+            ))
+          }
+        </div>
+      </Container>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .cardContainer {
+    @apply flex flex-col gap-8 px-6 py-8;
+  }
+</style>
