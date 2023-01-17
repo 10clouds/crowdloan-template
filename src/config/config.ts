@@ -14,7 +14,7 @@ const CONFIG = {
     { title: 'Rewards', url: '#rewards' },
     { title: 'Contributors', url: '#contributors' },
     { title: 'Additional', url: '#additional' },
-    { title: 'Tokenomics', url: '#' },
+    { title: 'Tokenomics', url: '#tokenomics' },
     { title: 'FAQ', url: '#faq' },
   ],
 
