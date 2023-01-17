@@ -1,0 +1,62 @@
+---
+import Section from '@/components/ui/Section.astro';
+import Progress from '@/components/ui/Progress.astro';
+import Cicle from '@/components/Icons/Cicle.astro';
+
+export interface Props {
+  id: string;
+}
+
+const { id = 'roadmap' } = Astro.props;
+
+let timelinePoints = [
+  {
+    label: 'Start Date',
+    body: '12.12.2022',
+  },
+  {
+    label: 'Testing',
+    body: '1.03.2023',
+  },
+  {
+    label: 'Auction',
+    body: '15.05.2023',
+    isCurrentPoint: true,
+  },
+  {
+    label: 'End date',
+    body: '1.08.2023',
+  },
+];
+---
+
+<Section id={id}>
+  <div class="section-title">Roadmap</div>
+  <div class="relative mt-28">
+    <Progress value={63} />
+    <div class="absolute -top-2.5 flex w-full justify-around">
+      {
+        timelinePoints.map(({ label, body, isCurrentPoint = false }) => (
+          <>
+            <div class="relative flex flex-col items-center">
+              {isCurrentPoint && (
+                <div class="drop-shadow-primary-small absolute -top-12 w-max rounded-lg bg-white px-5 text-3xl font-medium tracking-tight">
+                  We are here
+                </div>
+              )}
+              <Cicle class="timeline-point" />
+              <label>{label}</label>
+              <p>{body}</p>
+            </div>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</Section>
+
+<style>
+  .timeline-point {
+    @apply drop-shadow-primary-small;
+  }
+</style>

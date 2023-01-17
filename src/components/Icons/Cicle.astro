@@ -1,0 +1,26 @@
+---
+export interface Props {
+  firstColor?: string;
+  secondColor?: string;
+  class?: string;
+}
+
+const {
+  firstColor = 'white',
+  secondColor = '#3B5EEA',
+  class: className = '',
+} = Astro.props;
+---
+
+<span class={className}>
+  <svg
+    width="30"
+    height="30"
+    viewBox="0 0 30 30"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="15" cy="15" r="15" fill={firstColor}></circle>
+    <circle cx="15" cy="15" r="5" fill={secondColor}></circle>
+  </svg>
+</span>

@@ -38,6 +38,7 @@ module.exports = {
       dropShadow: {
         primary: '0px 24px 70px rgba(59, 107, 181, 0.15)',
         'primary-hover': '0px 24px 70px rgba(59, 107, 181, 0.35)',
+        'primary-small': '0px 3px 20px rgba(88, 102, 234, 0.4)',
       },
     },
   },

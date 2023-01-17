@@ -42,7 +42,10 @@ const { id = 'tokenomics', priceCard = [], progressCard = [] } = Astro.props;
             progressCard.map(({ label, progressValue }) => (
               <div>
                 <label class="text-lg">{label}</label>
-                <Progress value={progressValue} />
+                <Progress
+                  value={progressValue}
+                  isRemainingSpaceVisible={false}
+                />
               </div>
             ))
           }

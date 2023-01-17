@@ -1,6 +1,5 @@
 ---
 import Layout from '@/layouts/PageLayout.astro';
-import Card from '@/components/Card.astro';
 import Hero from '@/components/sections/Hero.astro';
 import About from '@/components/sections/About.astro';
 import Rewards from '@/components/sections/Rewards.astro';
@@ -10,6 +9,7 @@ import TimeLeftTimer from '@/components/common/TimeLeftTimer';
 import Button from '@/components/ui/Button.astro';
 import AdditionalLinks from '@/components/sections/AdditionalLinks.astro';
 import AboutToken from '@/components/sections/AboutToken.astro';
+import Roadmap from '@/components/sections/Roadmap.astro';
 
 const tempCardsData = [
   {
@@ -114,6 +114,7 @@ let progressCard = [
     priceCard={priceCard}
     progressCard={progressCard}
   />
+  <Roadmap id="roadmap" />
   <Rewards id="rewards" />
   <Contributors id="contributors" />
   <AdditionalLinks id="additional" cardsData={tempCardsData} />
