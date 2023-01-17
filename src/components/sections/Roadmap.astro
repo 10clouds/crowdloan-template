@@ -5,29 +5,14 @@ import Cicle from '@/components/Icons/Cicle.astro';
 
 export interface Props {
   id: string;
+  timelinePoints: {
+    label: string;
+    body: string;
+    isCurrentPoint?: boolean;
+  }[];
 }
 
-const { id = 'roadmap' } = Astro.props;
-
-let timelinePoints = [
-  {
-    label: 'Start Date',
-    body: '12.12.2022',
-  },
-  {
-    label: 'Testing',
-    body: '1.03.2023',
-  },
-  {
-    label: 'Auction',
-    body: '15.05.2023',
-    isCurrentPoint: true,
-  },
-  {
-    label: 'End date',
-    body: '1.08.2023',
-  },
-];
+const { id = 'roadmap', timelinePoints = [] } = Astro.props;
 ---
 
 <Section id={id}>

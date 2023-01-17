@@ -95,6 +95,26 @@ let progressCard = [
     progressValue: 50,
   },
 ];
+
+let timelinePoints = [
+  {
+    label: 'Start Date',
+    body: '12.12.2022',
+  },
+  {
+    label: 'Testing',
+    body: '1.03.2023',
+  },
+  {
+    label: 'Auction',
+    body: '15.05.2023',
+    isCurrentPoint: true,
+  },
+  {
+    label: 'End date',
+    body: '1.08.2023',
+  },
+];
 ---
 
 <Layout
@@ -114,7 +134,7 @@ let progressCard = [
     priceCard={priceCard}
     progressCard={progressCard}
   />
-  <Roadmap id="roadmap" />
+  <Roadmap id="roadmap" timelinePoints={timelinePoints} />
   <Rewards id="rewards" />
   <Contributors id="contributors" />
   <AdditionalLinks id="additional" cardsData={tempCardsData} />
