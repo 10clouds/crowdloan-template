@@ -31,7 +31,10 @@ const commonLinkClass = 'mx-auto flex flex-wrap items-center text-lg';
       {
         socials.map((link) => (
           <li>
-            <a href={link.href} class="mr-4 hover:underline md:mr-6">
+            <a
+              href={link.href}
+              class="text-primary mr-4 hover:underline md:mr-6"
+            >
               {link.label}
             </a>
           </li>
