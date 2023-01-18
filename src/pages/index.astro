@@ -149,6 +149,44 @@ let timelinePoints = [
     body: '1.08.2023',
   },
 ];
+
+const faq = [
+  {
+    question: 'How long does it take to verify my account?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+  {
+    question: 'How long will my withdrawal take to show up in my bank account?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+  {
+    question: 'How do Boosts work?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+  {
+    question: 'What is APY?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+  {
+    question: 'How does the waitlist work?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+  {
+    question: 'How do I change my email?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+  {
+    question: 'How do I change my address?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+];
 ---
 
 <Layout
@@ -175,7 +213,7 @@ let timelinePoints = [
   <Rewards id="rewards" />
   <Contributors id="contributors" />
   <AdditionalLinks id="additional" cardsData={tempCardsData} />
-  <FAQ id="faq" />
+  <FAQ id="faq" faq={faq} />
   <div
     class="mx-auto w-full bg-vector-1 bg-cover bg-center bg-no-repeat py-10 px-4 md:py-20"
   >

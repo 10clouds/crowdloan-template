@@ -1,11 +1,9 @@
 ---
+import type { FAQ } from '@/types';
 import AccordionItem from './AccordionItem';
 
 export interface Props {
-  faq: {
-    question: string;
-    answer: string;
-  }[];
+  faq: FAQ[];
   class?: string;
 }
 
