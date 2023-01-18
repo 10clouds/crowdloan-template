@@ -1,0 +1,61 @@
+---
+const tableData = [
+  {
+    rank: '1',
+    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
+    date: '7.12.2022',
+    contributed: '189,185.44 DOT',
+  },
+  {
+    rank: '1',
+    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
+    date: '7.12.2022',
+    contributed: '189,185.44 DOT',
+  },
+  {
+    rank: '1',
+    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
+    date: '7.12.2022',
+    contributed: '189,185.44 DOT',
+  },
+  {
+    rank: '1',
+    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
+    date: '7.12.2022',
+    contributed: '189,185.44 DOT',
+  },
+  {
+    rank: '1',
+    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
+    date: '7.12.2022',
+    contributed: '189,185.44 DOT',
+  },
+];
+const tHeaders = Object.keys(tableData[0] || {});
+---
+
+<table class="w-fit table-auto rounded-lg bg-white drop-shadow-primary">
+  <thead class="text-xs font-medium text-[#89888A]">
+    <tr>
+      {
+        tHeaders.map((label) => (
+          <th class="py-4 uppercase first-of-type:px-4 last-of-type:px-4">
+            {label}
+          </th>
+        ))
+      }
+    </tr>
+  </thead>
+  <tbody class="text-lg">
+    {
+      tableData.map(({ rank, account, contributed, date }) => (
+        <tr>
+          <td class="first-of-type:px-4">{rank}</td>
+          <td>{account}</td>
+          <td>{date}</td>
+          <td class="last-of-type:px-4">{contributed}</td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>
