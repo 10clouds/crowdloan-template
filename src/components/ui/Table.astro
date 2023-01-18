@@ -34,12 +34,14 @@ const tableData = [
 const tHeaders = Object.keys(tableData[0] || {});
 ---
 
-<table class="w-fit table-auto rounded-lg bg-white drop-shadow-primary">
+<table
+  class="b w-fit table-auto border-separate border-spacing-2 rounded-lg border-[#DBDBDB] bg-white drop-shadow-primary"
+>
   <thead class="text-xs font-medium text-[#89888A]">
     <tr>
       {
         tHeaders.map((label) => (
-          <th class="py-4 uppercase first-of-type:px-4 last-of-type:px-4">
+          <th class="border-b-[1px] border-[#DBDBDB] py-4 text-start uppercase first-of-type:px-4 last-of-type:px-4">
             {label}
           </th>
         ))
@@ -49,8 +51,8 @@ const tHeaders = Object.keys(tableData[0] || {});
   <tbody class="text-lg">
     {
       tableData.map(({ rank, account, contributed, date }) => (
-        <tr>
-          <td class="first-of-type:px-4">{rank}</td>
+        <tr class="rounded-lg border-b-[1px] border-[#DBDBDB] last-of-type:border-b-0 ">
+          <td class="text-center">{rank}</td>
           <td>{account}</td>
           <td>{date}</td>
           <td class="last-of-type:px-4">{contributed}</td>
