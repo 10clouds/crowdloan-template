@@ -24,3 +24,8 @@ export type AboutCard = {
   title: string;
   description: string;
 };
+
+export type FAQ = {
+  question: string;
+  answer: string;
+};
