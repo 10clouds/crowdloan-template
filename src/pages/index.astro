@@ -10,6 +10,8 @@ import Button from '@/components/ui/Button.astro';
 import AdditionalLinks from '@/components/sections/AdditionalLinks.astro';
 import AboutToken from '@/components/sections/AboutToken.astro';
 import Roadmap from '@/components/sections/Roadmap.astro';
+import Logos from '@/components/Logos.astro';
+import FAQ from '@/components/sections/FAQ.astro';
 
 //  TODO hero logos - bump to JSON or JS file
 import MiroLogo from '@/assets/images/logos/Miro.png';
@@ -19,7 +21,6 @@ import WebflowLogo from '@/assets/images/logos/Webflow.png';
 import MondayLogo from '@/assets/images/logos/Monday.png';
 
 import Logo from '@/assets/Logo.svg';
-import Logos from '@/components/Logos.astro';
 
 let logos = [
   {
@@ -174,6 +175,7 @@ let timelinePoints = [
   <Rewards id="rewards" />
   <Contributors id="contributors" />
   <AdditionalLinks id="additional" cardsData={tempCardsData} />
+  <FAQ id="faq" />
   <div
     class="mx-auto w-full bg-vector-1 bg-cover bg-center bg-no-repeat py-10 px-4 md:py-20"
   >

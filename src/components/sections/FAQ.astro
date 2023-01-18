@@ -1,0 +1,57 @@
+---
+import Section from '@/components/ui/Section.astro';
+import Accordion from '@/components/ui/Accordion/Accordion.astro';
+
+export interface Props {
+  id: string;
+}
+
+const { id = 'faq' } = Astro.props;
+
+const temp = [
+  {
+    question: 'How long does it take to verify my account?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+  {
+    question: 'How long will my withdrawal take to show up in my bank account?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+  {
+    question: 'How do Boosts work?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+  {
+    question: 'What is APY?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+  {
+    question: 'How does the waitlist work?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+  {
+    question: 'How do I change my email?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+  {
+    question: 'How do I change my address?',
+    answer:
+      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+  },
+];
+---
+
+<Section id={id} class="bg-primary">
+  <div class="section-title">Frequently Asked Questions</div>
+  <Accordion faq={temp} />
+  <p class="text-center">
+    Have a question that is not answered? You can contact us at
+    support@crowdloan.com
+  </p>
+</Section>
