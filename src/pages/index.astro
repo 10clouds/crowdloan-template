@@ -1,6 +1,5 @@
 ---
 import Layout from '@/layouts/PageLayout.astro';
-import Card from '@/components/Card.astro';
 import Hero from '@/components/sections/Hero.astro';
 import About from '@/components/sections/About.astro';
 import Rewards from '@/components/sections/Rewards.astro';
@@ -10,6 +9,40 @@ import TimeLeftTimer from '@/components/common/TimeLeftTimer';
 import Button from '@/components/ui/Button.astro';
 import AdditionalLinks from '@/components/sections/AdditionalLinks.astro';
 import AboutToken from '@/components/sections/AboutToken.astro';
+import Roadmap from '@/components/sections/Roadmap.astro';
+
+//  TODO hero logos - bump to JSON or JS file
+import MiroLogo from '@/assets/images/logos/Miro.png';
+import MobbinLogo from '@/assets/images/logos/Mobbin.png';
+import StripeLogo from '@/assets/images/logos/Stripe.png';
+import WebflowLogo from '@/assets/images/logos/Webflow.png';
+import MondayLogo from '@/assets/images/logos/Monday.png';
+
+import Logo from '@/assets/Logo.svg';
+import Logos from '@/components/Logos.astro';
+
+let logos = [
+  {
+    src: MiroLogo,
+    alt: '',
+  },
+  {
+    src: MobbinLogo,
+    alt: '',
+  },
+  {
+    src: StripeLogo,
+    alt: '',
+  },
+  {
+    src: WebflowLogo,
+    alt: '',
+  },
+  {
+    src: MondayLogo,
+    alt: '',
+  },
+];
 
 const tempCardsData = [
   {
@@ -95,6 +128,26 @@ let progressCard = [
     progressValue: 50,
   },
 ];
+
+let timelinePoints = [
+  {
+    label: 'Start Date',
+    body: '12.12.2022',
+  },
+  {
+    label: 'Testing',
+    body: '1.03.2023',
+  },
+  {
+    label: 'Auction',
+    body: '15.05.2023',
+    isCurrentPoint: true,
+  },
+  {
+    label: 'End date',
+    body: '1.08.2023',
+  },
+];
 ---
 
 <Layout
@@ -102,8 +155,11 @@ let progressCard = [
   title="Welcome to Crowdload."
   description="Crowdload is a simple lorem ipsum es dolor "
   footerLinks={SITE.footerLinks}
+  logo={Logo}
 >
   <Hero id="hero" />
+  <Logos logos={logos} class="mt-auto" />
+
   <About
     id="about"
     projectDescription={tempAboutData.projectDescription}
@@ -114,6 +170,7 @@ let progressCard = [
     priceCard={priceCard}
     progressCard={progressCard}
   />
+  <Roadmap id="roadmap" timelinePoints={timelinePoints} progressValue={63} />
   <Rewards id="rewards" />
   <Contributors id="contributors" />
   <AdditionalLinks id="additional" cardsData={tempCardsData} />

@@ -5,12 +5,6 @@ import { getDuration } from '@/utils';
 import { SITE } from '@/config';
 import Progress from '@/components/ui/Progress.astro';
 import Button from '@/components/ui/Button.astro';
-import Logos from '@/components/Logos.astro';
-import MiroLogo from '@/assets/images/logos/Miro.png';
-import MobbinLogo from '@/assets/images/logos/Mobbin.png';
-import StripeLogo from '@/assets/images/logos/Stripe.png';
-import WebflowLogo from '@/assets/images/logos/Webflow.png';
-import MondayLogo from '@/assets/images/logos/Monday.png';
 import Container from '@/components/ui/Container.astro';
 
 export interface Props {
@@ -21,38 +15,15 @@ export interface Props {
 const { id = 'hero' } = Astro.props;
 
 const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
-
-let logos = [
-  {
-    src: MiroLogo,
-    alt: '',
-  },
-  {
-    src: MobbinLogo,
-    alt: '',
-  },
-  {
-    src: StripeLogo,
-    alt: '',
-  },
-  {
-    src: WebflowLogo,
-    alt: '',
-  },
-  {
-    src: MondayLogo,
-    alt: '',
-  },
-];
 ---
 
-<Section id={id} class="bg-primary flex flex-col md:flex-row relative pb-0">
+<Section id={id} class="bg-primary flex flex-col md:flex-row relative">
   <div class="flex w-full flex-1 flex-col justify-between">
-    <div class="flex h-fit flex-col md:flex-row">
+    <div class="flex h-fit flex-col lg:flex-row">
       <div
-        class="mr-0 w-full pr-0 tracking-tighter md:mr-auto md:w-1/2 md:pr-24"
+        class="md:pr-auto mr-0 w-full tracking-tighter md:mr-14 md:w-1/2 lg:mr-20 2xl:mr-48"
       >
-        <h1 class="text-[40px] leading-10 md:text-8xl md:leading-[90%]">
+        <h1 class="text-[40px] leading-10 md:leading-[90%] xl:text-8xl">
           Building the future <span
             class="bg-timer-gradient bg-clip-text text-transparent"
             >of fin experiences</span
@@ -69,7 +40,7 @@ let logos = [
       <div
         class="mx-auto h-min w-full min-w-min max-w-max drop-shadow-primary md:ml-auto md:w-1/2 md:max-w-min"
       >
-        <Container class="mt-6">
+        <Container class="mt-6 md:mt-0">
           <TimeLeftTimer date={SITE.crowdLoadEndDate} client:load />
         </Container>
         <div
@@ -111,13 +82,5 @@ let logos = [
         </div>
       </div>
     </div>
-    <Logos logos={logos} class="mt-auto" />
   </div>
 </Section>
-
-<style>
-  section#hero {
-    /* this only applies to hero */
-    padding-bottom: 0;
-  }
-</style>

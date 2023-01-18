@@ -1,0 +1,64 @@
+---
+import Section from '@/components/ui/Section.astro';
+import Progress from '@/components/ui/Progress.astro';
+import Cicle from '@/components/Icons/Cicle.astro';
+
+export interface Props {
+  id: string;
+  timelinePoints: {
+    label: string;
+    body: string;
+    isCurrentPoint?: boolean;
+  }[];
+  progressValue: number;
+}
+
+const { id = 'roadmap', timelinePoints = [], progressValue = 20 } = Astro.props;
+---
+
+<section
+  id={id}
+  class="h-full w-full py-14 px-4 text-base md:min-h-[calc(100%-92px)] md:px-32 xl:py-40"
+>
+  <div class="section-title">Roadmap</div>
+  <div class="relative mt-36">
+    <Progress value={progressValue} />
+    <div class="absolute -top-2.5 flex w-full justify-around">
+      {
+        timelinePoints.map(
+          ({ label, body, isCurrentPoint = false }, idx, arr) => {
+            const currPointIdx = arr.findIndex(
+              ({ isCurrentPoint }) => isCurrentPoint
+            );
+            return (
+              <>
+                <div class="relative flex flex-col items-center">
+                  {isCurrentPoint && (
+                    <>
+                      <div class="drop-shadow-primary-small absolute -top-20 w-max rounded-lg bg-white px-5 py-2.5 text-3xl font-medium tracking-tight">
+                        We are here!
+                      </div>
+                      <div class="bg-base absolute bottom-0 -top-20 -z-10 h-full w-0.5 " />
+                    </>
+                  )}
+                  <Cicle
+                    class="timeline-point"
+                    secondColor={idx <= currPointIdx ? '#3B5EEA' : '#D4D4D8'}
+                  />
+                  <label class="mt-5 text-lg font-medium">{label}</label>
+                  <p class="opacity-70">{body}</p>
+                </div>
+              </>
+            );
+          }
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline-point {
+    @apply drop-shadow-primary-small;
+  }
+</style>
