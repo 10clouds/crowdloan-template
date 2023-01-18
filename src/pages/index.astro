@@ -187,6 +187,37 @@ const faq = [
       'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
   },
 ];
+
+const rewardsDistribution = [
+  {
+    title: '31 DOT per 1 DOT',
+    topLabel: "WE'RE HERE!",
+    description:
+      'Contribution for the first 500,000 DOT will receive 12 DOT per contributed DOT as a reward.',
+  },
+  {
+    title: '8 DOT per 1 DOT',
+    topLabel: 'NEXT BLOCK',
+    description:
+      'Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward.',
+  },
+  {
+    title: '4 DOT per 1 DOT',
+    topLabel: 'NEXT BLOCK',
+    description:
+      'Contribution for the raised xxx between 1,500,000 - 3,000,000 DOT will receive 4 DOT per contributed DOT as a reward.',
+    takeSpace: 2,
+  },
+  {
+    title: '31 DOT per 1 DOT',
+    topLabel: 'WHAT ELSE?',
+    bulletList: [
+      'The failure compensation in Batch 1 and Batch 2 will be distributed by the Project team.',
+      'The compensation ratio is XXX : DOT = 0.12 : 1',
+    ],
+    takeSpace: 4,
+  },
+];
 ---
 
 <Layout
@@ -210,7 +241,7 @@ const faq = [
     progressCard={progressCard}
   />
   <Roadmap id="roadmap" timelinePoints={timelinePoints} progressValue={63} />
-  <Rewards id="rewards" />
+  <Rewards id="rewards" rewardsDistribution={rewardsDistribution} />
   <Contributors id="contributors" />
   <AdditionalLinks id="additional" cardsData={tempCardsData} />
   <FAQ id="faq" faq={faq} />
