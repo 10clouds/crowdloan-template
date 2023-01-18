@@ -19,6 +19,7 @@ import WebflowLogo from '@/assets/images/logos/Webflow.png';
 import MondayLogo from '@/assets/images/logos/Monday.png';
 
 import Logo from '@/assets/Logo.svg';
+import Logos from '@/components/Logos.astro';
 
 let logos = [
   {
@@ -156,7 +157,9 @@ let timelinePoints = [
   footerLinks={SITE.footerLinks}
   logo={Logo}
 >
-  <Hero id="hero" logos={logos} />
+  <Hero id="hero" />
+  <Logos logos={logos} class="mt-auto" />
+
   <About
     id="about"
     projectDescription={tempAboutData.projectDescription}

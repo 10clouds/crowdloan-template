@@ -5,19 +5,14 @@ import { getDuration } from '@/utils';
 import { SITE } from '@/config';
 import Progress from '@/components/ui/Progress.astro';
 import Button from '@/components/ui/Button.astro';
-import Logos from '@/components/Logos.astro';
 import Container from '@/components/ui/Container.astro';
 
 export interface Props {
   id: string;
-  logos: {
-    src: string;
-    alt: string;
-  }[];
 }
 
 // TODO import all content from file
-const { id = 'hero', logos = [] } = Astro.props;
+const { id = 'hero' } = Astro.props;
 
 const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
 ---
@@ -26,9 +21,9 @@ const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
   <div class="flex w-full flex-1 flex-col justify-between">
     <div class="flex h-fit flex-col lg:flex-row">
       <div
-        class="mr-0 w-full pr-0 tracking-tighter md:mr-auto md:w-1/2 md:pr-24"
+        class="md:pr-auto mr-0 w-full tracking-tighter md:mr-14 md:w-1/2 lg:mr-20 2xl:mr-48"
       >
-        <h1 class="text-[40px] leading-10 md:text-8xl md:leading-[90%]">
+        <h1 class="text-[40px] leading-10 md:leading-[90%] xl:text-8xl">
           Building the future <span
             class="bg-timer-gradient bg-clip-text text-transparent"
             >of fin experiences</span
@@ -87,13 +82,5 @@ const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
         </div>
       </div>
     </div>
-    <Logos logos={logos} class="mt-auto" />
   </div>
 </Section>
-
-<style>
-  section#hero {
-    /* this only applies to hero */
-    padding-bottom: 0;
-  }
-</style>

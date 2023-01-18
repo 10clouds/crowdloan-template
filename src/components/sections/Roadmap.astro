@@ -34,9 +34,12 @@ const { id = 'roadmap', timelinePoints = [], progressValue = 20 } = Astro.props;
               <>
                 <div class="relative flex flex-col items-center">
                   {isCurrentPoint && (
-                    <div class="drop-shadow-primary-small absolute -top-20 w-max rounded-lg bg-white px-5 py-2.5 text-3xl font-medium tracking-tight">
-                      We are here!
-                    </div>
+                    <>
+                      <div class="drop-shadow-primary-small absolute -top-20 w-max rounded-lg bg-white px-5 py-2.5 text-3xl font-medium tracking-tight">
+                        We are here!
+                      </div>
+                      <div class="bg-base absolute bottom-0 -top-20 -z-10 h-full w-0.5 " />
+                    </>
                   )}
                   <Cicle
                     class="timeline-point"
