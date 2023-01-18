@@ -17,7 +17,7 @@ export type Card = {
   title: string;
   bulletList?: string[];
   description?: string;
-  href: string;
+  href?: string;
 };
 
 export type AboutCard = {

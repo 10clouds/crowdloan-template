@@ -3,19 +3,29 @@ import { Icon } from 'astro-icon';
 import type { Card } from '@/types';
 import ArrowDownRight from '@/components/Icons/ArrowDownRight.astro';
 
-export type Props = Card;
+export type Props = Card & { class?: string };
 
 const {
   title = '',
   bulletList = [],
   description = '',
   href = '',
+  class: className = '',
 } = Astro.props;
+
+const Element = href ? 'a' : 'div';
 ---
 
-<a
+<Element
   rel="noopener noreferrer"
-  class="w-full rounded-lg bg-white drop-shadow-primary transition-all duration-300 ease-in-out hover:cursor-pointer hover:drop-shadow-primary-hover md:w-[30%]"
+  class:list={[
+    'w-full rounded-lg bg-white drop-shadow-primary transition-all duration-300 ease-in-out  md:basis-[30%]',
+    {
+      [className]: className,
+      'hover:cursor-pointer hover:drop-shadow-primary-hover': !!href,
+      'pb-6': !href,
+    },
+  ]}
   href={href}
 >
   <div class="flex h-full flex-col px-4 py-6 md:px-8">
@@ -44,8 +54,12 @@ const {
         <p class="mt-6 font-normal leading-[140%]">{description}</p>
       )
     }
-    <div class="ml-auto mt-auto -mr-2 pt-6">
-      <ArrowDownRight />
-    </div>
+    {
+      !!href && (
+        <div class="ml-auto mt-auto -mr-2 pt-6">
+          <ArrowDownRight />
+        </div>
+      )
+    }
   </div>
-</a>
+</Element>

@@ -1,11 +1,56 @@
 ---
 import Section from '@/components/ui/Section.astro';
+import Card from '@/components/common/Card.astro';
 
 export interface Props {
   id: string;
 }
 
 const { id = 'rewards' } = Astro.props;
+
+const temp = [
+  {
+    title: '31 DOT per 1 DOT',
+  },
+];
 ---
 
-<Section id={id}>Rewards</Section>
+<Section id={id} class="bg-primary">
+  <div class="section-title">Reward distribution</div>
+  <p class="section-description">
+    All participants in the Project Crowdloan will receive DOTS as a reward for
+    their contributions. The amount of the rewards will depend on the total
+    amount of DOTS which has been contributed by others at the time of your
+    contribution.
+  </p>
+
+  <div
+    class="flex-column mt-16 flex flex-wrap justify-between gap-6 md:flex-row md:gap-0"
+  >
+    <Card
+      title={'4 DOT per 1 DOT'}
+      description={'Contribution for the raised xxx between 1,500,000 - 3,000,000 DOT will receive 4 DOT per contributed DOT as a reward.'}
+      bulletList={[]}
+      href={''}
+      class="w-max"
+    />
+    <Card
+      title={'8 DOT per 1 DOT'}
+      description={'Contribution for the raised xxx between 1,500,000 - 3,000,000 DOT will receive 4 DOT per contributed DOT as a reward.'}
+      bulletList={[]}
+      href={''}
+    />
+    <Card
+      title={'4 DOT per 1 DOT'}
+      description={'Contribution for the raised xxx between 1,500,000 - 3,000,000 DOT will receive 4 DOT per contributed DOT as a reward.'}
+      bulletList={[]}
+      href={''}
+    />
+    <Card
+      title={'Contribution for the first 500,000 DOT will receive 12 DOT per contributed DOT as a reward.'}
+      description={'Contribution for the raised xxx between 1,500,000 - 3,000,000 DOT will receive 4 DOT per contributed DOT as a reward.'}
+      bulletList={[]}
+      href={''}
+    />
+  </div>
+</Section>
