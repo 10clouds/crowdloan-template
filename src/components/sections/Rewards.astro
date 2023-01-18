@@ -1,18 +1,30 @@
 ---
 import Section from '@/components/ui/Section.astro';
 import Card from '@/components/common/Card.astro';
+import type { Card as CardType } from '@/types';
 
+interface RewardType extends CardType {
+  takeSpace?: number;
+}
 export interface Props {
   id: string;
+  rewardsDistribution: RewardType[];
 }
 
-const { id = 'rewards' } = Astro.props;
+const { id = 'rewards', rewardsDistribution = [] } = Astro.props;
 
-const temp = [
-  {
-    title: '31 DOT per 1 DOT',
-  },
-];
+const mapGridRowsToSpace: {
+  [key: number]: string;
+} = {
+  1: 'col-span-1',
+  2: 'col-span-2',
+  3: 'col-span-3',
+  4: 'col-span-4',
+  5: 'col-span-5',
+  6: 'col-span-6',
+};
+
+const defaultSpace = 3;
 ---
 
 <Section id={id} class="bg-primary">
@@ -24,33 +36,11 @@ const temp = [
     contribution.
   </p>
 
-  <div
-    class="flex-column mt-16 flex flex-wrap justify-between gap-6 md:flex-row md:gap-0"
-  >
-    <Card
-      title={'4 DOT per 1 DOT'}
-      description={'Contribution for the raised xxx between 1,500,000 - 3,000,000 DOT will receive 4 DOT per contributed DOT as a reward.'}
-      bulletList={[]}
-      href={''}
-      class="w-max"
-    />
-    <Card
-      title={'8 DOT per 1 DOT'}
-      description={'Contribution for the raised xxx between 1,500,000 - 3,000,000 DOT will receive 4 DOT per contributed DOT as a reward.'}
-      bulletList={[]}
-      href={''}
-    />
-    <Card
-      title={'4 DOT per 1 DOT'}
-      description={'Contribution for the raised xxx between 1,500,000 - 3,000,000 DOT will receive 4 DOT per contributed DOT as a reward.'}
-      bulletList={[]}
-      href={''}
-    />
-    <Card
-      title={'Contribution for the first 500,000 DOT will receive 12 DOT per contributed DOT as a reward.'}
-      description={'Contribution for the raised xxx between 1,500,000 - 3,000,000 DOT will receive 4 DOT per contributed DOT as a reward.'}
-      bulletList={[]}
-      href={''}
-    />
+  <div class="grid grid-cols-1 gap-6 pt-16 lg:grid-cols-6">
+    {
+      rewardsDistribution.map(({ takeSpace = defaultSpace, ...rest }) => (
+        <Card {...rest} class={mapGridRowsToSpace[takeSpace]} />
+      ))
+    }
   </div>
 </Section>

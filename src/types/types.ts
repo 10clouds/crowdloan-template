@@ -18,6 +18,7 @@ export type Card = {
   bulletList?: string[];
   description?: string;
   href?: string;
+  topLabel?: string;
 };
 
 export type AboutCard = {
