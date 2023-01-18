@@ -2,6 +2,7 @@
 import Section from '@/components/ui/Section.astro';
 import Card from '@/components/common/Card.astro';
 import type { Card as CardType } from '@/types';
+import Button from '@/components/ui/Button.astro';
 
 interface RewardType extends CardType {
   takeSpace?: number;
@@ -42,5 +43,16 @@ const defaultSpace = 3;
         <Card {...rest} class={mapGridRowsToSpace[takeSpace]} />
       ))
     }
+  </div>
+
+  <div
+    class="mt-20 flex w-full items-center justify-center rounded-lg bg-vector-2 bg-center bg-no-repeat lg:mt-40"
+  >
+    <div class="flex flex-col items-center justify-center gap-10 py-24">
+      <div class="text-3xl font-medium tracking-tight text-white lg:text-7xl">
+        Don’t wait too long!
+      </div>
+      <Button variant="primary" />
+    </div>
   </div>
 </Section>

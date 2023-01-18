@@ -29,6 +29,7 @@ module.exports = {
         'timer-gradient':
           'linear-gradient(251.25deg, #436EE7 37.33%, #5043E7 87.85%);',
         'vector-1': 'url(/src/assets/backgrounds/Vector_1.svg)',
+        'vector-2': 'url(/src/assets/backgrounds/Vector_2.svg)',
       },
       backgroundColor: {
         base: { DEFAULT: '#3B5EEA', light: '#506FEC' },
