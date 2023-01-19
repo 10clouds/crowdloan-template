@@ -34,30 +34,39 @@ const tableData = [
 const tHeaders = Object.keys(tableData[0] || {});
 ---
 
-<table
-  class="b w-fit table-auto border-separate border-spacing-2 rounded-lg border-[#DBDBDB] bg-white drop-shadow-primary"
+<div
+  class="w-fit overflow-x-auto rounded-lg border border-gray bg-white drop-shadow-primary"
 >
-  <thead class="text-xs font-medium text-[#89888A]">
-    <tr>
+  <div class="h-2 bg-timer-gradient opacity-60"></div>
+  <table class="w-fit table-auto">
+    <thead class="rounded-lg border bg-gray text-xs font-medium text-gray-dark">
+      <tr>
+        {
+          tHeaders.map((label) => (
+            <th class="border-gray border-b-[1px] py-4 text-start uppercase first-of-type:px-4 ">
+              {label}
+            </th>
+          ))
+        }
+      </tr>
+    </thead>
+    <tbody class="text-lg">
       {
-        tHeaders.map((label) => (
-          <th class="border-b-[1px] border-[#DBDBDB] py-4 text-start uppercase first-of-type:px-4 last-of-type:px-4">
-            {label}
-          </th>
+        tableData.map(({ rank, account, contributed, date }) => (
+          <tr class="border-gray rounded-lg border-b-[1px] last-of-type:border-b-0 ">
+            <td class="py-3 pr-8 text-center">{rank}</td>
+            <td>{account}</td>
+            <td>{date}</td>
+            <td class="pr-8">{contributed}</td>
+          </tr>
         ))
       }
-    </tr>
-  </thead>
-  <tbody class="text-lg">
-    {
-      tableData.map(({ rank, account, contributed, date }) => (
-        <tr class="rounded-lg border-b-[1px] border-[#DBDBDB] last-of-type:border-b-0 ">
-          <td class="text-center">{rank}</td>
-          <td>{account}</td>
-          <td>{date}</td>
-          <td class="last-of-type:px-4">{contributed}</td>
-        </tr>
-      ))
-    }
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  td:not(:first-of-type):not(:last-of-type) {
+    @apply pr-11;
+  }
+</style>
