@@ -1,13 +1,13 @@
 ---
 export interface Props {
-  firstColor?: string;
-  secondColor?: string;
+  borderColor?: string;
+  fillColor?: string;
   class?: string;
 }
 
 const {
-  firstColor = 'white',
-  secondColor = '#3B5EEA',
+  borderColor = 'white',
+  fillColor = '#3B5EEA',
   class: className = '',
 } = Astro.props;
 ---
@@ -20,7 +20,7 @@ const {
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle cx="15" cy="15" r="15" fill={firstColor}></circle>
-    <circle cx="15" cy="15" r="5" fill={secondColor}></circle>
+    <circle cx="15" cy="15" r="15" fill={borderColor}></circle>
+    <circle cx="15" cy="15" r="5" fill={fillColor}></circle>
   </svg>
 </span>

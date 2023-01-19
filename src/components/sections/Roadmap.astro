@@ -1,7 +1,6 @@
 ---
-import Section from '@/components/ui/Section.astro';
 import Progress from '@/components/ui/Progress.astro';
-import Cicle from '@/components/Icons/Cicle.astro';
+import Circle from '@/components/Icons/Circle.astro';
 
 export interface Props {
   id: string;
@@ -41,9 +40,9 @@ const { id = 'roadmap', timelinePoints = [], progressValue = 20 } = Astro.props;
                       <div class="bg-base absolute bottom-0 -top-20 -z-10 h-full w-0.5 " />
                     </>
                   )}
-                  <Cicle
-                    class="timeline-point"
-                    secondColor={idx <= currPointIdx ? '#3B5EEA' : '#D4D4D8'}
+                  <Circle
+                    class="drop-shadow-primary-small"
+                    borderColor={idx <= currPointIdx ? '#3B5EEA' : '#D4D4D8'}
                   />
                   <label class="mt-5 text-lg font-medium">{label}</label>
                   <p class="opacity-70">{body}</p>
@@ -56,9 +55,3 @@ const { id = 'roadmap', timelinePoints = [], progressValue = 20 } = Astro.props;
     </div>
   </div>
 </section>
-
-<style>
-  .timeline-point {
-    @apply drop-shadow-primary-small;
-  }
-</style>
