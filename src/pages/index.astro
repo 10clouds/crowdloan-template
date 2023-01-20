@@ -4,14 +4,13 @@ import Hero from '@/components/sections/Hero.astro';
 import About from '@/components/sections/About.astro';
 import Rewards from '@/components/sections/Rewards.astro';
 import Contributors from '@/components/sections/Contributors.astro';
-import { SITE } from '@/config';
-import TimeLeftTimer from '@/components/common/TimeLeftTimer';
-import Button from '@/components/ui/Button.astro';
 import AdditionalLinks from '@/components/sections/AdditionalLinks.astro';
 import AboutToken from '@/components/sections/AboutToken.astro';
 import Roadmap from '@/components/sections/Roadmap.astro';
 import Logos from '@/components/Logos.astro';
 import FAQ from '@/components/sections/FAQ.astro';
+
+import { SITE } from '@/config';
 
 //  TODO hero logos - bump to JSON or JS file
 import MiroLogo from '@/assets/images/logos/Miro.png';
@@ -21,6 +20,7 @@ import WebflowLogo from '@/assets/images/logos/Webflow.png';
 import MondayLogo from '@/assets/images/logos/Monday.png';
 
 import Logo from '@/assets/Logo.svg';
+import TimerBanner from '@/components/sections/TimerBanner.astro';
 
 let logos = [
   {
@@ -222,7 +222,7 @@ const rewardsDistribution = [
 
 <Layout
   navLinks={SITE.navLinks}
-  title="Welcome to Crowdload."
+  title="Parity Crowdload."
   description="Crowdload is a simple lorem ipsum es dolor "
   footerLinks={SITE.footerLinks}
   logo={Logo}
@@ -240,67 +240,11 @@ const rewardsDistribution = [
     priceCard={priceCard}
     progressCard={progressCard}
   />
+  Baner
   <Roadmap id="roadmap" timelinePoints={timelinePoints} progressValue={63} />
   <Rewards id="rewards" rewardsDistribution={rewardsDistribution} />
   <Contributors id="contributors" />
   <AdditionalLinks id="additional" cardsData={tempCardsData} />
   <FAQ id="faq" faq={faq} />
-  <div
-    class="mx-auto w-full bg-vector-1 bg-cover bg-center bg-no-repeat py-10 px-4 md:py-20"
-  >
-    <div class="flex flex-col items-center justify-center py-12 md:py-40">
-      <TimeLeftTimer
-        client:visible
-        date={SITE.crowdLoadEndDate}
-        variant="big"
-      />
-      <Button variant="default-light" class="mt-12" />
-    </div>
-  </div>
+  <TimerBanner />
 </Layout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 1.5rem;
-    max-width: 60ch;
-    height: 100vh;
-  }
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 0;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-  .instructions {
-    line-height: 1.6;
-    margin: 1rem 0;
-    border: 1px solid rgba(var(--accent), 25%);
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0.4rem;
-  }
-  .instructions code {
-    font-size: 0.875em;
-    font-weight: bold;
-    background: rgba(var(--accent), 12%);
-    color: rgb(var(--accent));
-    border-radius: 4px;
-    padding: 0.3em 0.45em;
-  }
-  .instructions strong {
-    color: rgb(var(--accent));
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 1rem;
-    padding: 0;
-  }
-</style>
