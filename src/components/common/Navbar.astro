@@ -12,24 +12,24 @@ const { navLinks = [], logo } = Astro.props;
 ---
 
 <header
-  class="sticky top-0 z-40 mx-auto w-full flex-none bg-primary px-4 transition-all duration-100 ease-in md:px-32"
+  class="sticky top-0 z-40 mx-auto w-full flex-none bg-primary px-4 transition-all duration-100 ease-in lg:px-32"
   id="header"
 >
-  <div class="w-full max-w-full py-3 px-3 md:flex md:justify-between">
+  <div class="w-full max-w-full py-3 px-3 lg:flex lg:justify-between">
     <div class="flex justify-between">
       <a class="flex items-center" href="#">
         <img src={logo} alt="crowload logotype" />
       </a>
-      <div class="flex items-center md:hidden">
+      <div class="flex items-center lg:hidden">
         <ToggleMenu />
       </div>
     </div>
     <nav
-      class="hidden w-full items-center overflow-y-auto md:ml-auto md:flex md:h-auto md:w-auto md:overflow-visible"
+      class="hidden w-full items-center overflow-y-auto lg:ml-auto lg:flex lg:h-auto lg:w-auto lg:overflow-visible"
       aria-label="Main navigation"
     >
       <ul
-        class="flex w-full flex-col pt-8 text-xl md:w-auto md:flex-row md:self-center md:pt-0 md:text-base"
+        class="flex w-full flex-col pt-8 text-xl lg:w-auto lg:flex-row lg:self-center lg:pt-0 lg:text-base"
       >
         {
           navLinks.map(({ title, url }) => (
@@ -45,10 +45,10 @@ const { navLinks = [], logo } = Astro.props;
         }
       </ul>
     </nav>
-    <div class="ml-4 flex items-center md:mb-0 md:self-center">
-      <div class="hidden items-center md:flex">
+    <div class="ml-4 flex items-center lg:mb-0 lg:self-center">
+      <div class="hidden items-center lg:flex">
         <!-- TODO logic for contribute btn -->
-        <a class="btn ml-0 py-2 xl:ml-32" href="#"><Button /></a>
+        <a class="ml-0 py-2 xl:ml-32" href="#"><Button /></a>
       </div>
     </div>
   </div>

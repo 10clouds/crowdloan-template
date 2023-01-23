@@ -17,7 +17,7 @@ const { id = 'roadmap', timelinePoints = [], progressValue = 20 } = Astro.props;
 
 <section
   id={id}
-  class="h-full w-full py-14 px-4 text-base md:min-h-[calc(100%-92px)] md:px-32 xl:py-40"
+  class="h-full w-full py-14 px-4 pb-28 text-base md:min-h-[calc(100%-92px)] md:px-32 xl:py-40"
 >
   <div class="section-title">Roadmap</div>
   <div class="relative mt-36">
@@ -42,7 +42,7 @@ const { id = 'roadmap', timelinePoints = [], progressValue = 20 } = Astro.props;
                   )}
                   <Circle
                     class="drop-shadow-primary-small"
-                    borderColor={idx <= currPointIdx ? '#3B5EEA' : '#D4D4D8'}
+                    fillColor={idx <= currPointIdx ? '#3B5EEA' : '#D4D4D8'}
                   />
                   <label class="mt-5 text-lg font-medium">{label}</label>
                   <p class="opacity-70">{body}</p>
