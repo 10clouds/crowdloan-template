@@ -13,14 +13,16 @@ const AccordionItem: FC<Props> = ({ answer, question }) => {
   return (
     <div className="w-fit max-w-fit border-b px-8 py-4 lg:py-6">
       <div className="flex justify-between">
-        <span
-          className={`text-2xl font-medium tracking-tight ${animation} lg:text-3xl ${
+        <label
+          htmlFor={question}
+          className={`text-2xl font-medium tracking-tight hover:cursor-pointer ${animation} lg:text-3xl ${
             isExpanded && 'text-primary'
           }`}
         >
           {question}
-        </span>
+        </label>
         <ExpandButton
+          id={question}
           className="ml-8 lg:ml-6"
           isExpanded={isExpanded}
           onClick={() => setIsExpanded((prev) => !prev)}

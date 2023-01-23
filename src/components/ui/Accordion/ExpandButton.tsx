@@ -4,15 +4,17 @@ interface Props {
   isExpanded: boolean;
   onClick: DOMAttributes<HTMLButtonElement>['onClick'];
   className?: string;
+  id: string;
 }
 
 const animation = 'transition-all duration-200 ease-in-out';
 
-const ExpandButton: FC<Props> = ({ isExpanded, onClick, className }) => {
+const ExpandButton: FC<Props> = ({ isExpanded, onClick, className, id }) => {
   return (
     <button
       className={`${className} relative flex h-0.5 w-4 self-center p-4`}
       onClick={onClick}
+      id={id}
     >
       <div className="absolute inset-auto h-0.5 w-4 bg-base"></div>
       <div
