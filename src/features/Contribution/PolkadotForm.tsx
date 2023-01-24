@@ -65,6 +65,7 @@ const gasLimit = 20000n * 1000000n;
 const PolkadotForm = () => {
   const [accounts, setAccounts] = useState<InjectedAccountWithMeta[]>([]);
   const [api, setApi] = useState<ApiPromise>();
+  const [isExtensionError, setIsExtensionError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [inputParam, setInputParam] = useState({
     transferAmount: 0,
@@ -128,10 +129,25 @@ const PolkadotForm = () => {
   }
 
   useEffect(() => {
-    setupExtension();
+    setupExtension().then((isError) => setIsExtensionError(isError));
     apiSetup().then((_api) => setApi(_api));
     getAccounts().then((allAccounts) => setAccounts(allAccounts));
   }, []);
+
+  if (isExtensionError) {
+    return (
+      <div>
+        Please install extension from{' '}
+        <a
+          href="https://polkadot.js.org/extension/"
+          className="text-primary hover:underline"
+        >
+          Polkadot extension
+        </a>
+        to make transactions
+      </div>
+    );
+  }
 
   return (
     <div className="w-full">
