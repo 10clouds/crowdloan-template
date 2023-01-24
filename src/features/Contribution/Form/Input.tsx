@@ -7,6 +7,7 @@ interface Props {
   handleInputChange: InputHTMLAttributes<HTMLInputElement>['onChange'];
   name: string;
   type?: InputHTMLAttributes<HTMLInputElement>['type'];
+  placeholder?: string;
 }
 
 const Input = ({
@@ -16,6 +17,7 @@ const Input = ({
   handleInputChange,
   name,
   type = 'text',
+  placeholder = '',
 }: Props) => {
   return (
     <div>
@@ -28,7 +30,7 @@ const Input = ({
       <div className="">
         <input
           id={name}
-          placeholder={label}
+          placeholder={placeholder}
           type={type}
           name={name}
           value={value}
