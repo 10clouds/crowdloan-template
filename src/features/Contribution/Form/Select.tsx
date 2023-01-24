@@ -70,7 +70,7 @@ const Select = ({
               {options.map((optionNode, idx) => (
                 <div
                   key={idx}
-                  className="hover:bg-gray-50 block border-b-[1px] border-gray px-4 py-3  last-of-type:border-0 hover:cursor-pointer hover:bg-secondary"
+                  className="hover:bg-gray-50 block border-b-[1px] border-gray px-4 py-3 last-of-type:border-0 hover:cursor-pointer hover:bg-secondary first-of-type:hover:rounded-t-2xl  last-of-type:hover:rounded-b-2xl"
                 >
                   {optionNode}
                 </div>
