@@ -21,7 +21,6 @@ const Select = ({
   useOnClickOutside(selectListRef, () => {
     setIsVisible(false);
   });
-  console.log('value', value);
   return (
     <div>
       <label
