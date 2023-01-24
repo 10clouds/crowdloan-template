@@ -41,7 +41,7 @@ const ModalWrapper = ({ children }: Props) => {
           WebkitOverflowScrolling: 'touch',
           borderRadius: '16px',
           outline: 'none',
-          padding: '20px',
+          padding: '40px',
           width: '50%',
         },
       }}
