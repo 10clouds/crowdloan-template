@@ -35,6 +35,7 @@ module.exports = {
         base: { DEFAULT: '#3B5EEA', light: '#506FEC' },
         gray: '#F5F5F5',
         cream: '#F9FAFF',
+        secondary: '#F6F7FE',
       },
       dropShadow: {
         primary: '0px 24px 70px rgba(59, 107, 181, 0.15)',
