@@ -336,8 +336,6 @@ const PolkadotForm = () => {
         <br />
         Chain INFO - {JSON.stringify(chainInfo, null, 2)}
         <br />
-        {form.transferAmount}
-        <br />
         <Select
           label="Contribute from"
           placeholder="Select account"
@@ -416,6 +414,7 @@ const PolkadotForm = () => {
         <button
           className="ml-auto flex w-full justify-center rounded-2xl bg-base px-6 py-3 text-lg text-white transition duration-150 ease-in-out hover:bg-base-light md:w-fit"
           type="submit"
+          disabled={isLoading}
         >
           Contribute
         </button>
