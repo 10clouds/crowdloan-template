@@ -1,4 +1,5 @@
 import type { InputHTMLAttributes } from 'react';
+import { memo } from 'react';
 
 interface Props {
   errorMessage?: string;
@@ -8,6 +9,7 @@ interface Props {
   name: string;
   type?: InputHTMLAttributes<HTMLInputElement>['type'];
   placeholder?: string;
+  required?: boolean;
 }
 
 const Input = ({
@@ -18,6 +20,7 @@ const Input = ({
   name,
   type = 'text',
   placeholder = '',
+  required = false,
 }: Props) => {
   return (
     <div>
@@ -34,6 +37,7 @@ const Input = ({
           type={type}
           name={name}
           value={value}
+          required={required}
           onChange={handleInputChange}
           className="inline-flex w-full min-w-full rounded-2xl border border-gray bg-white px-4 py-3 focus-within:border-blue-500"
         />
@@ -43,4 +47,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default memo(Input);

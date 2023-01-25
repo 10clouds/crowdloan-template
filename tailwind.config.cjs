@@ -19,6 +19,7 @@ module.exports = {
           DEFAULT: '#DBDBDB',
           dark: '#89888A',
         },
+        error: '#EA3B65',
       },
       textColor: {
         base: { DEFAULT: '#131115;', light: '#CFCFCF' },

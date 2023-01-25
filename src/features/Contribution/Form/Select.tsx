@@ -24,7 +24,7 @@ const Select = ({
   return (
     <div>
       <label
-        className="rounded-l-md py-3 px-4 text-xs opacity-50"
+        className="rounded-l-md py-3 px-4 text-xs text-gray-dark"
         htmlFor={label}
       >
         {label}
