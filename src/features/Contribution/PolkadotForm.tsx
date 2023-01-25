@@ -11,7 +11,7 @@ import Input from './Form/Input';
 import useIsModalVisible from './store/useIsModalVisible';
 import type { GenericChainProperties } from '@polkadot/types';
 import type { Balance } from '@polkadot/types/interfaces/runtime';
-import type { ISubmittableResult } from '@polkadot/types/types';
+import type { ISubmittableResult, Codec } from '@polkadot/types/types';
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { InjectedExtension } from '@polkadot/extension-inject/types';
 import Loading from '@/components/Icons/Loading';
@@ -20,18 +20,25 @@ const targetAddress = '5CVT9Q7HrnpMCFRts82EWuTvZD66KHUjCxkDwAPn7HauZ2L5';
 
 const minAmount = 5000 as const;
 
-async function getChainInfo(api: ApiPromise) {
+async function getBalance(api: ApiPromise) {
   try {
-    const chainInfo = await api.registry.getChainProperties();
-
     const now = await api.query.timestamp.now();
     const { nonce, data: balance } = await api.query.system.account(
-      '5HBRj1YyvsKQUWmbQum724zpu73YNZPUhZ9W5EaGnwGLFTJq'
+      targetAddress
     );
 
     console.log(
       `${now}: balance of ${balance.free.toHuman()} and a nonce of ${nonce}`
     );
+    return { now, nonce, balance };
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function getChainInfo(api: ApiPromise) {
+  try {
+    const chainInfo = await api.registry.getChainProperties();
 
     return chainInfo;
   } catch (err) {
@@ -143,14 +150,21 @@ function validateForm(
 const PolkadotForm = () => {
   const { setIsModalOpen } = useIsModalVisible();
 
+  // extension
   const [accounts, setAccounts] = useState<InjectedAccountWithMeta[]>([]);
   const [api, setApi] = useState<ApiPromise>();
   const [isExtensionError, setIsExtensionError] = useState<boolean>(false);
   const [chainInfo, setChainInfo] = useState<GenericChainProperties>();
+  const [balance, setBalance] = useState<Codec>();
+
+  // transaction
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [transactionStatus, setTransactionStatus] =
     useState<ISubmittableResult>();
-  const [transactionInfo, setTransactionInfo] = useState<Balance>();
+  const [transactionInfo, setTransactionInfo] = useState<Partial<Balance>>();
+  const [transactionError, setTransactionError] = useState<string>('');
+
+  // Form
   const [formErrors, setFormErrors] = useState({
     transferAmount: '',
     transferFrom: '',
@@ -252,6 +266,7 @@ const PolkadotForm = () => {
       await signAndSend({ transfer, injector });
     } catch (error) {
       console.log(error);
+      setTransactionError(error?.message);
     } finally {
       setIsLoading(false);
     }
@@ -267,6 +282,8 @@ const PolkadotForm = () => {
     if (!api) return;
 
     getChainInfo(api).then((chainInfo) => setChainInfo(chainInfo));
+
+    getBalance(api).then((balance) => setBalance(balance));
   }, [api]);
 
   if (isExtensionError) {
@@ -296,7 +313,10 @@ const PolkadotForm = () => {
   }
 
   return (
-    <div className="flex h-full flex-col justify-between ">
+    <form
+      onSubmit={handleFormSubmit}
+      className="flex h-full flex-col justify-between "
+    >
       <div className="h-full w-full overflow-y-auto">
         <div className="mb-8 flex justify-between">
           <div className="flex flex-col gap-2">
@@ -318,86 +338,89 @@ const PolkadotForm = () => {
         <br />
         {form.transferAmount}
         <br />
-        <form onSubmit={handleFormSubmit}>
-          <Select
-            label="Contribute from"
-            placeholder="Select account"
-            value={
-              form.transferFrom.name &&
-              `${form.transferFrom.name} - ${
-                form.transferFrom.address.slice(0, 15) + '...'
-              }`
-            }
-          >
-            {accounts.map(({ address = '', meta: { name = '' } }) => (
-              <div
-                key={address}
-                className="flex justify-between"
-                onClick={() => {
-                  handleChange({
-                    inputName: 'transferFrom',
-                    value: { name, address },
-                  });
-                }}
-              >
-                <div className="uppercase">{name}</div>
-                <div className="text-sm font-light text-gray-dark">
-                  {address.slice(0, 15) + '...'}
-                </div>
+        <Select
+          label="Contribute from"
+          placeholder="Select account"
+          value={
+            form.transferFrom.name &&
+            `${form.transferFrom.name} - ${
+              form.transferFrom.address.slice(0, 15) + '...'
+            }`
+          }
+        >
+          {accounts.map(({ address = '', meta: { name = '' } }) => (
+            <div
+              key={address}
+              className="flex justify-between"
+              onClick={() => {
+                handleChange({
+                  inputName: 'transferFrom',
+                  value: { name, address },
+                });
+              }}
+            >
+              <div className="uppercase">{name}</div>
+              <div className="text-sm font-light text-gray-dark">
+                {address.slice(0, 15) + '...'}
               </div>
-            ))}
-          </Select>
-          <p className="px-4 text-end text-xs text-gray-dark">
-            This account will contribute to the crowdloan
-          </p>
-
-          {!!formErrors.transferFrom && (
-            <span className="ml-2  text-error">{formErrors.transferFrom}</span>
-          )}
-
-          <div>
-            <Input
-              handleInputChange={handleFormInputChange}
-              name="transferAmount"
-              label="Contribution"
-              placeholder="0"
-              required
-              type="number"
-              value={form.transferAmount}
-            />
-          </div>
-          <p className="px-4 text-end text-xs text-gray-dark">
-            The amount to contribute from this account
-          </p>
-          {!!formErrors.transferAmount && (
-            <span className="ml-2 text-error">{formErrors.transferAmount}</span>
-          )}
-        </form>
-        <p className="mt-6 text-gray-dark">
-          The above contribution should amount to more than minimum contribution
-          and less than the remaining value.
+            </div>
+          ))}
+        </Select>
+        <p className="px-4 text-end text-xs text-gray-dark">
+          This account will contribute to the crowdloan
         </p>
-        <div className="flex rounded-2xl bg-secondary px-8 py-6">
-          <div className="w-1/2 ">
-            <div className="text-xs text-gray-dark">minimum allowed</div>
-            <div>5.0000 DOT</div>
-          </div>
-          <div className="w-1/2">
-            <div className="text-xs text-gray-dark">Remaining till cap</div>
-            <div>50,568.6681 DOT</div>
+        {!!formErrors.transferFrom && (
+          <span className="ml-2  text-error">{formErrors.transferFrom}</span>
+        )}
+        <div>
+          <Input
+            handleInputChange={handleFormInputChange}
+            name="transferAmount"
+            label="Contribution"
+            placeholder="0"
+            required
+            type="number"
+            value={form.transferAmount}
+          />
+        </div>
+        <p className="px-4 text-end text-xs text-gray-dark">
+          The amount to contribute from this account
+        </p>
+        {!!formErrors.transferAmount && (
+          <span className="ml-2 text-error">{formErrors.transferAmount}</span>
+        )}
+      </div>
+      <p className="mt-6 text-gray-dark">
+        The above contribution should amount to more than minimum contribution
+        and less than the remaining value.
+      </p>
+      <div className="flex rounded-2xl bg-secondary px-8 py-6">
+        <div className="w-1/2 ">
+          <div className="text-xs text-gray-dark">minimum allowed</div>
+          <div>5.0000 {chainInfo?.tokenSymbol?.toHuman()}</div>
+        </div>
+        <div className="w-1/2">
+          <div className="text-xs text-gray-dark">Remaining till cap</div>
+          <div>
+            {balance?.balance?.free?.toHuman()}{' '}
+            {chainInfo?.tokenSymbol?.toHuman()}
           </div>
         </div>
       </div>
-      <div className="flex-1 ">
+      <div className="flex flex-1  pt-4">
+        {transactionError && (
+          <div>
+            <span className="ml-2 text-error">{transactionError}</span>
+          </div>
+        )}
         <button
-          className="ml-auto flex w-full justify-center rounded-2xl bg-base px-[24px] py-[12px] text-lg text-white transition duration-150 ease-in-out hover:bg-base-light md:w-fit"
+          className="ml-auto flex w-full justify-center rounded-2xl bg-base px-6 py-3 text-lg text-white transition duration-150 ease-in-out hover:bg-base-light md:w-fit"
           type="submit"
-          onClick={(e) => handleFormSubmit(e)}
         >
           Contribute
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 
