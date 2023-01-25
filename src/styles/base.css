@@ -33,7 +33,7 @@ img {
   @apply transition;
 }
 [data-toggle-menu].expanded g > path:first-child {
-  @apply translate-y-[15px] translate-x-[-4px] -rotate-45;
+  @apply translate-y-[15px] translate-x-[-1px] -rotate-45;
 }
 
 [data-toggle-menu].expanded g > path:nth-child(2) {
@@ -41,7 +41,7 @@ img {
 }
 
 [data-toggle-menu].expanded g > path:last-child {
-  @apply translate-y-[-10px] translate-x-[13px] rotate-45;
+  @apply translate-y-[-10px] translate-x-[16px] rotate-45;
 }
 
 .section-title {
