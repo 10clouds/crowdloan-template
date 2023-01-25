@@ -15,5 +15,7 @@ const { id = '', class: className = '', isPaddingX = true } = Astro.props;
     { [className]: className, 'px-4 md:px-32': isPaddingX },
   ]}
 >
-  <slot />
+  <div class="mx-auto max-w-7xl">
+    <slot />
+  </div>
 </section>
