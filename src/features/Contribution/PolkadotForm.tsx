@@ -12,6 +12,8 @@ import useIsModalVisible from './store/useIsModalVisible';
 import type { GenericChainProperties } from '@polkadot/types';
 import type { Balance } from '@polkadot/types/interfaces/runtime';
 import type { ISubmittableResult } from '@polkadot/types/types';
+import type { SubmittableExtrinsic } from '@polkadot/api/types';
+import type { InjectedExtension } from '@polkadot/extension-inject/types';
 
 const targetAddress = '5CVT9Q7HrnpMCFRts82EWuTvZD66KHUjCxkDwAPn7HauZ2L5';
 
@@ -60,7 +62,8 @@ async function setupExtension() {
 
 async function apiSetup() {
   try {
-    const provider = new WsProvider('wss://westend-rpc.polkadot.io');
+    const provider = new WsProvider('wss://westend-rpc.polkadot.io'); // test network
+    // const provider = new WsProvider('wss://rpc.polkadot.io');
 
     const _api = await ApiPromise.create({ provider });
 
@@ -179,16 +182,38 @@ const PolkadotForm = () => {
     setFormErrors(errors);
   }
 
+  async function signAndSend({
+    transfer,
+    injector,
+  }: {
+    transfer: SubmittableExtrinsic<'promise', ISubmittableResult>;
+    injector: InjectedExtension;
+  }) {
+    try {
+      const hash = await transfer.signAndSend(
+        form.transferFrom.address,
+        { signer: injector.signer },
+        (status) => {
+          console.log('TRX', JSON.stringify(status, null, 2));
+
+          setTransactionStatus(status);
+        }
+      );
+
+      console.log('hash', hash);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   async function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const { isValid, errors } = validateForm(form, { minAmount: 5000 });
 
     if (!isValid) {
       setFormErrors(errors);
-      return;
+      // return;
     }
-
-    console.log('PASSED');
 
     try {
       setIsLoading(true);
@@ -202,28 +227,16 @@ const PolkadotForm = () => {
       if (!api) throw new Error('There is no connection to api');
       if (!chainInfo) throw new Error('There is no Chain info');
 
-      console.log('first', chainInfo.registry.chainDecimals?.[0]);
-
       const transfer = api.tx.balances.transfer(
         targetAddress,
-        form.transferAmount * 10 * chainInfo.registry.chainDecimals?.[0]
+        form.transferAmount * 10 ** chainInfo.registry.chainDecimals?.[0]
       );
 
       const info = await transfer.paymentInfo(fromAcc.address);
+      console.log('info', JSON.stringify(info, null, 2));
       setTransactionInfo(info.partialFee);
 
-      const hash = await transfer.signAndSend(
-        form.transferFrom.address,
-        { signer: injector.signer },
-        (status, ...rest) => {
-          console.log('TRX', JSON.stringify(status, null, 2));
-
-          console.log('REST -> ', JSON.stringify(rest, null, 2));
-          setTransactionStatus(status);
-        }
-      );
-
-      console.log('hash', hash);
+      await signAndSend({ transfer, injector });
     } catch (error) {
       console.log(error);
     } finally {
@@ -273,12 +286,14 @@ const PolkadotForm = () => {
           <button onClick={() => setIsModalOpen(false)}>X</button>
         </div>
         STATUS
-        {JSON.stringify(transactionStatus?.status, null, 2)}
-        {JSON.stringify(transactionInfo, null, 2)}
-        {JSON.stringify(chainInfo, null, 2)}
+        {JSON.stringify(transactionStatus?.status, null, 2)} <br />
+        {JSON.stringify(transactionStatus, null, 2)} <br />
+        TRANSACTION INFO - PARTIAL FEE {transactionInfo?.toHuman()}
+        <br />
+        Chain INFO - {JSON.stringify(chainInfo, null, 2)}
+        <br />
         {form.transferAmount}
-        {JSON.stringify(formErrors, null, 2)}
-        {typeof form.transferAmount}
+        <br />
         <form onSubmit={handleFormSubmit}>
           <Select
             label="Contribute from"
