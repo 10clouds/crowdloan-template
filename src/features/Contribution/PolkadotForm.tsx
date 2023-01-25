@@ -317,18 +317,18 @@ const PolkadotForm = () => {
       onSubmit={handleFormSubmit}
       className="flex h-full flex-col justify-between "
     >
-      <div className="h-full w-full overflow-y-auto">
-        <div className="mb-8 flex justify-between">
-          <div className="flex flex-col gap-2">
-            <div className="text-3xl font-medium tracking-tight">
-              Contribute to fund
-            </div>
-            <p className="text-gray-dark">
-              Select the account and the amount to contribute.
-            </p>
+      <div className="mb-8 flex justify-between">
+        <div className="flex flex-col gap-2">
+          <div className="text-3xl font-medium tracking-tight">
+            Contribute to fund
           </div>
-          <button onClick={() => setIsModalOpen(false)}>X</button>
+          <p className="text-gray-dark">
+            Select the account and the amount to contribute.
+          </p>
         </div>
+        <button onClick={() => setIsModalOpen(false)}>X</button>
+      </div>
+      <div className="h-full w-full overflow-y-auto">
         STATUS
         {JSON.stringify(transactionStatus?.status, null, 2)} <br />
         {JSON.stringify(transactionStatus, null, 2)} <br />
@@ -389,21 +389,21 @@ const PolkadotForm = () => {
         {!!formErrors.transferAmount && (
           <span className="ml-2 text-error">{formErrors.transferAmount}</span>
         )}
-      </div>
-      <p className="mt-6 text-gray-dark">
-        The above contribution should amount to more than minimum contribution
-        and less than the remaining value.
-      </p>
-      <div className="flex rounded-2xl bg-secondary px-8 py-6">
-        <div className="w-1/2 ">
-          <div className="text-xs text-gray-dark">minimum allowed</div>
-          <div>5.0000 {chainInfo?.tokenSymbol?.toHuman()}</div>
-        </div>
-        <div className="w-1/2">
-          <div className="text-xs text-gray-dark">Remaining till cap</div>
-          <div>
-            {balance?.balance?.free?.toHuman()}{' '}
-            {chainInfo?.tokenSymbol?.toHuman()}
+        <p className="mt-6 text-gray-dark">
+          The above contribution should amount to more than minimum contribution
+          and less than the remaining value.
+        </p>
+        <div className="flex rounded-2xl bg-secondary px-8 py-6">
+          <div className="w-1/2 ">
+            <div className="text-xs text-gray-dark">minimum allowed</div>
+            <div>5.0000 {chainInfo?.tokenSymbol?.toHuman()}</div>
+          </div>
+          <div className="w-1/2">
+            <div className="text-xs text-gray-dark">Remaining till cap</div>
+            <div>
+              {balance?.balance?.free?.toHuman()}{' '}
+              {chainInfo?.tokenSymbol?.toHuman()}
+            </div>
           </div>
         </div>
       </div>
