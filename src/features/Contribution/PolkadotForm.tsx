@@ -14,12 +14,24 @@ import type { Balance } from '@polkadot/types/interfaces/runtime';
 import type { ISubmittableResult } from '@polkadot/types/types';
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { InjectedExtension } from '@polkadot/extension-inject/types';
+import Loading from '@/components/Icons/Loading';
 
 const targetAddress = '5CVT9Q7HrnpMCFRts82EWuTvZD66KHUjCxkDwAPn7HauZ2L5';
+
+const minAmount = 5000 as const;
 
 async function getChainInfo(api: ApiPromise) {
   try {
     const chainInfo = await api.registry.getChainProperties();
+
+    const now = await api.query.timestamp.now();
+    const { nonce, data: balance } = await api.query.system.account(
+      '5HBRj1YyvsKQUWmbQum724zpu73YNZPUhZ9W5EaGnwGLFTJq'
+    );
+
+    console.log(
+      `${now}: balance of ${balance.free.toHuman()} and a nonce of ${nonce}`
+    );
 
     return chainInfo;
   } catch (err) {
@@ -177,7 +189,7 @@ const PolkadotForm = () => {
     };
     setForm(newForm);
 
-    const { errors } = validateForm(newForm, { minAmount: 5000 });
+    const { errors } = validateForm(newForm, { minAmount });
 
     setFormErrors(errors);
   }
@@ -208,7 +220,7 @@ const PolkadotForm = () => {
 
   async function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { isValid, errors } = validateForm(form, { minAmount: 5000 });
+    const { isValid, errors } = validateForm(form, { minAmount });
 
     if (!isValid) {
       setFormErrors(errors);
@@ -229,7 +241,8 @@ const PolkadotForm = () => {
 
       const transfer = api.tx.balances.transfer(
         targetAddress,
-        form.transferAmount * 10 ** chainInfo.registry.chainDecimals?.[0]
+        // form.transferAmount * 10 ** chainInfo.registry.chainDecimals?.[0]
+        form.transferAmount
       );
 
       const info = await transfer.paymentInfo(fromAcc.address);
@@ -258,15 +271,26 @@ const PolkadotForm = () => {
 
   if (isExtensionError) {
     return (
-      <div>
-        Please install extension from{' '}
-        <a
-          href="https://polkadot.js.org/extension/"
-          className="text-primary hover:underline"
-        >
-          Polkadot extension
-        </a>
-        to make transactions
+      <div className="flex w-full ">
+        <div className="mx-auto flex-1 justify-center text-center">
+          Please install extension from&nbsp;
+          <a
+            href="https://polkadot.js.org/extension/"
+            className="text-center text-primary hover:underline"
+          >
+            Polkadot extension&nbsp;
+          </a>
+          to make transactions
+        </div>
+      </div>
+    );
+  }
+
+  if (!api) {
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <Loading />
+        Connecting to extension...
       </div>
     );
   }
