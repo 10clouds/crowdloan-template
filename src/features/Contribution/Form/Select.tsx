@@ -65,7 +65,7 @@ const Select = ({
             </svg>
           </button>
           {isVisible && (
-            <ul className="absolute left-0 z-10 mt-1 w-full origin-top-right rounded-2xl border border-gray bg-white ">
+            <ul className="absolute left-0 z-10 mt-1 max-h-60 w-full origin-top-right overflow-hidden overflow-y-auto rounded-2xl border border-gray bg-white">
               {options.map((optionNode, idx) => (
                 <div
                   key={idx}

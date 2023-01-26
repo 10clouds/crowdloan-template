@@ -2,7 +2,6 @@ import type { InputHTMLAttributes } from 'react';
 import { memo } from 'react';
 
 interface Props {
-  errorMessage?: string;
   label: string;
   value: string | number;
   handleInputChange: InputHTMLAttributes<HTMLInputElement>['onChange'];
@@ -10,10 +9,10 @@ interface Props {
   type?: InputHTMLAttributes<HTMLInputElement>['type'];
   placeholder?: string;
   required?: boolean;
+  currency?: string;
 }
 
 const Input = ({
-  errorMessage,
   label,
   value,
   handleInputChange,
@@ -21,6 +20,7 @@ const Input = ({
   type = 'text',
   placeholder = '',
   required = false,
+  currency = 'DOT',
 }: Props) => {
   return (
     <div>
@@ -30,7 +30,7 @@ const Input = ({
       >
         {label}
       </label>
-      <div className="">
+      <div className="relative">
         <input
           id={name}
           placeholder={placeholder}
@@ -41,7 +41,9 @@ const Input = ({
           onChange={handleInputChange}
           className="inline-flex w-full min-w-full rounded-2xl border border-gray bg-white px-4 py-3 focus-within:border-blue-500"
         />
-        <div className="error">{errorMessage && errorMessage[0]}</div>
+        <div className="absolute top-0 bottom-0 right-4 flex items-center text-gray-dark">
+          {currency}
+        </div>
       </div>
     </div>
   );

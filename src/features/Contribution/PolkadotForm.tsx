@@ -1,50 +1,28 @@
+import { useEffect, useState, FormEvent } from 'react';
 import {
   web3Accounts,
   web3Enable,
   web3FromSource,
 } from '@polkadot/extension-dapp';
 import type { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
-import { ApiPromise, WsProvider } from '@polkadot/api';
-import { useEffect, useState, FormEvent } from 'react';
-import Select from './Form/Select';
-import Input from './Form/Input';
-import useIsModalVisible from './store/useIsModalVisible';
+import type { ApiPromise } from '@polkadot/api';
+
 import type { GenericChainProperties } from '@polkadot/types';
 import type { Balance } from '@polkadot/types/interfaces/runtime';
 import type { ISubmittableResult, Codec } from '@polkadot/types/types';
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { InjectedExtension } from '@polkadot/extension-inject/types';
+
+import useIsModalVisible from './store/useIsModalVisible';
+
 import Loading from '@/components/Icons/Loading';
+import Select from './Form/Select';
+import Input from './Form/Input';
+import { apiSetup, getBalance, getChainInfo } from './api';
 
 const targetAddress = '5CVT9Q7HrnpMCFRts82EWuTvZD66KHUjCxkDwAPn7HauZ2L5';
 
 const minAmount = 5000 as const;
-
-async function getBalance(api: ApiPromise) {
-  try {
-    const now = await api.query.timestamp.now();
-    const { nonce, data: balance } = await api.query.system.account(
-      targetAddress
-    );
-
-    console.log(
-      `${now}: balance of ${balance.free.toHuman()} and a nonce of ${nonce}`
-    );
-    return { now, nonce, balance };
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-async function getChainInfo(api: ApiPromise) {
-  try {
-    const chainInfo = await api.registry.getChainProperties();
-
-    return chainInfo;
-  } catch (err) {
-    console.error(err);
-  }
-}
 
 const getAccounts = async () => {
   let allAccounts = [] as InjectedAccountWithMeta[];
@@ -78,24 +56,6 @@ async function setupExtension() {
 
   return isError;
 }
-
-async function apiSetup() {
-  try {
-    const provider = new WsProvider('wss://westend-rpc.polkadot.io'); // test network
-    // const provider = new WsProvider('wss://rpc.polkadot.io');
-
-    const _api = await ApiPromise.create({ provider });
-
-    if (_api) {
-      console.log('Connection Success', _api);
-      return _api;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-const gasLimit = 20000n * 1000000n;
 
 function transferAmountValidator(value: number, min: number) {
   if (!value) {
@@ -253,9 +213,11 @@ const PolkadotForm = () => {
       if (!api) throw new Error('There is no connection to api');
       if (!chainInfo) throw new Error('There is no Chain info');
 
+      const chainDecimals = chainInfo?.chainInfo.registry.chainDecimals?.[0];
+
       const transfer = api.tx.balances.transfer(
         targetAddress,
-        // form.transferAmount * 10 ** chainInfo.registry.chainDecimals?.[0]
+        // form.transferAmount * 10 ** chainDecimals
         form.transferAmount
       );
 
@@ -266,7 +228,7 @@ const PolkadotForm = () => {
       await signAndSend({ transfer, injector });
     } catch (error) {
       console.log(error);
-      setTransactionError(error?.message);
+      setTransactionError(error?.message ?? '');
     } finally {
       setIsLoading(false);
     }
@@ -283,7 +245,7 @@ const PolkadotForm = () => {
 
     getChainInfo(api).then((chainInfo) => setChainInfo(chainInfo));
 
-    getBalance(api).then((balance) => setBalance(balance));
+    getBalance({ api, targetAddress }).then((balance) => setBalance(balance));
   }, [api]);
 
   if (isExtensionError) {
@@ -379,10 +341,11 @@ const PolkadotForm = () => {
             required
             type="number"
             value={form.transferAmount}
+            currency={chainInfo?.chainInfo?.tokenSymbol?.toHuman() ?? ''}
           />
         </div>
         <p className="px-4 text-end text-xs text-gray-dark">
-          The amount to contribute from this account
+          The amount to contribute
         </p>
         {!!formErrors.transferAmount && (
           <span className="ml-2 text-error">{formErrors.transferAmount}</span>
@@ -394,13 +357,13 @@ const PolkadotForm = () => {
         <div className="flex rounded-2xl bg-secondary px-8 py-6">
           <div className="w-1/2 ">
             <div className="text-xs text-gray-dark">minimum allowed</div>
-            <div>5.0000 {chainInfo?.tokenSymbol?.toHuman()}</div>
+            <div>5.0000 {chainInfo?.chainInfo?.tokenSymbol?.toHuman()}</div>
           </div>
           <div className="w-1/2">
             <div className="text-xs text-gray-dark">Remaining till cap</div>
             <div>
               {balance?.balance?.free?.toHuman()}{' '}
-              {chainInfo?.tokenSymbol?.toHuman()}
+              {chainInfo?.chainInfo?.tokenSymbol?.toHuman()}
             </div>
           </div>
         </div>
