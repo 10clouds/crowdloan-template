@@ -22,6 +22,7 @@ import FinalState from '@features/Contribution/components/FinalState';
 import { useSetupPolkadot } from '@features/Contribution/hooks';
 import { validateForm } from '@/features/Contribution/utils/form';
 import { SITE } from '@/config';
+import { convertUnit } from '@/features/Contribution/utils';
 
 const PolkadotForm = () => {
   const { setIsModalOpen } = useIsModalVisible();
@@ -145,7 +146,7 @@ const PolkadotForm = () => {
 
       const transfer = api.tx.balances.transfer(
         SITE.polkadotConfig.targetAccountAddress,
-        form.transferAmount * 10 ** chainDecimals
+        convertUnit({ amount: form.transferAmount, chainDecimals })
       );
 
       const info = await transfer.paymentInfo(fromAcc.address);
@@ -317,7 +318,12 @@ const PolkadotForm = () => {
           <div className="w-1/2">
             <div className="text-xs text-gray-dark">Remaining till cap</div>
             <div>
-              {balance?.balance?.free?.toHuman().slice(0, 5)}{' '}
+              {balance?.balance?.free
+                ?.toHuman()
+                .slice(
+                  0,
+                  Number(chainInfo?.chainInfo.registry.chainDecimals?.[0]) - 4
+                )}{' '}
               {chainInfo?.chainInfo?.tokenSymbol?.toHuman()}
             </div>
           </div>

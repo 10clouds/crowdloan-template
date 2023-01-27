@@ -32,7 +32,7 @@ const ModalWrapper = ({ children }: Props) => {
         content: {
           position: 'absolute',
           padding: '0',
-          marginInline: 'auto',
+          margin: 'auto',
           background: '#fff',
           overflow: 'auto',
           WebkitOverflowScrolling: 'touch',
