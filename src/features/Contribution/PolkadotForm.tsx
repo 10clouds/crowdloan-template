@@ -27,7 +27,10 @@ const PolkadotForm = () => {
   const { setIsModalOpen } = useIsModalVisible();
   const { accounts, api, isExtensionError } = useSetupPolkadot();
 
-  const [chainInfo, setChainInfo] = useState<GenericChainProperties>();
+  const [chainInfo, setChainInfo] = useState<{
+    chainInfo?: GenericChainProperties;
+    chainName?: Text;
+  }>();
   const [balance, setBalance] = useState<BalanceExtracted>();
 
   // transaction
@@ -36,7 +39,7 @@ const PolkadotForm = () => {
     useState<ISubmittableResult>();
   const [transactionInfo, setTransactionInfo] = useState<RuntimeDispatchInfo>();
   const [transactionError, setTransactionError] = useState<string>('');
-  const [signAndSendAction, setSignAndSendAction] = useState<{
+  const [signAndSendData, setSignAndSendData] = useState<{
     transfer?: SubmittableExtrinsic<'promise', ISubmittableResult>;
     injector?: InjectedExtension;
   }>({
@@ -149,7 +152,7 @@ const PolkadotForm = () => {
       console.log('info', JSON.stringify(info, null, 2));
       setTransactionInfo(info);
 
-      setSignAndSendAction({ transfer, injector });
+      setSignAndSendData({ transfer, injector });
     } catch (error) {
       console.log(error);
       setTransactionError(error?.message ?? '');
@@ -288,7 +291,9 @@ const PolkadotForm = () => {
             type="number"
             disabled={!!transactionInfo}
             value={form.transferAmount}
-            currency={chainInfo?.chainInfo?.tokenSymbol?.toHuman() ?? ''}
+            currency={
+              (chainInfo?.chainInfo?.tokenSymbol?.toHuman() as string) ?? ''
+            }
           />
         </div>
         <p className="px-4 text-end text-xs text-gray-dark">
@@ -312,7 +317,7 @@ const PolkadotForm = () => {
           <div className="w-1/2">
             <div className="text-xs text-gray-dark">Remaining till cap</div>
             <div>
-              {balance?.balance?.free?.toHuman()}{' '}
+              {balance?.balance?.free?.toHuman().slice(0, 5)}{' '}
               {chainInfo?.chainInfo?.tokenSymbol?.toHuman()}
             </div>
           </div>
@@ -339,7 +344,7 @@ const PolkadotForm = () => {
         ) : (
           <button
             className="button-variant-default base-button ml-auto w-full"
-            onClick={() => signAndSend(signAndSendAction)}
+            onClick={() => signAndSend(signAndSendData)}
           >
             Sign and Send
           </button>
