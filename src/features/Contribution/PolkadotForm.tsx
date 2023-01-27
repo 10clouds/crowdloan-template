@@ -175,7 +175,7 @@ const PolkadotForm = () => {
 
   if (isExtensionError) {
     return (
-      <div className="flex w-full ">
+      <div className="flex w-full min-w-[30vw] flex-col px-6 py-12">
         <div className="mx-auto flex-1 justify-center text-center">
           Please install extension from&nbsp;
           <a
@@ -186,6 +186,12 @@ const PolkadotForm = () => {
           </a>
           to make transactions
         </div>
+        <button
+          className="base-button button-variant-default mx-auto mt-4"
+          onClick={() => setIsModalOpen(false)}
+        >
+          OK got it
+        </button>
       </div>
     );
   }
@@ -245,7 +251,9 @@ const PolkadotForm = () => {
       </div>
       <div className="h-full w-full overflow-y-auto">
         {transactionInfo?.partialFee && (
-          <div>Partial Fee {transactionInfo?.partialFee?.toHuman()}</div>
+          <div className="text-primary">
+            Partial Fee {transactionInfo?.partialFee?.toHuman()}
+          </div>
         )}
         <Select
           label="Contribute from"
