@@ -6,6 +6,7 @@ interface Props {
   placeholder?: string;
   value: string | ReactNode;
   children: ReactNode[];
+  disabled?: boolean;
 }
 
 const Select = ({
@@ -13,6 +14,7 @@ const Select = ({
   placeholder = '',
   value = '',
   children = [],
+  disabled = false,
 }: Props) => {
   const selectListRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -33,7 +35,7 @@ const Select = ({
         className={`relative inline-flex min-w-full justify-between rounded-2xl border border-gray bg-white focus-within:border-blue-500 ${
           isVisible && 'border-blue-500'
         }`}
-        onClick={() => setIsVisible((prev) => !prev)}
+        onClick={() => !disabled && setIsVisible((prev) => !prev)}
         aria-haspopup="true"
         aria-expanded={isVisible}
         aria-label="select"

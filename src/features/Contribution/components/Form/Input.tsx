@@ -10,6 +10,7 @@ interface Props {
   placeholder?: string;
   required?: boolean;
   currency?: string;
+  disabled?: boolean;
 }
 
 const Input = ({
@@ -21,6 +22,7 @@ const Input = ({
   placeholder = '',
   required = false,
   currency = 'DOT',
+  disabled = false,
 }: Props) => {
   return (
     <div>
@@ -38,6 +40,7 @@ const Input = ({
           name={name}
           value={value}
           required={required}
+          disabled={disabled}
           onChange={handleInputChange}
           className="inline-flex w-full min-w-full rounded-2xl border border-gray bg-white px-4 py-3 focus-within:border-blue-500"
         />

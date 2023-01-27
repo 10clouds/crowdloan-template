@@ -11,7 +11,7 @@ import type { ApiPromise } from '@polkadot/api';
 
 export const accountBalance = atom<BalanceExtracted>();
 
-export const useIsModalVisible = () => {
+export const useAccountBalance = () => {
   const [api, setApi] = useState<ApiPromise>();
 
   const balance = useStore(accountBalance);

@@ -31,18 +31,15 @@ const ModalWrapper = ({ children }: Props) => {
         },
         content: {
           position: 'absolute',
-          top: '10%',
-          left: '0',
-          right: '0',
-          bottom: '10%',
+          padding: '0',
           marginInline: 'auto',
           background: '#fff',
           overflow: 'auto',
           WebkitOverflowScrolling: 'touch',
           borderRadius: '16px',
           outline: 'none',
-          padding: '40px',
-          width: '50%',
+          width: 'fit-content',
+          height: 'fit-content',
         },
       }}
     >

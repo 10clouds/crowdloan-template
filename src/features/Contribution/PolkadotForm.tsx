@@ -188,7 +188,7 @@ const PolkadotForm = () => {
 
   if (!api) {
     return (
-      <div className="flex h-full w-full items-center justify-center">
+      <div className="flex h-full w-full min-w-[30vw] items-center justify-center p-10">
         <Loading />
         Connecting to extension...
       </div>
@@ -198,10 +198,35 @@ const PolkadotForm = () => {
   if (transactionError)
     return <FinalState description={transactionError} title="Error" isError />;
 
+  if (transactionStatus && !transactionStatus.isFinalized)
+    return (
+      <div className="flex h-full w-full min-w-[30vw] flex-col items-center justify-center p-10">
+        <Loading />
+        <div className="text-3xl font-medium tracking-tight">Processing...</div>
+        <div className="mt-4">
+          {Object.keys(transactionStatus?.status?.toHuman() ?? {}).map(
+            (status) => (
+              <div key={status} className="flex ">
+                Current Status - {status}
+              </div>
+            )
+          )}
+        </div>
+      </div>
+    );
+
+  if (transactionStatus && transactionStatus.isFinalized)
+    return (
+      <FinalState
+        description="Thank you for your contribution."
+        title="Success"
+      />
+    );
+
   return (
     <form
       onSubmit={handleFormSubmit}
-      className="flex h-full flex-col justify-between "
+      className="flex h-full max-h-[90vh] max-w-xl flex-col justify-between p-10"
     >
       <div className="mb-8 flex justify-between">
         <div className="flex flex-col gap-2">
@@ -215,11 +240,13 @@ const PolkadotForm = () => {
         <button onClick={closeModal}>X</button>
       </div>
       <div className="h-full w-full overflow-y-auto">
-        Partial Fee {transactionInfo?.partialFee?.toHuman()}
-        <br />
+        {transactionInfo?.partialFee && (
+          <div>Partial Fee {transactionInfo?.partialFee?.toHuman()}</div>
+        )}
         <Select
           label="Contribute from"
           placeholder="Select account"
+          disabled={!!transactionInfo}
           value={
             form.transferFrom.name &&
             `${form.transferFrom.name} - ${
@@ -259,6 +286,7 @@ const PolkadotForm = () => {
             placeholder="0"
             required
             type="number"
+            disabled={!!transactionInfo}
             value={form.transferAmount}
             currency={chainInfo?.chainInfo?.tokenSymbol?.toHuman() ?? ''}
           />
@@ -290,6 +318,7 @@ const PolkadotForm = () => {
           </div>
         </div>
       </div>
+      <hr className="bg-gray-200 dark:bg-gray-700 my-8 -ml-10 h-px w-[120%] border" />
       <div className="flex flex-1  pt-4">
         <button
           className="button-variant-primary base-button mr-auto"
@@ -299,13 +328,6 @@ const PolkadotForm = () => {
           Cancel
         </button>
 
-        {Object.keys(transactionStatus?.status?.toHuman() ?? {}).map(
-          (status) => (
-            <div key={status} className="flex ">
-              <Loading /> {status}
-            </div>
-          )
-        )}
         {!transactionInfo ? (
           <button
             className="button-variant-default base-button ml-auto w-full"
