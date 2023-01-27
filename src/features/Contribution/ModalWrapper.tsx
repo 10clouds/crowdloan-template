@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
-import useIsModalVisible from './store/useIsModalVisible';
 import type { ReactNode } from 'react';
+import { useIsModalVisible } from '@/store';
 
 interface Props {
   children: ReactNode;

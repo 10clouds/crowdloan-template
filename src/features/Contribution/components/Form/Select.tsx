@@ -30,7 +30,9 @@ const Select = ({
         {label}
       </label>
       <div
-        className="relative inline-flex min-w-full justify-between rounded-2xl border border-gray bg-white focus-within:border-blue-500 "
+        className={`relative inline-flex min-w-full justify-between rounded-2xl border border-gray bg-white focus-within:border-blue-500 ${
+          isVisible && 'border-blue-500'
+        }`}
         onClick={() => setIsVisible((prev) => !prev)}
         aria-haspopup="true"
         aria-expanded={isVisible}

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import useIsModalVisible from './store/useIsModalVisible';
+import { useIsModalVisible } from '@/store';
 
 const ButtonWrapper = ({ children }: { children: ReactNode }) => {
   const { setIsModalOpen } = useIsModalVisible();

@@ -1,128 +1,48 @@
 import { useEffect, useState, FormEvent } from 'react';
+import { web3FromSource } from '@polkadot/extension-dapp';
 import {
-  web3Accounts,
-  web3Enable,
-  web3FromSource,
-} from '@polkadot/extension-dapp';
-import type { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
-import type { ApiPromise } from '@polkadot/api';
+  BalanceExtracted,
+  getBalance,
+  getChainInfo,
+} from '@features/Contribution/api';
 
 import type { GenericChainProperties } from '@polkadot/types';
-import type { Balance } from '@polkadot/types/interfaces/runtime';
-import type { ISubmittableResult, Codec } from '@polkadot/types/types';
+import type { ISubmittableResult } from '@polkadot/types/types';
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { InjectedExtension } from '@polkadot/extension-inject/types';
+import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces';
 
-import useIsModalVisible from './store/useIsModalVisible';
+import { useIsModalVisible } from '@/store';
 
 import Loading from '@/components/Icons/Loading';
-import Select from './Form/Select';
-import Input from './Form/Input';
-import { apiSetup, getBalance, getChainInfo } from './api';
+import Select from '@features/Contribution/components/Form/Select';
+import Input from '@/features/Contribution/components/Form/Input';
+import FinalState from '@features/Contribution/components/FinalState';
 
-const targetAddress = '5CVT9Q7HrnpMCFRts82EWuTvZD66KHUjCxkDwAPn7HauZ2L5';
-
-const minAmount = 5000 as const;
-
-const getAccounts = async () => {
-  let allAccounts = [] as InjectedAccountWithMeta[];
-  try {
-    allAccounts = await web3Accounts();
-
-    return allAccounts;
-  } catch (error) {
-    console.error(error);
-    return allAccounts;
-  }
-};
-
-async function setupExtension() {
-  let isError = false;
-  try {
-    const extension = await web3Enable('parity-crowdloan');
-
-    if (extension.length === 0) {
-      console.error(
-        'No extension Found, please install from https://polkadot.js.org/extension/'
-      );
-      isError = true;
-      return isError;
-    }
-  } catch (error) {
-    console.error(error);
-    isError = true;
-    return isError;
-  }
-
-  return isError;
-}
-
-function transferAmountValidator(value: number, min: number) {
-  if (!value) {
-    return 'This field is required';
-  } else if (value <= 0) {
-    return 'Value cannot be negative';
-  } else if (isNaN(value)) {
-    return 'Value is not a number';
-  } else if (value > min) {
-    return `Value must be between 0 and ${min}`;
-  }
-
-  return '';
-}
-
-function transferFromValidator(accountInfo: { name: string; address: string }) {
-  const { name, address } = accountInfo;
-  if (!name && !address) {
-    return 'This field is required';
-  }
-  return '';
-}
-
-function validateForm(
-  formData: {
-    transferAmount: number;
-    transferFrom: {
-      name: string;
-      address: string;
-    };
-  },
-  options: { minAmount?: number } = {}
-) {
-  const { transferAmount, transferFrom } = formData;
-  const { minAmount = 1 } = options;
-
-  const transferAmountErrMessage = transferAmountValidator(
-    transferAmount,
-    minAmount
-  );
-  const transferFromErrMessage = transferFromValidator(transferFrom);
-
-  const errors = {
-    transferAmount: transferAmountErrMessage,
-    transferFrom: transferFromErrMessage,
-  };
-
-  const isValid = !Object.values(errors).some(Boolean);
-  return { isValid, errors };
-}
+import { useSetupPolkadot } from '@features/Contribution/hooks';
+import { validateForm } from '@/features/Contribution/utils/form';
+import { SITE } from '@/config';
 
 const PolkadotForm = () => {
   const { setIsModalOpen } = useIsModalVisible();
+  const { accounts, api, isExtensionError } = useSetupPolkadot();
 
-  // extension
-  const [accounts, setAccounts] = useState<InjectedAccountWithMeta[]>([]);
-  const [api, setApi] = useState<ApiPromise>();
-  const [isExtensionError, setIsExtensionError] = useState<boolean>(false);
   const [chainInfo, setChainInfo] = useState<GenericChainProperties>();
-  const [balance, setBalance] = useState<Codec>();
+  const [balance, setBalance] = useState<BalanceExtracted>();
 
   // transaction
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [transactionStatus, setTransactionStatus] =
     useState<ISubmittableResult>();
-  const [transactionInfo, setTransactionInfo] = useState<Partial<Balance>>();
+  const [transactionInfo, setTransactionInfo] = useState<RuntimeDispatchInfo>();
   const [transactionError, setTransactionError] = useState<string>('');
+  const [signAndSendAction, setSignAndSendAction] = useState<{
+    transfer?: SubmittableExtrinsic<'promise', ISubmittableResult>;
+    injector?: InjectedExtension;
+  }>({
+    transfer: undefined,
+    injector: undefined,
+  });
 
   // Form
   const [formErrors, setFormErrors] = useState({
@@ -163,7 +83,9 @@ const PolkadotForm = () => {
     };
     setForm(newForm);
 
-    const { errors } = validateForm(newForm, { minAmount });
+    const { errors } = validateForm(newForm, {
+      minAmount: SITE.polkadotConfig.minAmount,
+    });
 
     setFormErrors(errors);
   }
@@ -176,33 +98,36 @@ const PolkadotForm = () => {
     injector: InjectedExtension;
   }) {
     try {
-      const hash = await transfer.signAndSend(
+      await transfer.signAndSend(
         form.transferFrom.address,
         { signer: injector.signer },
         (status) => {
-          console.log('TRX', JSON.stringify(status, null, 2));
-
           setTransactionStatus(status);
         }
       );
-
-      console.log('hash', hash);
     } catch (err) {
       console.error(err);
     }
   }
 
+  function closeModal() {
+    setIsModalOpen(false);
+  }
+
   async function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { isValid, errors } = validateForm(form, { minAmount });
+    const { isValid, errors } = validateForm(form, {
+      minAmount: SITE.polkadotConfig.minAmount,
+    });
 
     if (!isValid) {
       setFormErrors(errors);
-      // return;
+      return;
     }
 
     try {
       setIsLoading(true);
+
       const fromAcc = accounts.find(
         (a) => a.address === form.transferFrom.address
       );
@@ -216,16 +141,15 @@ const PolkadotForm = () => {
       const chainDecimals = chainInfo?.chainInfo.registry.chainDecimals?.[0];
 
       const transfer = api.tx.balances.transfer(
-        targetAddress,
-        // form.transferAmount * 10 ** chainDecimals
-        form.transferAmount
+        SITE.polkadotConfig.targetAccountAddress,
+        form.transferAmount * 10 ** chainDecimals
       );
 
       const info = await transfer.paymentInfo(fromAcc.address);
       console.log('info', JSON.stringify(info, null, 2));
-      setTransactionInfo(info.partialFee);
+      setTransactionInfo(info);
 
-      await signAndSend({ transfer, injector });
+      setSignAndSendAction({ transfer, injector });
     } catch (error) {
       console.log(error);
       setTransactionError(error?.message ?? '');
@@ -235,17 +159,14 @@ const PolkadotForm = () => {
   }
 
   useEffect(() => {
-    setupExtension().then((isError) => setIsExtensionError(isError));
-    apiSetup().then((_api) => setApi(_api));
-    getAccounts().then((allAccounts) => setAccounts(allAccounts));
-  }, []);
-
-  useEffect(() => {
     if (!api) return;
 
     getChainInfo(api).then((chainInfo) => setChainInfo(chainInfo));
 
-    getBalance({ api, targetAddress }).then((balance) => setBalance(balance));
+    getBalance({
+      api,
+      targetAddress: SITE.polkadotConfig.targetAccountAddress,
+    }).then((balance) => setBalance(balance));
   }, [api]);
 
   if (isExtensionError) {
@@ -274,6 +195,9 @@ const PolkadotForm = () => {
     );
   }
 
+  if (transactionError)
+    return <FinalState description={transactionError} title="Error" isError />;
+
   return (
     <form
       onSubmit={handleFormSubmit}
@@ -288,15 +212,10 @@ const PolkadotForm = () => {
             Select the account and the amount to contribute.
           </p>
         </div>
-        <button onClick={() => setIsModalOpen(false)}>X</button>
+        <button onClick={closeModal}>X</button>
       </div>
       <div className="h-full w-full overflow-y-auto">
-        STATUS
-        {JSON.stringify(transactionStatus?.status, null, 2)} <br />
-        {JSON.stringify(transactionStatus, null, 2)} <br />
-        TRANSACTION INFO - PARTIAL FEE {transactionInfo?.toHuman()}
-        <br />
-        Chain INFO - {JSON.stringify(chainInfo, null, 2)}
+        Partial Fee {transactionInfo?.partialFee?.toHuman()}
         <br />
         <Select
           label="Contribute from"
@@ -357,7 +276,10 @@ const PolkadotForm = () => {
         <div className="flex rounded-2xl bg-secondary px-8 py-6">
           <div className="w-1/2 ">
             <div className="text-xs text-gray-dark">minimum allowed</div>
-            <div>5.0000 {chainInfo?.chainInfo?.tokenSymbol?.toHuman()}</div>
+            <div>
+              {SITE.polkadotConfig.minAmount}&nbsp;
+              {chainInfo?.chainInfo?.tokenSymbol?.toHuman()}
+            </div>
           </div>
           <div className="w-1/2">
             <div className="text-xs text-gray-dark">Remaining till cap</div>
@@ -369,18 +291,37 @@ const PolkadotForm = () => {
         </div>
       </div>
       <div className="flex flex-1  pt-4">
-        {transactionError && (
-          <div>
-            <span className="ml-2 text-error">{transactionError}</span>
-          </div>
-        )}
         <button
-          className="ml-auto flex w-full justify-center rounded-2xl bg-base px-6 py-3 text-lg text-white transition duration-150 ease-in-out hover:bg-base-light md:w-fit"
-          type="submit"
+          className="button-variant-primary base-button mr-auto"
           disabled={isLoading}
+          onClick={closeModal}
         >
-          Contribute
+          Cancel
         </button>
+
+        {Object.keys(transactionStatus?.status?.toHuman() ?? {}).map(
+          (status) => (
+            <div key={status} className="flex ">
+              <Loading /> {status}
+            </div>
+          )
+        )}
+        {!transactionInfo ? (
+          <button
+            className="button-variant-default base-button ml-auto w-full"
+            type="submit"
+            disabled={isLoading}
+          >
+            Contribute
+          </button>
+        ) : (
+          <button
+            className="button-variant-default base-button ml-auto w-full"
+            onClick={() => signAndSend(signAndSendAction)}
+          >
+            Sign and Send
+          </button>
+        )}
       </div>
     </form>
   );
