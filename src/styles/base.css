@@ -52,6 +52,22 @@ img {
   @apply mx-auto mt-6 text-center text-lg opacity-70 md:w-2/3;
 }
 
+.base-button {
+  @apply flex w-full justify-center rounded-2xl px-6 py-3 text-lg transition duration-150 ease-in-out md:w-fit;
+}
+
+.button-variant-default {
+  @apply bg-base text-white hover:bg-base-light;
+}
+
+.button-variant-default-light {
+  @apply bg-white text-primary hover:bg-gray;
+}
+
+.button-variant-primary {
+  @apply bg-white text-primary hover:border-secondary;
+}
+
 /* hide arros in input of type number */
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
