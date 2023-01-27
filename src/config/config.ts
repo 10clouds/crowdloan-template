@@ -40,4 +40,12 @@ const footerLinks = {
   ],
 };
 
-export const SITE = { ...CONFIG, footerLinks };
+const polkadotConfig = {
+  // address for people to transfer coins
+  targetAccountAddress: '5CVT9Q7HrnpMCFRts82EWuTvZD66KHUjCxkDwAPn7HauZ2L5',
+
+  // minimal amount to contribute - this is used in form validation
+  minAmount: 1,
+};
+
+export const SITE = { ...CONFIG, footerLinks, polkadotConfig };
