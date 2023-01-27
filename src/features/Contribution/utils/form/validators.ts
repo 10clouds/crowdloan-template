@@ -5,7 +5,7 @@ export function transferAmountValidator(value: number, min: number) {
     return 'Value cannot be negative';
   } else if (isNaN(value)) {
     return 'Value is not a number';
-  } else if (value > min) {
+  } else if (value < min) {
     return `Value must be between 0 and ${min}`;
   }
 
