@@ -1,5 +1,6 @@
-import { useEffect, useState, FormEvent } from 'react';
+import { useEffect, useState } from 'react';
 import { web3FromSource } from '@polkadot/extension-dapp';
+import { useForm } from 'react-hook-form';
 import {
   BalanceExtracted,
   getBalance,
@@ -18,11 +19,21 @@ import Loading from '@/components/Icons/Loading';
 import Select from '@features/Contribution/components/Form/Select';
 import Input from '@/features/Contribution/components/Form/Input';
 import FinalState from '@features/Contribution/components/FinalState';
+import LoadingWithProgress from '@/features/Contribution/components/LoadingWithProgress';
+import NoExtension from '@features/Contribution/components/NoExtension';
 
 import { useSetupPolkadot } from '@features/Contribution/hooks';
-import { validateForm } from '@/features/Contribution/utils/form';
 import { SITE } from '@/config';
-import { convertUnit } from '@/features/Contribution/utils';
+import { convertUnit, isMobileDevice } from '@/features/Contribution/utils';
+import type { FormData, SignAndSubmit } from '@features/Contribution/types';
+import MobileInfo from './components/MobileInfo';
+import ContributionMinInfo from './components/ContributionMinInfo';
+import TransactionInfo from './components/TransactionInfo';
+
+const formDefaultState = {
+  transferAmount: 0,
+  transferFrom: '',
+};
 
 const PolkadotForm = () => {
   const { setIsModalOpen } = useIsModalVisible();
@@ -40,58 +51,50 @@ const PolkadotForm = () => {
     useState<ISubmittableResult>();
   const [transactionInfo, setTransactionInfo] = useState<RuntimeDispatchInfo>();
   const [transactionError, setTransactionError] = useState<string>('');
-  const [signAndSendData, setSignAndSendData] = useState<{
-    transfer?: SubmittableExtrinsic<'promise', ISubmittableResult>;
-    injector?: InjectedExtension;
-  }>({
+  const [signAndSendData, setSignAndSendData] = useState<SignAndSubmit>({
     transfer: undefined,
     injector: undefined,
   });
 
-  // Form
-  const [formErrors, setFormErrors] = useState({
-    transferAmount: '',
-    transferFrom: '',
-  });
-  const [form, setForm] = useState({
-    transferAmount: 0,
-    transferFrom: {
-      name: '',
-      address: '',
-    },
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    watch,
+    getValues,
+    trigger,
+    formState: { errors },
+  } = useForm<FormData>({
+    mode: 'onChange',
+    defaultValues: formDefaultState,
   });
 
-  function clearErr(formName: keyof typeof formErrors) {
-    setFormErrors({ ...formErrors, [formName]: '' });
+  const transferFrom = watch('transferFrom');
+
+  register('transferFrom', {
+    required: { value: true, message: 'This Field is required' },
+  });
+
+  function getRemaining(chainDecimals: number) {
+    const leftTillCap =
+      convertUnit({ amount: SITE.polkadotConfig.targetAmount, chainDecimals }) -
+      balance?.balance?.free;
+
+    return leftTillCap / 10 ** chainDecimals;
   }
 
-  function handleChange({
-    inputName,
-    value,
-  }: {
-    inputName: string;
-    value: unknown;
-  }) {
-    setForm({
-      ...form,
-      [inputName]: value,
-    });
+  const remaining = getRemaining(
+    chainInfo?.chainInfo.registry.chainDecimals?.[0] ?? 0
+  )
+    .toString()
+    .slice(0, 6);
 
-    clearErr('transferFrom');
-  }
+  function getSelectedValue(accAddress: string) {
+    if (!accAddress) return '';
 
-  function handleFormInputChange(e: any) {
-    const newForm = {
-      ...form,
-      [e.target.name]: e.target.value,
-    };
-    setForm(newForm);
+    const fromAcc = accounts.find((a) => a.address === accAddress);
 
-    const { errors } = validateForm(newForm, {
-      minAmount: SITE.polkadotConfig.minAmount,
-    });
-
-    setFormErrors(errors);
+    return `${fromAcc?.meta.name} - ${transferFrom.slice(0, 15) + '...'}`;
   }
 
   async function signAndSend({
@@ -102,8 +105,9 @@ const PolkadotForm = () => {
     injector: InjectedExtension;
   }) {
     try {
+      const fromAddress = getValues('transferFrom');
       await transfer.signAndSend(
-        form.transferFrom.address,
+        fromAddress,
         { signer: injector.signer },
         (status) => {
           setTransactionStatus(status);
@@ -111,6 +115,7 @@ const PolkadotForm = () => {
       );
     } catch (err) {
       console.error(err);
+      setTransactionError(error?.message ?? '');
     }
   }
 
@@ -118,23 +123,11 @@ const PolkadotForm = () => {
     setIsModalOpen(false);
   }
 
-  async function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const { isValid, errors } = validateForm(form, {
-      minAmount: SITE.polkadotConfig.minAmount,
-    });
-
-    if (!isValid) {
-      setFormErrors(errors);
-      return;
-    }
-
+  const handleFormSubmit = handleSubmit(async (formData) => {
     try {
       setIsLoading(true);
 
-      const fromAcc = accounts.find(
-        (a) => a.address === form.transferFrom.address
-      );
+      const fromAcc = accounts.find((a) => a.address === formData.transferFrom);
       if (!fromAcc) throw new Error('There is no available account');
 
       const injector = await web3FromSource(fromAcc.meta.source);
@@ -146,21 +139,21 @@ const PolkadotForm = () => {
 
       const transfer = api.tx.balances.transfer(
         SITE.polkadotConfig.targetAccountAddress,
-        convertUnit({ amount: form.transferAmount, chainDecimals })
+        convertUnit({ amount: formData.transferAmount, chainDecimals })
       );
 
       const info = await transfer.paymentInfo(fromAcc.address);
-      console.log('info', JSON.stringify(info, null, 2));
       setTransactionInfo(info);
 
       setSignAndSendData({ transfer, injector });
     } catch (error) {
       console.log(error);
       setTransactionError(error?.message ?? '');
+      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }
-  }
+  });
 
   useEffect(() => {
     if (!api) return;
@@ -173,59 +166,29 @@ const PolkadotForm = () => {
     }).then((balance) => setBalance(balance));
   }, [api]);
 
-  if (isExtensionError) {
+  if (isMobileDevice())
     return (
-      <div className="flex w-full min-w-[30vw] flex-col px-6 py-12">
-        <div className="mx-auto flex-1 justify-center text-center">
-          Please install extension from&nbsp;
-          <a
-            href="https://polkadot.js.org/extension/"
-            className="text-center text-primary hover:underline"
-          >
-            Polkadot extension&nbsp;
-          </a>
-          to make transactions
-        </div>
-        <button
-          className="base-button button-variant-default mx-auto mt-4"
-          onClick={() => setIsModalOpen(false)}
-        >
-          OK got it
-        </button>
-      </div>
+      <MobileInfo
+        max={remaining}
+        tokenSymbol={chainInfo?.chainInfo?.tokenSymbol.toHuman() as string}
+      />
     );
-  }
 
-  if (!api) {
+  if (isExtensionError) return <NoExtension />;
+
+  if (!api)
     return (
       <div className="mb-2 flex h-full w-full min-w-[30vw] flex-col items-center justify-center p-10">
         <Loading />
         Connecting to extension...
       </div>
     );
-  }
 
   if (transactionError)
     return <FinalState description={transactionError} title="Error" isError />;
 
   if (transactionStatus && !transactionStatus.isFinalized)
-    return (
-      <div className="flex h-full w-full min-w-[30vw] flex-col items-center justify-center p-10">
-        <Loading />
-        <div className="mt-2 text-3xl font-medium tracking-tight">
-          Processing...
-        </div>
-        <div className="mt-4">
-          {Object.keys(transactionStatus?.status?.toHuman() ?? {}).map(
-            (status) => (
-              <div key={status} className="flex ">
-                Current Status - {status}
-              </div>
-            )
-          )}
-        </div>
-      </div>
-    );
+    return <LoadingWithProgress transactionStatus={transactionStatus} />;
 
   if (transactionStatus && transactionStatus.isFinalized)
     return (
@@ -253,30 +216,25 @@ const PolkadotForm = () => {
       </div>
       <div className="h-full w-full overflow-y-auto">
         {transactionInfo?.partialFee && (
-          <div className="text-primary">
-            Partial Fee {transactionInfo?.partialFee?.toHuman()}
-          </div>
+          <TransactionInfo
+            tokenSymbol={chainInfo?.chainInfo?.tokenSymbol.toHuman() as string}
+            amount={() => getValues('transferAmount')}
+            fee={transactionInfo?.partialFee?.toHuman()}
+          />
         )}
         <Select
           label="Contribute from"
           placeholder="Select account"
           disabled={!!transactionInfo}
-          value={
-            form.transferFrom.name &&
-            `${form.transferFrom.name} - ${
-              form.transferFrom.address.slice(0, 15) + '...'
-            }`
-          }
+          value={() => getSelectedValue(transferFrom)}
         >
           {accounts.map(({ address = '', meta: { name = '' } }) => (
             <div
               key={address}
               className="flex justify-between"
               onClick={() => {
-                handleChange({
-                  inputName: 'transferFrom',
-                  value: { name, address },
-                });
+                setValue('transferFrom', address);
+                trigger('transferFrom');
               }}
             >
               <div className="uppercase">{name}</div>
@@ -289,19 +247,28 @@ const PolkadotForm = () => {
         <p className="px-4 text-end text-xs text-gray-dark">
           This account will contribute to the crowdloan
         </p>
-        {!!formErrors.transferFrom && (
-          <span className="ml-2  text-error">{formErrors.transferFrom}</span>
+        {!!errors.transferFrom && (
+          <span className="ml-2  text-error">
+            {errors.transferFrom.message}
+          </span>
         )}
         <div>
           <Input
-            handleInputChange={handleFormInputChange}
-            name="transferAmount"
             label="Contribution"
             placeholder="0"
-            required
             type="number"
+            {...register('transferAmount', {
+              required: {
+                value: true,
+                message: 'This Field is required',
+              },
+              min: {
+                value: SITE.polkadotConfig.minAmount,
+                message: `Value have to be higher or equal to ${SITE.polkadotConfig.minAmount}`,
+              },
+              valueAsNumber: true,
+            })}
             disabled={!!transactionInfo}
-            value={form.transferAmount}
             currency={
               (chainInfo?.chainInfo?.tokenSymbol?.toHuman() as string) ?? ''
             }
@@ -310,34 +277,20 @@ const PolkadotForm = () => {
         <p className="px-4 text-end text-xs text-gray-dark">
           The amount to contribute
         </p>
-        {!!formErrors.transferAmount && (
-          <span className="ml-2 text-error">{formErrors.transferAmount}</span>
+        {!!errors.transferAmount && (
+          <span className="ml-2 text-error">
+            {errors.transferAmount.message}
+          </span>
         )}
-        <p className="mt-6 text-gray-dark">
+        <p className="mt-6 mb-4 text-gray-dark">
           The above contribution should amount to more than minimum contribution
           and less than the remaining value.
         </p>
-        <div className="flex rounded-2xl bg-secondary px-8 py-6">
-          <div className="w-1/2 ">
-            <div className="text-xs text-gray-dark">minimum allowed</div>
-            <div>
-              {SITE.polkadotConfig.minAmount}&nbsp;
-              {chainInfo?.chainInfo?.tokenSymbol?.toHuman()}
-            </div>
-          </div>
-          <div className="w-1/2">
-            <div className="text-xs text-gray-dark">Remaining till cap</div>
-            <div>
-              {balance?.balance?.free
-                ?.toHuman()
-                .slice(
-                  0,
-                  Number(chainInfo?.chainInfo.registry.chainDecimals?.[0]) - 4
-                )}{' '}
-              {chainInfo?.chainInfo?.tokenSymbol?.toHuman()}
-            </div>
-          </div>
-        </div>
+        <ContributionMinInfo
+          min={SITE.polkadotConfig.minAmount}
+          max={remaining}
+          tokenSymbol={chainInfo?.chainInfo?.tokenSymbol.toHuman() as string}
+        />
       </div>
       <hr className="bg-gray-200 dark:bg-gray-700 my-8 -ml-10 h-px w-[120%] border" />
       <div className="flex flex-1  pt-4">

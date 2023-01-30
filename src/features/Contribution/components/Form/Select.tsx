@@ -4,7 +4,7 @@ import useOnClickOutside from '@/hooks/useOnClickOutside';
 interface Props {
   label: string;
   placeholder?: string;
-  value: string | ReactNode;
+  value: () => string | ReactNode;
   children: ReactNode[];
   disabled?: boolean;
 }
@@ -12,7 +12,7 @@ interface Props {
 const Select = ({
   label = '',
   placeholder = '',
-  value = '',
+  value = () => '',
   children = [],
   disabled = false,
 }: Props) => {
@@ -42,8 +42,12 @@ const Select = ({
         ref={selectListRef}
         id={label}
       >
-        <label className="hover:bg-gray-50 rounded-l-md px-4 py-3 text-gray-600 hover:text-gray-700">
-          {value || placeholder}
+        <label
+          className={`hover:bg-gray-50 rounded-l-md px-4 py-3 ${
+            disabled ? 'text-gray-dark' : ' hover:text-gray-700'
+          }`}
+        >
+          {value() || placeholder}
         </label>
 
         <div>

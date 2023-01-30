@@ -8,7 +8,6 @@ const CONFIG = {
   title: 'Please add here a title',
   description: '🚀  Please add here a description',
 
-  // Navbar links
   navLinks: [
     { title: 'About', url: '#about' },
     { title: 'Rewards', url: '#rewards' },
@@ -18,7 +17,7 @@ const CONFIG = {
     { title: 'FAQ', url: '#faq' },
   ],
 
-  // project
+  // this can be any date format that is accepted by new Date()
   crowdLoadEndDate: '2023-03-13',
 };
 
@@ -46,6 +45,9 @@ const polkadotConfig = {
 
   // minimal amount to contribute - this is used in form validation
   minAmount: 1,
+
+  // amount that you want to reach in full DOT
+  targetAmount: 35,
 };
 
 export const SITE = { ...CONFIG, footerLinks, polkadotConfig };

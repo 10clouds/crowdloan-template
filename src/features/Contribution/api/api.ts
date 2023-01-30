@@ -4,13 +4,15 @@ import type { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
 
 export async function apiSetup() {
   try {
-    const provider = new WsProvider('wss://westend-rpc.polkadot.io'); // test network
-    // const provider = new WsProvider('wss://rpc.polkadot.io');
+    const provider = new WsProvider(
+      import.meta.env.MODE === 'development'
+        ? 'wss://westend-rpc.polkadot.io'
+        : 'wss://rpc.polkadot.io'
+    );
 
     const _api = await ApiPromise.create({ provider });
 
     if (_api) {
-      console.log('Connection Success', _api);
       return _api;
     }
   } catch (error) {
