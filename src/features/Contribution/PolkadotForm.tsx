@@ -24,7 +24,11 @@ import NoExtension from '@features/Contribution/components/NoExtension';
 
 import { useSetupPolkadot } from '@features/Contribution/hooks';
 import { SITE } from '@/config';
-import { convertUnit, isMobileDevice } from '@/features/Contribution/utils';
+import {
+  convertUnit,
+  getRemaining,
+  isMobileDevice,
+} from '@/features/Contribution/utils';
 import type { FormData, SignAndSubmit } from '@features/Contribution/types';
 import MobileInfo from './components/MobileInfo';
 import ContributionMinInfo from './components/ContributionMinInfo';
@@ -75,17 +79,10 @@ const PolkadotForm = () => {
     required: { value: true, message: 'This Field is required' },
   });
 
-  function getRemaining(chainDecimals: number) {
-    const leftTillCap =
-      convertUnit({ amount: SITE.polkadotConfig.targetAmount, chainDecimals }) -
-      balance?.balance?.free;
-
-    return leftTillCap / 10 ** chainDecimals;
-  }
-
-  const remaining = getRemaining(
-    chainInfo?.chainInfo.registry.chainDecimals?.[0] ?? 0
-  )
+  const remaining = getRemaining({
+    chainDecimals: chainInfo?.chainInfo.registry.chainDecimals?.[0] ?? 0,
+    balance: balance?.balance.free,
+  })
     .toString()
     .slice(0, 6);
 
