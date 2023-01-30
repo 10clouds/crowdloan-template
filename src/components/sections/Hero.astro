@@ -12,7 +12,6 @@ export interface Props {
   id: string;
 }
 
-// TODO import all content from file
 const { id = 'hero' } = Astro.props;
 
 const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
