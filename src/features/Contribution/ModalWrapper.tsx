@@ -40,6 +40,7 @@ const ModalWrapper = ({ children }: Props) => {
           outline: 'none',
           width: 'fit-content',
           height: 'fit-content',
+          overflowX: 'hidden',
         },
       }}
     >
