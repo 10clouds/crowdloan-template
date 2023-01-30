@@ -12,6 +12,11 @@ interface Props {
 const MobileInfo = ({ tokenSymbol, max }: Props) => {
   const { setIsModalOpen } = useIsModalVisible();
 
+  function copyToCb() {
+    copyToClipboard(SITE.polkadotConfig.targetAccountAddress);
+    alert('You have successfully copied Address to clipboard');
+  }
+
   return (
     <div className="flex w-full max-w-2xl flex-col justify-between overflow-y-auto px-6 py-10">
       <div>
@@ -24,19 +29,12 @@ const MobileInfo = ({ tokenSymbol, max }: Props) => {
           to process transaction.
         </p>
         <div className="ml-4 text-xs opacity-50">Account address</div>
-        <div
-          className="flex rounded-2xl border text-sm"
-          onClick={() =>
-            copyToClipboard(SITE.polkadotConfig.targetAccountAddress)
-          }
-        >
+        <div className="flex rounded-2xl border text-sm" onClick={copyToCb}>
           <div className="p-4 ">
             {SITE.polkadotConfig.targetAccountAddress.slice(0, 20) + '...'}
           </div>
           <button
-            onClick={() =>
-              copyToClipboard(SITE.polkadotConfig.targetAccountAddress)
-            }
+            onClick={copyToCb}
             className="flex w-full items-center justify-center rounded-2xl bg-base px-4"
           >
             <Copy />
