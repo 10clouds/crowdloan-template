@@ -25,7 +25,7 @@ import NoExtension from '@features/Contribution/components/NoExtension';
 import { useSetupPolkadot } from '@features/Contribution/hooks';
 import { SITE } from '@/config';
 import { convertUnit, isMobileDevice } from '@/features/Contribution/utils';
-import type { FormData } from '@features/Contribution/types';
+import type { FormData, SignAndSubmit } from '@features/Contribution/types';
 import MobileInfo from './components/MobileInfo';
 import ContributionMinInfo from './components/ContributionMinInfo';
 
@@ -50,10 +50,7 @@ const PolkadotForm = () => {
     useState<ISubmittableResult>();
   const [transactionInfo, setTransactionInfo] = useState<RuntimeDispatchInfo>();
   const [transactionError, setTransactionError] = useState<string>('');
-  const [signAndSendData, setSignAndSendData] = useState<{
-    transfer?: SubmittableExtrinsic<'promise', ISubmittableResult>;
-    injector?: InjectedExtension;
-  }>({
+  const [signAndSendData, setSignAndSendData] = useState<SignAndSubmit>({
     transfer: undefined,
     injector: undefined,
   });
@@ -64,6 +61,7 @@ const PolkadotForm = () => {
     handleSubmit,
     watch,
     getValues,
+    trigger,
     formState: { errors },
   } = useForm<FormData>({
     mode: 'onChange',
@@ -90,7 +88,7 @@ const PolkadotForm = () => {
     .toString()
     .slice(0, 6);
 
-  function getSelectValue(accAddress: string) {
+  function getSelectedValue(accAddress: string) {
     if (!accAddress) return '';
 
     const fromAcc = accounts.find((a) => a.address === accAddress);
@@ -116,6 +114,8 @@ const PolkadotForm = () => {
       );
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -150,7 +150,6 @@ const PolkadotForm = () => {
     } catch (error) {
       console.log(error);
       setTransactionError(error?.message ?? '');
-    } finally {
       setIsLoading(false);
     }
   });
@@ -224,7 +223,7 @@ const PolkadotForm = () => {
           label="Contribute from"
           placeholder="Select account"
           disabled={!!transactionInfo}
-          value={() => getSelectValue(transferFrom)}
+          value={() => getSelectedValue(transferFrom)}
         >
           {accounts.map(({ address = '', meta: { name = '' } }) => (
             <div
@@ -232,6 +231,7 @@ const PolkadotForm = () => {
               className="flex justify-between"
               onClick={() => {
                 setValue('transferFrom', address);
+                trigger('transferFrom');
               }}
             >
               <div className="uppercase">{name}</div>
