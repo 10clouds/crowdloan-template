@@ -18,6 +18,7 @@ import Loading from '@/components/Icons/Loading';
 import Select from '@features/Contribution/components/Form/Select';
 import Input from '@/features/Contribution/components/Form/Input';
 import FinalState from '@features/Contribution/components/FinalState';
+import LoadingWithProgress from '@/features/Contribution/components/LoadingWithProgress';
 
 import { useSetupPolkadot } from '@features/Contribution/hooks';
 import { validateForm } from '@/features/Contribution/utils/form';
@@ -209,23 +210,7 @@ const PolkadotForm = () => {
     return <FinalState description={transactionError} title="Error" isError />;
 
   if (transactionStatus && !transactionStatus.isFinalized)
-    return (
-      <div className="flex h-full w-full min-w-[30vw] flex-col items-center justify-center p-10">
-        <Loading />
-        <div className="mt-2 text-3xl font-medium tracking-tight">
-          Processing...
-        </div>
-        <div className="mt-4">
-          {Object.keys(transactionStatus?.status?.toHuman() ?? {}).map(
-            (status) => (
-              <div key={status} className="flex ">
-                Current Status - {status}
-              </div>
-            )
-          )}
-        </div>
-      </div>
-    );
+    return <LoadingWithProgress transactionStatus={transactionStatus} />;
 
   if (transactionStatus && transactionStatus.isFinalized)
     return (
