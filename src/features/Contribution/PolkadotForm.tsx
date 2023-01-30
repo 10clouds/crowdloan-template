@@ -28,6 +28,7 @@ import { convertUnit, isMobileDevice } from '@/features/Contribution/utils';
 import type { FormData, SignAndSubmit } from '@features/Contribution/types';
 import MobileInfo from './components/MobileInfo';
 import ContributionMinInfo from './components/ContributionMinInfo';
+import TransactionInfo from './components/TransactionInfo';
 
 const formDefaultState = {
   transferAmount: 0,
@@ -114,8 +115,7 @@ const PolkadotForm = () => {
       );
     } catch (err) {
       console.error(err);
-    } finally {
-      setIsLoading(false);
+      setTransactionError(error?.message ?? '');
     }
   }
 
@@ -149,6 +149,8 @@ const PolkadotForm = () => {
     } catch (error) {
       console.log(error);
       setTransactionError(error?.message ?? '');
+      setIsLoading(false);
+    } finally {
       setIsLoading(false);
     }
   });
@@ -214,9 +216,11 @@ const PolkadotForm = () => {
       </div>
       <div className="h-full w-full overflow-y-auto">
         {transactionInfo?.partialFee && (
-          <div className="text-primary">
-            Partial Fee {transactionInfo?.partialFee?.toHuman()}
-          </div>
+          <TransactionInfo
+            tokenSymbol={chainInfo?.chainInfo?.tokenSymbol.toHuman() as string}
+            amount={() => getValues('transferAmount')}
+            fee={transactionInfo?.partialFee?.toHuman()}
+          />
         )}
         <Select
           label="Contribute from"
