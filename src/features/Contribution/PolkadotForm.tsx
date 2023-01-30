@@ -39,6 +39,23 @@ const formDefaultState = {
   transferFrom: '',
 };
 
+const inputOptions = {
+  account: {
+    required: { value: true, message: 'This Field is required' },
+  },
+  amount: {
+    required: {
+      value: true,
+      message: 'This Field is required',
+    },
+    min: {
+      value: SITE.polkadotConfig.minAmount,
+      message: `Value have to be higher or equal to ${SITE.polkadotConfig.minAmount}`,
+    },
+    valueAsNumber: true,
+  },
+};
+
 const PolkadotForm = () => {
   const { setIsModalOpen } = useIsModalVisible();
   const { accounts, api, isExtensionError } = useSetupPolkadot();
@@ -75,9 +92,7 @@ const PolkadotForm = () => {
 
   const transferFrom = watch('transferFrom');
 
-  register('transferFrom', {
-    required: { value: true, message: 'This Field is required' },
-  });
+  register('transferFrom', inputOptions.account);
 
   const remaining = getRemaining({
     chainDecimals: chainInfo?.chainInfo.registry.chainDecimals?.[0] ?? 0,
@@ -254,17 +269,7 @@ const PolkadotForm = () => {
             label="Contribution"
             placeholder="0"
             type="number"
-            {...register('transferAmount', {
-              required: {
-                value: true,
-                message: 'This Field is required',
-              },
-              min: {
-                value: SITE.polkadotConfig.minAmount,
-                message: `Value have to be higher or equal to ${SITE.polkadotConfig.minAmount}`,
-              },
-              valueAsNumber: true,
-            })}
+            {...register('transferAmount', inputOptions.amount)}
             disabled={!!transactionInfo}
             currency={
               (chainInfo?.chainInfo?.tokenSymbol?.toHuman() as string) ?? ''
