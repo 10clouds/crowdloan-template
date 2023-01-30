@@ -47,7 +47,9 @@ const Input = forwardRef<
             onChange={onChange}
             onBlur={onBlur}
             disabled={disabled}
-            className="inline-flex w-full min-w-full rounded-2xl border border-gray bg-white px-4 py-3 focus-within:border-blue-500"
+            className={`inline-flex w-full min-w-full rounded-2xl border border-gray bg-white px-4 py-3 ${
+              disabled ? 'text-gray' : 'text-base'
+            } focus-within:border-blue-500`}
           />
           <div className="absolute top-0 bottom-0 right-4 flex items-center text-gray-dark">
             {currency}
