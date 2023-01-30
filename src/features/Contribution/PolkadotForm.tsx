@@ -1,5 +1,6 @@
-import { useEffect, useState, FormEvent } from 'react';
+import { useEffect, useState } from 'react';
 import { web3FromSource } from '@polkadot/extension-dapp';
+import { useForm } from 'react-hook-form';
 import {
   BalanceExtracted,
   getBalance,
@@ -21,9 +22,10 @@ import FinalState from '@features/Contribution/components/FinalState';
 import LoadingWithProgress from '@/features/Contribution/components/LoadingWithProgress';
 
 import { useSetupPolkadot } from '@features/Contribution/hooks';
-import { validateForm } from '@/features/Contribution/utils/form';
 import { SITE } from '@/config';
 import { convertUnit } from '@/features/Contribution/utils';
+import type { FormData } from './types';
+import NoExtension from './components/NoExtension';
 
 const PolkadotForm = () => {
   const { setIsModalOpen } = useIsModalVisible();
@@ -49,51 +51,26 @@ const PolkadotForm = () => {
     injector: undefined,
   });
 
-  // Form
-  const [formErrors, setFormErrors] = useState({
-    transferAmount: '',
-    transferFrom: '',
-  });
-  const [form, setForm] = useState({
-    transferAmount: 0,
-    transferFrom: {
-      name: '',
-      address: '',
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    watch,
+    getValues,
+    formState: { errors },
+  } = useForm<FormData>({
+    mode: 'onChange',
+    defaultValues: {
+      transferAmount: 0,
+      transferFrom: '',
     },
   });
 
-  function clearErr(formName: keyof typeof formErrors) {
-    setFormErrors({ ...formErrors, [formName]: '' });
-  }
+  const transferFrom = watch('transferFrom');
 
-  function handleChange({
-    inputName,
-    value,
-  }: {
-    inputName: string;
-    value: unknown;
-  }) {
-    setForm({
-      ...form,
-      [inputName]: value,
-    });
-
-    clearErr('transferFrom');
-  }
-
-  function handleFormInputChange(e: any) {
-    const newForm = {
-      ...form,
-      [e.target.name]: e.target.value,
-    };
-    setForm(newForm);
-
-    const { errors } = validateForm(newForm, {
-      minAmount: SITE.polkadotConfig.minAmount,
-    });
-
-    setFormErrors(errors);
-  }
+  register('transferFrom', {
+    required: { value: true, message: 'This Field is required' },
+  });
 
   async function signAndSend({
     transfer,
@@ -103,8 +80,9 @@ const PolkadotForm = () => {
     injector: InjectedExtension;
   }) {
     try {
+      const fromAddress = getValues('transferFrom');
       await transfer.signAndSend(
-        form.transferFrom.address,
+        fromAddress,
         { signer: injector.signer },
         (status) => {
           setTransactionStatus(status);
@@ -119,23 +97,15 @@ const PolkadotForm = () => {
     setIsModalOpen(false);
   }
 
-  async function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const { isValid, errors } = validateForm(form, {
-      minAmount: SITE.polkadotConfig.minAmount,
-    });
+  const handleFormSubmit = handleSubmit(async (formData) => {
+    console.log('formData :>> ', formData);
 
-    if (!isValid) {
-      setFormErrors(errors);
-      return;
-    }
+    // return;
 
     try {
       setIsLoading(true);
 
-      const fromAcc = accounts.find(
-        (a) => a.address === form.transferFrom.address
-      );
+      const fromAcc = accounts.find((a) => a.address === formData.transferFrom);
       if (!fromAcc) throw new Error('There is no available account');
 
       const injector = await web3FromSource(fromAcc.meta.source);
@@ -147,7 +117,7 @@ const PolkadotForm = () => {
 
       const transfer = api.tx.balances.transfer(
         SITE.polkadotConfig.targetAccountAddress,
-        convertUnit({ amount: form.transferAmount, chainDecimals })
+        convertUnit({ amount: formData.transferAmount, chainDecimals })
       );
 
       const info = await transfer.paymentInfo(fromAcc.address);
@@ -161,7 +131,7 @@ const PolkadotForm = () => {
     } finally {
       setIsLoading(false);
     }
-  }
+  });
 
   useEffect(() => {
     if (!api) return;
@@ -175,26 +145,7 @@ const PolkadotForm = () => {
   }, [api]);
 
   if (isExtensionError) {
-    return (
-      <div className="flex w-full min-w-[30vw] flex-col px-6 py-12">
-        <div className="mx-auto flex-1 justify-center text-center">
-          Please install extension from&nbsp;
-          <a
-            href="https://polkadot.js.org/extension/"
-            className="text-center text-primary hover:underline"
-          >
-            Polkadot extension&nbsp;
-          </a>
-          to make transactions
-        </div>
-        <button
-          className="base-button button-variant-default mx-auto mt-4"
-          onClick={() => setIsModalOpen(false)}
-        >
-          OK got it
-        </button>
-      </div>
-    );
+    return <NoExtension />;
   }
 
   if (!api) {
@@ -219,6 +170,14 @@ const PolkadotForm = () => {
         title="Success"
       />
     );
+
+  function getSelectValue(accAddress: string) {
+    if (!accAddress) return '';
+
+    const fromAcc = accounts.find((a) => a.address === accAddress);
+
+    return `${fromAcc?.meta.name} - ${transferFrom.slice(0, 15) + '...'}`;
+  }
 
   return (
     <form
@@ -246,22 +205,14 @@ const PolkadotForm = () => {
           label="Contribute from"
           placeholder="Select account"
           disabled={!!transactionInfo}
-          value={
-            form.transferFrom.name &&
-            `${form.transferFrom.name} - ${
-              form.transferFrom.address.slice(0, 15) + '...'
-            }`
-          }
+          value={() => getSelectValue(transferFrom)}
         >
           {accounts.map(({ address = '', meta: { name = '' } }) => (
             <div
               key={address}
               className="flex justify-between"
               onClick={() => {
-                handleChange({
-                  inputName: 'transferFrom',
-                  value: { name, address },
-                });
+                setValue('transferFrom', address);
               }}
             >
               <div className="uppercase">{name}</div>
@@ -274,19 +225,28 @@ const PolkadotForm = () => {
         <p className="px-4 text-end text-xs text-gray-dark">
           This account will contribute to the crowdloan
         </p>
-        {!!formErrors.transferFrom && (
-          <span className="ml-2  text-error">{formErrors.transferFrom}</span>
+        {!!errors.transferFrom && (
+          <span className="ml-2  text-error">
+            {errors.transferFrom.message}
+          </span>
         )}
         <div>
           <Input
-            handleInputChange={handleFormInputChange}
-            name="transferAmount"
             label="Contribution"
             placeholder="0"
-            required
             type="number"
+            {...register('transferAmount', {
+              required: {
+                value: true,
+                message: 'This Field is required',
+              },
+              min: {
+                value: SITE.polkadotConfig.minAmount,
+                message: `Value have to be higher or equal to ${SITE.polkadotConfig.minAmount}`,
+              },
+              valueAsNumber: true,
+            })}
             disabled={!!transactionInfo}
-            value={form.transferAmount}
             currency={
               (chainInfo?.chainInfo?.tokenSymbol?.toHuman() as string) ?? ''
             }
@@ -295,8 +255,10 @@ const PolkadotForm = () => {
         <p className="px-4 text-end text-xs text-gray-dark">
           The amount to contribute
         </p>
-        {!!formErrors.transferAmount && (
-          <span className="ml-2 text-error">{formErrors.transferAmount}</span>
+        {!!errors.transferAmount && (
+          <span className="ml-2 text-error">
+            {errors.transferAmount.message}
+          </span>
         )}
         <p className="mt-6 text-gray-dark">
           The above contribution should amount to more than minimum contribution
