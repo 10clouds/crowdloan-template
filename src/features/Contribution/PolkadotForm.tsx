@@ -21,6 +21,10 @@ import Input from '@/features/Contribution/components/Form/Input';
 import FinalState from '@features/Contribution/components/FinalState';
 import LoadingWithProgress from '@/features/Contribution/components/LoadingWithProgress';
 import NoExtension from '@features/Contribution/components/NoExtension';
+import MobileInfo from '@features/Contribution/components/MobileInfo';
+import ContributionMinInfo from '@features/Contribution/components/ContributionMinInfo';
+import TransactionInfo from '@features/Contribution/components/TransactionInfo';
+import Close from '@features/Contribution/components/icons/Close';
 
 import { useSetupPolkadot } from '@features/Contribution/hooks';
 import { SITE } from '@/config';
@@ -30,9 +34,6 @@ import {
   isMobileDevice,
 } from '@/features/Contribution/utils';
 import type { FormData, SignAndSubmit } from '@features/Contribution/types';
-import MobileInfo from './components/MobileInfo';
-import ContributionMinInfo from './components/ContributionMinInfo';
-import TransactionInfo from './components/TransactionInfo';
 
 const formDefaultState = {
   transferAmount: 0,
@@ -224,7 +225,7 @@ const PolkadotForm = () => {
             Select the account and the amount to contribute.
           </p>
         </div>
-        <button onClick={closeModal}>X</button>
+        <Close onClick={closeModal} />
       </div>
       <div className="h-full w-full overflow-y-auto">
         {transactionInfo?.partialFee && (
