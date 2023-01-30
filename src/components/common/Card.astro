@@ -46,11 +46,13 @@ const Element = href ? 'a' : 'div';
         bulletList.length
           ? bulletList.map((item) => (
               <div class="flex first-of-type:mt-8">
-                <Icon
-                  name="tabler:check"
-                  color="#3b5eea"
-                  class="h-3 w-3 md:h-6 md:w-6"
-                />
+                <div class="flex items-center justify-center">
+                  <Icon
+                    name="tabler:check"
+                    color="#3b5eea"
+                    class="h-3 w-3 md:h-6 md:w-6"
+                  />
+                </div>
                 <span class="pl-3 opacity-70">{item}</span>
               </div>
             ))

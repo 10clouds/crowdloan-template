@@ -8,11 +8,20 @@ export interface Props {
 const { color = '#3b5eea' } = Astro.props;
 ---
 
-<div class="max-w-fit rounded-full border p-2">
+<div
+  class="arrow-down-color-wrapper max-w-fit rounded-full border p-2 transition-all duration-300 ease-in-out hover:bg-base"
+  tabindex="1"
+>
   <Icon
     name="tabler:arrow-down-right"
     color={color}
-    class="w-6 h-6 -rotate-90 hover:scale-125 transition-all duration-300 ease-in-out hover:cursor-pointer"
+    class="arrow-down-color w-6 h-6 -rotate-90 hover:color-white transition-all duration-300 ease-in-out hover:cursor-pointer"
     optimize={false}
   />
 </div>
+
+<style>
+  .arrow-down-color-wrapper:hover svg.arrow-down-color {
+    color: white;
+  }
+</style>
