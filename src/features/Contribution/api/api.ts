@@ -4,7 +4,6 @@ import type { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
 
 export async function apiSetup() {
   try {
-    console.log('import.meta.env.MODE', import.meta.env.MODE);
     const provider = new WsProvider(
       import.meta.env.MODE === 'development'
         ? 'wss://westend-rpc.polkadot.io'
