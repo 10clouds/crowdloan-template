@@ -143,7 +143,6 @@ const PolkadotForm = () => {
       );
 
       const info = await transfer.paymentInfo(fromAcc.address);
-      console.log('info', JSON.stringify(info, null, 2));
       setTransactionInfo(info);
 
       setSignAndSendData({ transfer, injector });
