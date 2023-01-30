@@ -19,9 +19,9 @@ const MobileInfo = ({ tokenSymbol, max }: Props) => {
           Contribute to fund
         </span>
         <p className="mb-6 text-gray-dark">
-          In order to contribute to fund, copy the individual transaction ID and
-          open your dedicated Polkadot wallet app on your device and use this
-          address to process transaction.
+          In order to contribute to fund, copy the account address ID and open
+          your dedicated Polkadot wallet app on your device and use this address
+          to process transaction.
         </p>
         <div className="ml-4 text-xs opacity-50">Account address</div>
         <div
