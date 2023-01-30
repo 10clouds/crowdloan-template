@@ -19,6 +19,7 @@ module.exports = {
           DEFAULT: '#DBDBDB',
           dark: '#89888A',
         },
+        error: '#EA3B65',
       },
       textColor: {
         base: { DEFAULT: '#131115;', light: '#CFCFCF' },
@@ -35,6 +36,7 @@ module.exports = {
         base: { DEFAULT: '#3B5EEA', light: '#506FEC' },
         gray: '#F5F5F5',
         cream: '#F9FAFF',
+        secondary: '#F6F7FE',
       },
       dropShadow: {
         primary: '0px 24px 70px rgba(59, 107, 181, 0.15)',

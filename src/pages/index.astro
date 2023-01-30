@@ -21,6 +21,8 @@ import MondayLogo from '@/assets/images/logos/Monday.png';
 
 import Logo from '@/assets/Logo.svg';
 import TimerBanner from '@/components/sections/TimerBanner.astro';
+import ModalWrapper from '@/features/Contribution/ModalWrapper';
+import PolkadotForm from '@/features/Contribution/PolkadotForm';
 
 let logos = [
   {
@@ -246,4 +248,5 @@ const rewardsDistribution = [
   <AdditionalLinks id="additional" cardsData={tempCardsData} />
   <FAQ id="faq" faq={faq} />
   <TimerBanner />
+  <ModalWrapper client:only><PolkadotForm client:only /></ModalWrapper>
 </Layout>

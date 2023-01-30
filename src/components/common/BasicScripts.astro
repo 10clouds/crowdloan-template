@@ -25,6 +25,9 @@
 
     attachEvent('#header nav li', 'click', () => {
       // closing menu on each nav lick click
+      document
+        .querySelector('[data-toggle-menu]')
+        ?.classList.remove('expanded');
       document.body.classList.remove('overflow-hidden');
       document.getElementById('header')?.classList.remove('h-screen');
       document.querySelector('#header nav')?.classList.add('hidden');

@@ -15,14 +15,13 @@ const {
 } = Astro.props;
 
 const variants = {
-  default: 'bg-base text-white hover:bg-base-light',
-  'default-light': 'bg-white text-primary hover:bg-gray',
-  primary: 'bg-white text-primary',
+  default: 'button-variant-default',
+  'default-light': 'button-variant-default-light',
+  primary: 'button-variant-primary',
   disabled: '',
 } as const;
 
-const commonStyles =
-  'flex justify-center px-[24px] py-[12px] rounded-2xl text-lg transition duration-150 ease-in-out md:w-fit w-full';
+const commonStyles = 'base-button';
 ---
 
 <button

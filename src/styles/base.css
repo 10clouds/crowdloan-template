@@ -33,7 +33,7 @@ img {
   @apply transition;
 }
 [data-toggle-menu].expanded g > path:first-child {
-  @apply translate-y-[15px] translate-x-[-4px] -rotate-45;
+  @apply translate-y-[15px] translate-x-[-1px] -rotate-45;
 }
 
 [data-toggle-menu].expanded g > path:nth-child(2) {
@@ -41,7 +41,7 @@ img {
 }
 
 [data-toggle-menu].expanded g > path:last-child {
-  @apply translate-y-[-10px] translate-x-[13px] rotate-45;
+  @apply translate-y-[-10px] translate-x-[16px] rotate-45;
 }
 
 .section-title {
@@ -50,4 +50,33 @@ img {
 
 .section-description {
   @apply mx-auto mt-6 text-center text-lg opacity-70 md:w-2/3;
+}
+
+.base-button {
+  @apply flex w-full justify-center rounded-2xl px-6 py-3 text-lg transition duration-150 ease-in-out md:w-fit;
+}
+
+.button-variant-default {
+  @apply bg-base text-white hover:bg-base-light;
+}
+
+.button-variant-default-light {
+  @apply bg-white text-primary hover:bg-gray;
+}
+
+.button-variant-primary {
+  @apply bg-white text-primary hover:border-secondary;
+}
+
+/* hide arros in input of type number */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }

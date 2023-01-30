@@ -32,7 +32,7 @@ const Element = href ? 'a' : 'div';
   <div class="flex h-full flex-col px-4 py-6 md:px-8">
     {
       topLabel && (
-        <span class="text-xs font-medium tracking-wide opacity-50">
+        <span class="mt-5 text-xs font-medium tracking-wide opacity-50">
           {topLabel}
         </span>
       )
@@ -51,7 +51,7 @@ const Element = href ? 'a' : 'div';
                   color="#3b5eea"
                   class="h-3 w-3 md:h-6 md:w-6"
                 />
-                <span class="pl-3">{item}</span>
+                <span class="pl-3 opacity-70">{item}</span>
               </div>
             ))
           : null
@@ -59,7 +59,7 @@ const Element = href ? 'a' : 'div';
     </div>
     {
       description && (
-        <p class="mt-6 font-normal leading-[140%]">{description}</p>
+        <p class="mt-6 font-normal leading-[140%] opacity-70">{description}</p>
       )
     }
     {

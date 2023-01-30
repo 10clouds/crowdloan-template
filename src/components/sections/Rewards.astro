@@ -3,6 +3,7 @@ import Section from '@/components/ui/Section.astro';
 import Card from '@/components/common/Card.astro';
 import Button from '@/components/ui/Button.astro';
 import type { Card as CardType } from '@/types';
+import ButtonWrapper from '@/features/Contribution/ButtonWrapper';
 
 interface RewardType extends CardType {
   takeSpace?: number;
@@ -52,7 +53,9 @@ const defaultSpace = 3;
       <div class="text-3xl font-medium tracking-tight text-white lg:text-7xl">
         Don’t wait too long!
       </div>
-      <Button variant="primary" />
+      <ButtonWrapper client:load>
+        <Button variant="primary" />
+      </ButtonWrapper>
     </div>
   </div>
 </Section>
