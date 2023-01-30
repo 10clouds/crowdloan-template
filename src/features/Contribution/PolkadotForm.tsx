@@ -142,11 +142,10 @@ const PolkadotForm = () => {
 
       const fromAcc = accounts.find((a) => a.address === formData.transferFrom);
       if (!fromAcc) throw new Error('There is no available account');
-
-      const injector = await web3FromSource(fromAcc.meta.source);
-
       if (!api) throw new Error('There is no connection to api');
       if (!chainInfo) throw new Error('There is no Chain info');
+
+      const injector = await web3FromSource(fromAcc.meta.source);
 
       const chainDecimals = chainInfo?.chainInfo.registry.chainDecimals?.[0];
 
