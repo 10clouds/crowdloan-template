@@ -10,7 +10,6 @@ export async function apiSetup() {
     const _api = await ApiPromise.create({ provider });
 
     if (_api) {
-      console.log('Connection Success', _api);
       return _api;
     }
   } catch (error) {
