@@ -46,6 +46,9 @@ const polkadotConfig = {
 
   // minimal amount to contribute - this is used in form validation
   minAmount: 1,
+
+  // amount that you want to reach
+  targetAmount: 35,
 };
 
 export const SITE = { ...CONFIG, footerLinks, polkadotConfig };

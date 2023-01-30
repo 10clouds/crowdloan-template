@@ -20,12 +20,19 @@ import Select from '@features/Contribution/components/Form/Select';
 import Input from '@/features/Contribution/components/Form/Input';
 import FinalState from '@features/Contribution/components/FinalState';
 import LoadingWithProgress from '@/features/Contribution/components/LoadingWithProgress';
+import NoExtension from '@features/Contribution/components/NoExtension';
 
 import { useSetupPolkadot } from '@features/Contribution/hooks';
 import { SITE } from '@/config';
-import { convertUnit } from '@/features/Contribution/utils';
-import type { FormData } from './types';
-import NoExtension from './components/NoExtension';
+import { convertUnit, isMobileDevice } from '@/features/Contribution/utils';
+import type { FormData } from '@features/Contribution/types';
+import MobileInfo from './components/MobileInfo';
+import ContributionMinInfo from './components/ContributionMinInfo';
+
+const formDefaultState = {
+  transferAmount: 0,
+  transferFrom: '',
+};
 
 const PolkadotForm = () => {
   const { setIsModalOpen } = useIsModalVisible();
@@ -60,10 +67,7 @@ const PolkadotForm = () => {
     formState: { errors },
   } = useForm<FormData>({
     mode: 'onChange',
-    defaultValues: {
-      transferAmount: 0,
-      transferFrom: '',
-    },
+    defaultValues: formDefaultState,
   });
 
   const transferFrom = watch('transferFrom');
@@ -71,6 +75,28 @@ const PolkadotForm = () => {
   register('transferFrom', {
     required: { value: true, message: 'This Field is required' },
   });
+
+  function getRemaining(chainDecimals: number) {
+    const leftTillCap =
+      convertUnit({ amount: SITE.polkadotConfig.targetAmount, chainDecimals }) -
+      balance?.balance?.free;
+
+    return leftTillCap / 10 ** chainDecimals;
+  }
+
+  const remaining = getRemaining(
+    chainInfo?.chainInfo.registry.chainDecimals?.[0] ?? 0
+  )
+    .toString()
+    .slice(0, 6);
+
+  function getSelectValue(accAddress: string) {
+    if (!accAddress) return '';
+
+    const fromAcc = accounts.find((a) => a.address === accAddress);
+
+    return `${fromAcc?.meta.name} - ${transferFrom.slice(0, 15) + '...'}`;
+  }
 
   async function signAndSend({
     transfer,
@@ -98,10 +124,6 @@ const PolkadotForm = () => {
   }
 
   const handleFormSubmit = handleSubmit(async (formData) => {
-    console.log('formData :>> ', formData);
-
-    // return;
-
     try {
       setIsLoading(true);
 
@@ -144,18 +166,23 @@ const PolkadotForm = () => {
     }).then((balance) => setBalance(balance));
   }, [api]);
 
-  if (isExtensionError) {
-    return <NoExtension />;
-  }
+  if (isMobileDevice())
+    return (
+      <MobileInfo
+        max={remaining}
+        tokenSymbol={chainInfo?.chainInfo?.tokenSymbol.toHuman() as string}
+      />
+    );
 
-  if (!api) {
+  if (isExtensionError) return <NoExtension />;
+
+  if (!api)
     return (
       <div className="mb-2 flex h-full w-full min-w-[30vw] flex-col items-center justify-center p-10">
         <Loading />
         Connecting to extension...
       </div>
     );
-  }
 
   if (transactionError)
     return <FinalState description={transactionError} title="Error" isError />;
@@ -170,14 +197,6 @@ const PolkadotForm = () => {
         title="Success"
       />
     );
-
-  function getSelectValue(accAddress: string) {
-    if (!accAddress) return '';
-
-    const fromAcc = accounts.find((a) => a.address === accAddress);
-
-    return `${fromAcc?.meta.name} - ${transferFrom.slice(0, 15) + '...'}`;
-  }
 
   return (
     <form
@@ -260,31 +279,15 @@ const PolkadotForm = () => {
             {errors.transferAmount.message}
           </span>
         )}
-        <p className="mt-6 text-gray-dark">
+        <p className="mt-6 mb-4 text-gray-dark">
           The above contribution should amount to more than minimum contribution
           and less than the remaining value.
         </p>
-        <div className="flex rounded-2xl bg-secondary px-8 py-6">
-          <div className="w-1/2 ">
-            <div className="text-xs text-gray-dark">minimum allowed</div>
-            <div>
-              {SITE.polkadotConfig.minAmount}&nbsp;
-              {chainInfo?.chainInfo?.tokenSymbol?.toHuman()}
-            </div>
-          </div>
-          <div className="w-1/2">
-            <div className="text-xs text-gray-dark">Remaining till cap</div>
-            <div>
-              {balance?.balance?.free
-                ?.toHuman()
-                .slice(
-                  0,
-                  Number(chainInfo?.chainInfo.registry.chainDecimals?.[0]) - 4
-                )}{' '}
-              {chainInfo?.chainInfo?.tokenSymbol?.toHuman()}
-            </div>
-          </div>
-        </div>
+        <ContributionMinInfo
+          min={SITE.polkadotConfig.minAmount}
+          max={remaining}
+          tokenSymbol={chainInfo?.chainInfo?.tokenSymbol.toHuman() as string}
+        />
       </div>
       <hr className="bg-gray-200 dark:bg-gray-700 my-8 -ml-10 h-px w-[120%] border" />
       <div className="flex flex-1  pt-4">
