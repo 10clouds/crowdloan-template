@@ -198,7 +198,7 @@ const PolkadotForm = () => {
 
   if (!api) {
     return (
-      <div className="flex h-full w-full min-w-[30vw] items-center justify-center p-10">
+      <div className="mb-2 flex h-full w-full min-w-[30vw] flex-col items-center justify-center p-10">
         <Loading />
         Connecting to extension...
       </div>
@@ -212,7 +212,9 @@ const PolkadotForm = () => {
     return (
       <div className="flex h-full w-full min-w-[30vw] flex-col items-center justify-center p-10">
         <Loading />
-        <div className="text-3xl font-medium tracking-tight">Processing...</div>
+        <div className="mt-2 text-3xl font-medium tracking-tight">
+          Processing...
+        </div>
         <div className="mt-4">
           {Object.keys(transactionStatus?.status?.toHuman() ?? {}).map(
             (status) => (
