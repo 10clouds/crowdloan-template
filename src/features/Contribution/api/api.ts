@@ -1,6 +1,8 @@
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
 import type { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
+import type { BalanceExtracted } from './types';
+import type { AccountInfoWithDualRefCount } from '@polkadot/types/interfaces';
 
 export async function apiSetup() {
   try {
@@ -36,12 +38,12 @@ export async function getBalance({
 }: {
   api: ApiPromise;
   targetAddress: string;
-}) {
+}): Promise<BalanceExtracted> {
   try {
     const now = await api.query.timestamp.now();
-    const { nonce, data: balance } = await api.query.system.account(
+    const { nonce, data: balance } = (await api.query.system.account(
       targetAddress
-    );
+    )) as AccountInfoWithDualRefCount;
 
     return { now, nonce, balance };
   } catch (err) {
