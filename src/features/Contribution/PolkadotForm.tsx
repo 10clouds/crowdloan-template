@@ -28,6 +28,7 @@ import { useSetupPolkadot } from '@features/Contribution/hooks';
 import { SITE } from '@/config';
 import {
   convertUnit,
+  getErrorMessage,
   getRemaining,
   isMobileDevice,
 } from '@/features/Contribution/utils';
@@ -114,7 +115,7 @@ const PolkadotForm = () => {
       );
     } catch (err) {
       console.error(err);
-      setTransactionError(err?.message ?? '');
+      setTransactionError(getErrorMessage(err));
     }
   }
 
@@ -144,9 +145,9 @@ const PolkadotForm = () => {
       setTransactionInfo(info);
 
       setSignAndSendData({ transfer, injector });
-    } catch (error) {
-      console.log(error);
-      setTransactionError(error?.message ?? '');
+    } catch (err) {
+      console.log(err);
+      setTransactionError(getErrorMessage(err));
       setIsLoading(false);
     } finally {
       setIsLoading(false);
