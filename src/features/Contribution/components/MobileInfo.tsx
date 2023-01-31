@@ -30,12 +30,12 @@ const MobileInfo = ({ tokenSymbol, max }: Props) => {
         </p>
         <div className="ml-4 text-xs opacity-50">Account address</div>
         <div className="flex rounded-2xl border text-sm" onClick={copyToCb}>
-          <div className="p-4 ">
+          <div className="flex-1 p-4">
             {SITE.polkadotConfig.targetAccountAddress.slice(0, 20) + '...'}
           </div>
           <button
             onClick={copyToCb}
-            className="flex w-full items-center justify-center rounded-2xl bg-base px-4"
+            className="flex  items-center justify-center rounded-2xl bg-base px-4"
           >
             <Copy />
           </button>
@@ -55,7 +55,7 @@ const MobileInfo = ({ tokenSymbol, max }: Props) => {
       </div>
 
       <button
-        className="base-button button-variant-default mt-auto"
+        className="base-button button-variant-default mx-auto mt-auto "
         onClick={() => setIsModalOpen(false)}
       >
         Done

@@ -7,6 +7,7 @@ import Progress from '@/components/ui/Progress.astro';
 import Button from '@/components/ui/Button.astro';
 import Container from '@/components/ui/Container.astro';
 import ButtonWrapper from '@/features/Contribution/ButtonWrapper';
+import ContributedInfo from '../ContributedInfo';
 
 export interface Props {
   id: string;
@@ -47,26 +48,8 @@ const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
         <Container class="mt-6 md:mt-0">
           <TimeLeftTimer date={SITE.crowdLoadEndDate} client:load />
         </Container>
-        <div
-          class="mb-px flex flex-col rounded-b-lg bg-white px-4 py-6 md:px-8"
-        >
-          <div class="flex">
-            <div class="flex flex-col">
-              <div class="pb-2 text-xs opacity-50 md:text-sm">Contributed</div>
-              <span
-                class="text-xl font-medium leading-[90%] text-primary md:text-[2rem]"
-                >31,515,989<span class="px-1 opacity-50">/</span></span
-              >
-            </div>
-            <div class="flex flex-col">
-              <div class="pb-2 text-xs opacity-50 md:text-sm">CAP</div>
-              <span class="text-xl font-medium leading-[90%] md:text-[2rem]"
-                >35,000,000 DOT</span
-              >
-            </div>
-          </div>
-          <Progress value={90} class="mt-4" />
-        </div>
+
+        <ContributedInfo client:only />
 
         <div class="flex rounded-lg bg-white px-8 py-6 md:px-8">
           <div class="flex w-1/2 flex-col">

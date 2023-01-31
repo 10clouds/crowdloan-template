@@ -8,6 +8,6 @@ export type FormData = {
 };
 
 export type SignAndSubmit = {
-  transfer?: SubmittableExtrinsic<'promise', ISubmittableResult>;
-  injector?: InjectedExtension;
+  transfer: SubmittableExtrinsic<'promise', ISubmittableResult>;
+  injector: InjectedExtension;
 };

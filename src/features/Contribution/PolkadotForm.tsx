@@ -9,8 +9,6 @@ import {
 
 import type { GenericChainProperties } from '@polkadot/types';
 import type { ISubmittableResult } from '@polkadot/types/types';
-import type { SubmittableExtrinsic } from '@polkadot/api/types';
-import type { InjectedExtension } from '@polkadot/extension-inject/types';
 import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces';
 
 import { useIsModalVisible } from '@/store';
@@ -21,28 +19,47 @@ import Input from '@/features/Contribution/components/Form/Input';
 import FinalState from '@features/Contribution/components/FinalState';
 import LoadingWithProgress from '@/features/Contribution/components/LoadingWithProgress';
 import NoExtension from '@features/Contribution/components/NoExtension';
+import MobileInfo from '@features/Contribution/components/MobileInfo';
+import ContributionMinInfo from '@features/Contribution/components/ContributionMinInfo';
+import TransactionInfo from '@features/Contribution/components/TransactionInfo';
+import Close from '@features/Contribution/components/icons/Close';
 
 import { useSetupPolkadot } from '@features/Contribution/hooks';
 import { SITE } from '@/config';
-import { convertUnit, isMobileDevice } from '@/features/Contribution/utils';
+import {
+  convertUnit,
+  getRemaining,
+  isMobileDevice,
+} from '@/features/Contribution/utils';
 import type { FormData, SignAndSubmit } from '@features/Contribution/types';
-import MobileInfo from './components/MobileInfo';
-import ContributionMinInfo from './components/ContributionMinInfo';
-import TransactionInfo from './components/TransactionInfo';
 
 const formDefaultState = {
   transferAmount: 0,
   transferFrom: '',
 };
 
+const inputOptions = {
+  account: {
+    required: { value: true, message: 'This Field is required' },
+  },
+  amount: {
+    required: {
+      value: true,
+      message: 'This Field is required',
+    },
+    min: {
+      value: SITE.polkadotConfig.minAmount,
+      message: `Value have to be higher or equal to ${SITE.polkadotConfig.minAmount}`,
+    },
+    valueAsNumber: true,
+  },
+};
+
 const PolkadotForm = () => {
   const { setIsModalOpen } = useIsModalVisible();
   const { accounts, api, isExtensionError } = useSetupPolkadot();
 
-  const [chainInfo, setChainInfo] = useState<{
-    chainInfo?: GenericChainProperties;
-    chainName?: Text;
-  }>();
+  const [chainInfo, setChainInfo] = useState<GenericChainProperties>();
   const [balance, setBalance] = useState<BalanceExtracted>();
 
   // transaction
@@ -51,10 +68,7 @@ const PolkadotForm = () => {
     useState<ISubmittableResult>();
   const [transactionInfo, setTransactionInfo] = useState<RuntimeDispatchInfo>();
   const [transactionError, setTransactionError] = useState<string>('');
-  const [signAndSendData, setSignAndSendData] = useState<SignAndSubmit>({
-    transfer: undefined,
-    injector: undefined,
-  });
+  const [signAndSendData, setSignAndSendData] = useState<SignAndSubmit>();
 
   const {
     register,
@@ -71,21 +85,12 @@ const PolkadotForm = () => {
 
   const transferFrom = watch('transferFrom');
 
-  register('transferFrom', {
-    required: { value: true, message: 'This Field is required' },
-  });
+  register('transferFrom', inputOptions.account);
 
-  function getRemaining(chainDecimals: number) {
-    const leftTillCap =
-      convertUnit({ amount: SITE.polkadotConfig.targetAmount, chainDecimals }) -
-      balance?.balance?.free;
-
-    return leftTillCap / 10 ** chainDecimals;
-  }
-
-  const remaining = getRemaining(
-    chainInfo?.chainInfo.registry.chainDecimals?.[0] ?? 0
-  )
+  const remaining = getRemaining({
+    chainDecimals: chainInfo?.registry.chainDecimals?.[0] ?? 0,
+    balance: balance?.balance.free,
+  })
     .toString()
     .slice(0, 6);
 
@@ -97,13 +102,7 @@ const PolkadotForm = () => {
     return `${fromAcc?.meta.name} - ${transferFrom.slice(0, 15) + '...'}`;
   }
 
-  async function signAndSend({
-    transfer,
-    injector,
-  }: {
-    transfer: SubmittableExtrinsic<'promise', ISubmittableResult>;
-    injector: InjectedExtension;
-  }) {
+  async function signAndSend({ transfer, injector }: SignAndSubmit) {
     try {
       const fromAddress = getValues('transferFrom');
       await transfer.signAndSend(
@@ -115,7 +114,7 @@ const PolkadotForm = () => {
       );
     } catch (err) {
       console.error(err);
-      setTransactionError(error?.message ?? '');
+      setTransactionError(err?.message ?? '');
     }
   }
 
@@ -129,13 +128,12 @@ const PolkadotForm = () => {
 
       const fromAcc = accounts.find((a) => a.address === formData.transferFrom);
       if (!fromAcc) throw new Error('There is no available account');
-
-      const injector = await web3FromSource(fromAcc.meta.source);
-
       if (!api) throw new Error('There is no connection to api');
       if (!chainInfo) throw new Error('There is no Chain info');
 
-      const chainDecimals = chainInfo?.chainInfo.registry.chainDecimals?.[0];
+      const injector = await web3FromSource(fromAcc.meta.source);
+
+      const chainDecimals = chainInfo.registry.chainDecimals?.[0];
 
       const transfer = api.tx.balances.transfer(
         SITE.polkadotConfig.targetAccountAddress,
@@ -170,7 +168,7 @@ const PolkadotForm = () => {
     return (
       <MobileInfo
         max={remaining}
-        tokenSymbol={chainInfo?.chainInfo?.tokenSymbol.toHuman() as string}
+        tokenSymbol={chainInfo?.tokenSymbol.toHuman() as string}
       />
     );
 
@@ -212,12 +210,12 @@ const PolkadotForm = () => {
             Select the account and the amount to contribute.
           </p>
         </div>
-        <button onClick={closeModal}>X</button>
+        <Close onClick={closeModal} />
       </div>
       <div className="h-full w-full overflow-y-auto">
         {transactionInfo?.partialFee && (
           <TransactionInfo
-            tokenSymbol={chainInfo?.chainInfo?.tokenSymbol.toHuman() as string}
+            tokenSymbol={chainInfo?.tokenSymbol.toHuman() as string}
             amount={() => getValues('transferAmount')}
             fee={transactionInfo?.partialFee?.toHuman()}
           />
@@ -257,21 +255,9 @@ const PolkadotForm = () => {
             label="Contribution"
             placeholder="0"
             type="number"
-            {...register('transferAmount', {
-              required: {
-                value: true,
-                message: 'This Field is required',
-              },
-              min: {
-                value: SITE.polkadotConfig.minAmount,
-                message: `Value have to be higher or equal to ${SITE.polkadotConfig.minAmount}`,
-              },
-              valueAsNumber: true,
-            })}
+            {...register('transferAmount', inputOptions.amount)}
             disabled={!!transactionInfo}
-            currency={
-              (chainInfo?.chainInfo?.tokenSymbol?.toHuman() as string) ?? ''
-            }
+            currency={(chainInfo?.tokenSymbol?.toHuman() as string) ?? ''}
           />
         </div>
         <p className="px-4 text-end text-xs text-gray-dark">
@@ -289,7 +275,7 @@ const PolkadotForm = () => {
         <ContributionMinInfo
           min={SITE.polkadotConfig.minAmount}
           max={remaining}
-          tokenSymbol={chainInfo?.chainInfo?.tokenSymbol.toHuman() as string}
+          tokenSymbol={chainInfo?.tokenSymbol.toHuman() as string}
         />
       </div>
       <hr className="bg-gray-200 dark:bg-gray-700 my-8 -ml-10 h-px w-[120%] border" />
@@ -313,7 +299,7 @@ const PolkadotForm = () => {
         ) : (
           <button
             className="button-variant-default base-button ml-auto w-full"
-            onClick={() => signAndSend(signAndSendData)}
+            onClick={() => signAndSend(signAndSendData as SignAndSubmit)}
           >
             Sign and Send
           </button>
