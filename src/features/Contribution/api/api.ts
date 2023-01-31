@@ -24,9 +24,7 @@ export async function getChainInfo(api: ApiPromise) {
   try {
     const chainInfo = await api.registry.getChainProperties();
 
-    const chainName = await api.rpc.system.chain();
-
-    return { chainInfo, chainName };
+    return chainInfo;
   } catch (err) {
     console.error(err);
   }

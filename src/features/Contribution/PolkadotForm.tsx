@@ -61,10 +61,7 @@ const PolkadotForm = () => {
   const { setIsModalOpen } = useIsModalVisible();
   const { accounts, api, isExtensionError } = useSetupPolkadot();
 
-  const [chainInfo, setChainInfo] = useState<{
-    chainInfo?: GenericChainProperties;
-    chainName?: Text;
-  }>();
+  const [chainInfo, setChainInfo] = useState<GenericChainProperties>();
   const [balance, setBalance] = useState<BalanceExtracted>();
 
   // transaction
@@ -96,7 +93,7 @@ const PolkadotForm = () => {
   register('transferFrom', inputOptions.account);
 
   const remaining = getRemaining({
-    chainDecimals: chainInfo?.chainInfo.registry.chainDecimals?.[0] ?? 0,
+    chainDecimals: chainInfo?.registry.chainDecimals?.[0] ?? 0,
     balance: balance?.balance.free,
   })
     .toString()
@@ -147,7 +144,7 @@ const PolkadotForm = () => {
 
       const injector = await web3FromSource(fromAcc.meta.source);
 
-      const chainDecimals = chainInfo?.chainInfo.registry.chainDecimals?.[0];
+      const chainDecimals = chainInfo.registry.chainDecimals?.[0];
 
       const transfer = api.tx.balances.transfer(
         SITE.polkadotConfig.targetAccountAddress,
@@ -182,7 +179,7 @@ const PolkadotForm = () => {
     return (
       <MobileInfo
         max={remaining}
-        tokenSymbol={chainInfo?.chainInfo?.tokenSymbol.toHuman() as string}
+        tokenSymbol={chainInfo?.tokenSymbol.toHuman() as string}
       />
     );
 
@@ -229,7 +226,7 @@ const PolkadotForm = () => {
       <div className="h-full w-full overflow-y-auto">
         {transactionInfo?.partialFee && (
           <TransactionInfo
-            tokenSymbol={chainInfo?.chainInfo?.tokenSymbol.toHuman() as string}
+            tokenSymbol={chainInfo?.tokenSymbol.toHuman() as string}
             amount={() => getValues('transferAmount')}
             fee={transactionInfo?.partialFee?.toHuman()}
           />
@@ -271,9 +268,7 @@ const PolkadotForm = () => {
             type="number"
             {...register('transferAmount', inputOptions.amount)}
             disabled={!!transactionInfo}
-            currency={
-              (chainInfo?.chainInfo?.tokenSymbol?.toHuman() as string) ?? ''
-            }
+            currency={(chainInfo?.tokenSymbol?.toHuman() as string) ?? ''}
           />
         </div>
         <p className="px-4 text-end text-xs text-gray-dark">
@@ -291,7 +286,7 @@ const PolkadotForm = () => {
         <ContributionMinInfo
           min={SITE.polkadotConfig.minAmount}
           max={remaining}
-          tokenSymbol={chainInfo?.chainInfo?.tokenSymbol.toHuman() as string}
+          tokenSymbol={chainInfo?.tokenSymbol.toHuman() as string}
         />
       </div>
       <hr className="bg-gray-200 dark:bg-gray-700 my-8 -ml-10 h-px w-[120%] border" />
