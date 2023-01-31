@@ -114,7 +114,7 @@ const PolkadotForm = () => {
       );
     } catch (err) {
       console.error(err);
-      setTransactionError(error?.message ?? '');
+      setTransactionError(err?.message ?? '');
     }
   }
 
