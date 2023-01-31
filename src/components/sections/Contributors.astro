@@ -7,6 +7,39 @@ export interface Props {
 }
 
 const { id = 'contributors' } = Astro.props;
+
+const tableData = [
+  {
+    rank: '1',
+    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
+    date: '7.12.2022',
+    contributed: '189,185.44 DOT',
+  },
+  {
+    rank: '1',
+    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
+    date: '7.12.2022',
+    contributed: '189,185.44 DOT',
+  },
+  {
+    rank: '1',
+    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
+    date: '7.12.2022',
+    contributed: '189,185.44 DOT',
+  },
+  {
+    rank: '1',
+    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
+    date: '7.12.2022',
+    contributed: '189,185.44 DOT',
+  },
+  {
+    rank: '1',
+    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
+    date: '7.12.2022',
+    contributed: '189,185.44 DOT',
+  },
+];
 ---
 
 <Section id={id} class="bg-primary">
@@ -17,7 +50,7 @@ const { id = 'contributors' } = Astro.props;
     </div>
   </div>
   <div class="mx-auto mt-16 block">
-    <Table />
+    <Table tableData={tableData} />
   </div>
   <div class="flex justify-center">
     <a

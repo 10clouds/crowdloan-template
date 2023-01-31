@@ -1,36 +1,14 @@
 ---
-const tableData = [
-  {
-    rank: '1',
-    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
-    date: '7.12.2022',
-    contributed: '189,185.44 DOT',
-  },
-  {
-    rank: '1',
-    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
-    date: '7.12.2022',
-    contributed: '189,185.44 DOT',
-  },
-  {
-    rank: '1',
-    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
-    date: '7.12.2022',
-    contributed: '189,185.44 DOT',
-  },
-  {
-    rank: '1',
-    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
-    date: '7.12.2022',
-    contributed: '189,185.44 DOT',
-  },
-  {
-    rank: '1',
-    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
-    date: '7.12.2022',
-    contributed: '189,185.44 DOT',
-  },
-];
+export interface Props {
+  tableData: {
+    rank: string;
+    account: string;
+    contributed: string;
+    date: string | Date;
+  }[];
+}
+const { tableData } = Astro.props;
+
 const tHeaders = Object.keys(tableData[0] || {});
 ---
 
