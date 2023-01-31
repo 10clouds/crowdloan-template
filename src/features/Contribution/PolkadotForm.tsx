@@ -9,8 +9,6 @@ import {
 
 import type { GenericChainProperties } from '@polkadot/types';
 import type { ISubmittableResult } from '@polkadot/types/types';
-import type { SubmittableExtrinsic } from '@polkadot/api/types';
-import type { InjectedExtension } from '@polkadot/extension-inject/types';
 import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces';
 
 import { useIsModalVisible } from '@/store';
@@ -70,10 +68,7 @@ const PolkadotForm = () => {
     useState<ISubmittableResult>();
   const [transactionInfo, setTransactionInfo] = useState<RuntimeDispatchInfo>();
   const [transactionError, setTransactionError] = useState<string>('');
-  const [signAndSendData, setSignAndSendData] = useState<SignAndSubmit>({
-    transfer: undefined,
-    injector: undefined,
-  });
+  const [signAndSendData, setSignAndSendData] = useState<SignAndSubmit>();
 
   const {
     register,
@@ -107,13 +102,7 @@ const PolkadotForm = () => {
     return `${fromAcc?.meta.name} - ${transferFrom.slice(0, 15) + '...'}`;
   }
 
-  async function signAndSend({
-    transfer,
-    injector,
-  }: {
-    transfer: SubmittableExtrinsic<'promise', ISubmittableResult>;
-    injector: InjectedExtension;
-  }) {
+  async function signAndSend({ transfer, injector }: SignAndSubmit) {
     try {
       const fromAddress = getValues('transferFrom');
       await transfer.signAndSend(
@@ -310,7 +299,7 @@ const PolkadotForm = () => {
         ) : (
           <button
             className="button-variant-default base-button ml-auto w-full"
-            onClick={() => signAndSend(signAndSendData)}
+            onClick={() => signAndSend(signAndSendData as SignAndSubmit)}
           >
             Sign and Send
           </button>
