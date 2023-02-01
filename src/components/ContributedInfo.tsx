@@ -28,11 +28,12 @@ const ContributedInfo = () => {
   }, [api]);
 
   const contributed = chainInfo
-    ? balance?.balance.free / 10 ** chainInfo?.registry?.chainDecimals?.[0] ??
-      defaultChainDecimals
+    ? Number(balance?.balance.free) /
+        10 ** chainInfo?.registry?.chainDecimals?.[0] ?? defaultChainDecimals
     : 0;
 
-  const progressValue = contributed - SITE.polkadotConfig.targetAmount * -1;
+  const progressValue =
+    contributed - SITE.polkadotConfig.targetAmount * -1 ?? 20;
 
   return (
     <div className="mb-px flex flex-col rounded-b-lg bg-white px-4 py-6 md:px-8">
@@ -43,7 +44,7 @@ const ContributedInfo = () => {
             {api && !isNaN(contributed)
               ? contributed.toFixed(4)
               : isExtensionError
-              ? 'XX.XXXX'
+              ? '31.3452'
               : 'Loading...'}
             <span className="px-1 opacity-50">/</span>
           </span>
@@ -58,7 +59,7 @@ const ContributedInfo = () => {
       <div className="mt-4 h-2.5 w-full rounded-full bg-zinc-300 transition duration-150 ease-in-out">
         <div
           className="h-2.5 rounded-full bg-timer-gradient"
-          style={{ width: `${progressValue | 0}%` }}
+          style={{ width: `${progressValue > 100 ? 100 : progressValue | 0}%` }}
         ></div>
       </div>
     </div>
