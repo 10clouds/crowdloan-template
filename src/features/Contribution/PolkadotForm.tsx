@@ -50,7 +50,7 @@ const inputOptions = {
     },
     min: {
       value: SITE.polkadotConfig.minAmount,
-      message: `Value have to be higher or equal to ${SITE.polkadotConfig.minAmount}`,
+      message: `Value has to be higher or equal to ${SITE.polkadotConfig.minAmount}`,
     },
     valueAsNumber: true,
   },
