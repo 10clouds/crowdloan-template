@@ -1,4 +1,6 @@
 ---
+import { t } from 'i18next';
+
 import TimeLeftTimer from '@/components/common/TimeLeftTimer';
 import Section from '@/components/ui/Section.astro';
 import { getDuration } from '@/utils';
@@ -24,16 +26,14 @@ const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
         class="md:pr-auto mr-0 w-full pb-6 text-center tracking-tighter md:mr-14 lg:mr-20 lg:w-1/2 lg:pb-0 lg:text-start 2xl:mr-48"
       >
         <h1 class="text-[40px] leading-10 md:leading-[90%] xl:text-8xl">
-          Building the future <span
+          {t('titles.hero')}&nbsp;<span
             class="bg-timer-gradient bg-clip-text text-transparent"
-            >of fin experiences</span
+            >{t('titles.heroColorized')}</span
           >
         </h1>
 
         <p class="pt-6 text-lg">
-          Describe what problems your project solves. Avoid using popular
-          phrases or sentences. Instead, think of something by which people will
-          remember you.
+          {t('descriptions.hero')}
         </p>
         <div class="mx-auto mt-10 w-fit lg:mx-0">
           <ButtonWrapper client:load>
@@ -52,14 +52,16 @@ const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
 
         <div class="flex rounded-lg bg-white px-8 py-6 md:px-8">
           <div class="flex w-1/2 flex-col">
-            <div class="pb-2 text-xs opacity-50 md:text-sm">Lease duration</div>
+            <div class="pb-2 text-xs opacity-50 md:text-sm">
+              {t('hero.leaseDuration')}
+            </div>
             <span class="text-xl font-medium leading-[90%] md:text-[2rem]"
               >{Math.floor(Number(weeksLeft.weeks ?? 0))} weeks</span
             >
           </div>
           <div class="flex flex-col">
             <div class="pb-2 text-xs opacity-50 md:text-sm">
-              Auction started
+              {t('hero.auctionStarted')}
             </div>
             <span class="text-xl font-medium leading-[90%] md:text-[2rem]"
               >LP15-LP8</span

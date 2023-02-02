@@ -9,15 +9,12 @@ import AboutToken from '@/components/sections/AboutToken.astro';
 import Roadmap from '@/components/sections/Roadmap.astro';
 import Logos from '@/components/Logos.astro';
 import FAQ from '@/components/sections/FAQ.astro';
-
 import { SITE } from '@/config';
-
 import MiroLogo from '@/assets/images/logos/Miro.svg';
 import MobbinLogo from '@/assets/images/logos/Mobbin.svg';
 import StripeLogo from '@/assets/images/logos/Stripe.svg';
 import WebflowLogo from '@/assets/images/logos/Webflow.svg';
 import MondayLogo from '@/assets/images/logos/Monday.svg';
-
 import Logo from '@/assets/Logo.svg';
 import TimerBanner from '@/components/sections/TimerBanner.astro';
 import ModalWrapper from '@/features/Contribution/ModalWrapper';
@@ -75,19 +72,16 @@ const tempCardsData = [
   },
 ];
 
-const tempAboutData = {
-  projectDescription:
-    'The rise of the crypto economy promises a world where everyone has access to open and secure financial systems. But this future isn’t guaranteed, the bridge to this new world must be built.',
+const aboutData = {
+  projectDescription: 'descriptions.about',
   cards: [
     {
-      title: '12',
-      description:
-        'This is a feature description. How would that work?  Why would that be useful? Who could use it? Think of the value. ',
+      title: 'about.cards.title1',
+      description: 'about.cards.description1',
     },
     {
-      title: '2x',
-      description:
-        'This is a feature description. How would that work?  Why would that be useful? Who could use it? Think of the value. ',
+      title: 'about.cards.title2',
+      description: 'about.cards.description2',
     },
   ],
 };
@@ -107,7 +101,6 @@ let priceCard = [
     subLabel: '62% of Total Supply',
   },
 ];
-
 let progressCard = [
   {
     label: 'LP Rewards 40%',
@@ -130,7 +123,6 @@ let progressCard = [
     progressValue: 15,
   },
 ];
-
 let timelinePoints = [
   {
     label: 'Start Date',
@@ -150,7 +142,6 @@ let timelinePoints = [
     body: '1.08.2023',
   },
 ];
-
 const faq = [
   {
     question: 'How long does it take to verify my account?',
@@ -188,7 +179,6 @@ const faq = [
       'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
   },
 ];
-
 const rewardsDistribution = [
   {
     title: '31 DOT per 1 DOT',
@@ -233,8 +223,8 @@ const rewardsDistribution = [
 
   <About
     id="about"
-    projectDescription={tempAboutData.projectDescription}
-    cards={tempAboutData.cards}
+    projectDescription={aboutData.projectDescription}
+    cards={aboutData.cards}
   />
   <AboutToken
     id="tokenomics"

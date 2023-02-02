@@ -1,0 +1,28 @@
+{
+  "titles": {
+    "hero": "Building the future",
+    "heroColorized": "of fin experiences",
+    "about": "About the Project"
+  },
+  "descriptions": {
+    "hero": "Describe what problems your project solves. Avoid using popular phrases or sentences. Instead, think of something by which people will remember you.",
+    "about": "The rise of the crypto economy promises a world where everyone has access to open and secure financial systems. But this future isn’t guaranteed, the bridge to this new world must be built."
+  },
+  "buttons": {
+    "contribute": "Contribute"
+  },
+  "hero": {
+    "contributed": "Contributed",
+    "cap": "CAP",
+    "leaseDuration": "Lease Duration",
+    "auctionStarted": "Auction started"
+  },
+  "about": {
+    "cards": {
+        "title1": "12",
+        "description1": "This is a feature description. How would that work? Why would that be useful? Who could use it? Think of the value.",
+        "title2": "2x",
+        "description2": "This is a feature description. How would that work? Why would that be useful? Who could use it? Think of the value."
+    }
+  }
+}

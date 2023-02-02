@@ -1,4 +1,6 @@
 ---
+import { t } from 'i18next';
+
 import Section from '@/components/ui/Section.astro';
 import type { AboutCard } from '@/types';
 
@@ -17,18 +19,18 @@ const { id = 'about', projectDescription = '', cards = [] } = Astro.props;
       <div
         class="mb-4 text-center text-[40px] font-medium leading-[120%] tracking-tight md:text-start"
       >
-        About the Project
+        {t('titles.about')}
       </div>
       <p class="description w-full md:w-2/3">
-        {projectDescription}
+        {t(projectDescription)}
       </p>
     </div>
     <div class="flex w-full flex-col gap-20 lg:w-1/2">
       {
         cards.map(({ title, description }) => (
           <div>
-            <div class="heading">{title}</div>
-            <p class="description">{description}</p>
+            <div class="heading">{t(title)}</div>
+            <p class="description">{t(description)}</p>
           </div>
         ))
       }
