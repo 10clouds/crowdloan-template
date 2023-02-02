@@ -16,7 +16,9 @@ const { navLinks = [], logo } = Astro.props;
   class="sticky top-0 z-40 mx-auto w-full flex-none bg-primary px-4 transition-all duration-100 ease-in lg:px-32"
   id="header"
 >
-  <div class="w-full max-w-full py-3 px-3 lg:flex lg:justify-between">
+  <div
+    class="mx-auto w-full max-w-full py-3 px-3 lg:flex lg:max-w-7xl lg:justify-between"
+  >
     <div class="flex justify-between">
       <a class="flex items-center" href="#">
         <img src={logo} alt="crowload logotype" />
