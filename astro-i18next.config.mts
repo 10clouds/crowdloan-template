@@ -6,7 +6,7 @@ const config: AstroI18nextConfig = {
   locales: ['en'],
   load: ['server', 'client'],
   i18nextServer: {
-    debug: import.meta.env.DEV,
+    debug: false,
   },
   i18nextClient: {
     debug: true,
