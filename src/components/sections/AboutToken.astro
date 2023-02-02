@@ -28,7 +28,7 @@ const { id = 'tokenomics', priceCard = [], progressCard = [] } = Astro.props;
           {
             priceCard.map(({ label, subLabel, body }) => (
               <div>
-                <label class="text-lg opacity-50">{t(label)}</label>
+                <label class="text-lg opacity-50">{label}</label>
                 <div class="text-3xl font-medium tracking-tight">{body}</div>
                 {subLabel && <p>{subLabel}</p>}
               </div>
@@ -41,7 +41,7 @@ const { id = 'tokenomics', priceCard = [], progressCard = [] } = Astro.props;
           {
             progressCard.map(({ label, progressValue }) => (
               <div>
-                <label class="text-lg">{t(label)}</label>
+                <label class="text-lg">{label}</label>
                 <Progress
                   value={progressValue}
                   isRemainingSpaceVisible={false}

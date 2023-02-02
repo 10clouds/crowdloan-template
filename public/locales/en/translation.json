@@ -6,14 +6,17 @@
     "aboutToken": "About the token",
     "roadmap": "Roadmap",
     "rewards": "Reward distribution",
-    "contributors": "Recent contributors"
+    "contributors": "Recent contributors",
+    "additionalLinks": "Additional links",
+    "faq": "Frequently Asked Questions"
   },
   "descriptions": {
     "hero": "Describe what problems your project solves. Avoid using popular phrases or sentences. Instead, think of something by which people will remember you.",
     "about": "The rise of the crypto economy promises a world where everyone has access to open and secure financial systems. But this future isn’t guaranteed, the bridge to this new world must be built.",
     "aboutToken": "Share some details about tokenomics. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at ligula consequat ante pharetra eleifend ut et diam.",
     "rewards": "All participants in the Project Crowdloan will receive DOTS as a reward for their contributions. The amount of the rewards will depend on the total amount of DOTS which has been contributed by others at the time of your contribution.",
-    "contributors": "Here you can shortly say something about the contributors"
+    "contributors": "Here you can shortly say something about the contributors",
+    "faq": "Have a question that is not answered? You can contact us at"
   },
   "buttons": {
     "contribute": "Contribute"
@@ -60,7 +63,17 @@
   "rewards": {
     "dontWait": "Don't wait too long!"
   },
-"contributors": {
-  "openPolka": "Open Polkascan"
-}
+  "contributors": {
+    "openPolka": "Open Polkascan"
+  },
+  "faq": {
+    "howLongToVerify": "How long does it take to verify my account?",
+    "howLongToVerifyAnswer": "Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.",
+    "howLongWithdrawl": "How long will my withdrawal take to show up in my bank account?",
+    "howBoostWork" : "How do Boosts work?",
+    "whatIsApy": "What is APY?",
+    "howWaitlistWork" : "How does the waitlist work?",
+    "howToChangeEmail": "How do I change my email?",
+    "howToChangeAddress" : "How do I change my address?"
+  }
 }

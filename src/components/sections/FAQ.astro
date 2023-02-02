@@ -1,4 +1,5 @@
 ---
+import { t } from 'i18next';
 import Section from '@/components/ui/Section.astro';
 import Accordion from '@/components/ui/Accordion/Accordion.astro';
 import type { FAQ } from '@/types';
@@ -12,10 +13,15 @@ const { id = 'faq', faq = [] } = Astro.props;
 ---
 
 <Section id={id} class="bg-primary">
-  <div class="section-title">Frequently Asked Questions</div>
+  <div class="section-title">{t('titles.faq')}</div>
   <Accordion faq={faq} />
   <p class="pt-10 text-center text-lg">
-    Have a question that is not answered? You can contact us at
-    <a href="#" class="text-primary"> support@crowdloan.com</a>
+    {t('descriptions.faq')}
+    <a
+      href="mailto:support@crowdloan.com?subject=Mail from Our Site"
+      class="text-primary"
+    >
+      support@crowdloan.com</a
+    >
   </p>
 </Section>

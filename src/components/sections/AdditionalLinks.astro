@@ -1,4 +1,5 @@
 ---
+import { t } from 'i18next';
 import Section from '@/components/ui/Section.astro';
 import Card from '@/components/common/Card.astro';
 import type { Card as CardType } from '@/types';
@@ -12,7 +13,7 @@ const { id = 'additinalLinks', cardsData = [] } = Astro.props;
 ---
 
 <Section id={id}>
-  <div class="section-title">Additional links</div>
+  <div class="section-title">{t('titles.additionalLinks')}</div>
   <div class="mt-16 flex flex-col justify-evenly gap-6 lg:flex-row">
     {
       cardsData.map(({ title, description, href, bulletList }) => (

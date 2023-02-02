@@ -22,15 +22,15 @@ const { id = 'about', projectDescription = '', cards = [] } = Astro.props;
         {t('titles.about')}
       </div>
       <p class="description w-full md:w-2/3">
-        {t(projectDescription)}
+        {projectDescription}
       </p>
     </div>
     <div class="flex w-full flex-col gap-20 lg:w-1/2">
       {
         cards.map(({ title, description }) => (
           <div>
-            <div class="heading">{t(title)}</div>
-            <p class="description">{t(description)}</p>
+            <div class="heading">{title}</div>
+            <p class="description">{description}</p>
           </div>
         ))
       }
