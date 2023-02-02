@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { SITE } from '@/config';
 import {
   getBalance,
@@ -27,10 +27,15 @@ const ContributedInfo = () => {
     getChainInfo(api).then((_chainInfo) => setChainInfo(_chainInfo));
   }, [api]);
 
-  const contributed = chainInfo
-    ? Number(balance?.balance.free) /
-        10 ** chainInfo?.registry?.chainDecimals?.[0] ?? defaultChainDecimals
-    : 0;
+  const contributed = useMemo(
+    () =>
+      chainInfo
+        ? Number(balance?.balance.free) /
+            10 ** chainInfo?.registry?.chainDecimals?.[0] ??
+          defaultChainDecimals
+        : 0,
+    [balance?.balance.free, chainInfo]
+  );
 
   const progressValue =
     contributed - SITE.polkadotConfig.targetAmount * -1 ?? 20;
