@@ -75,5 +75,11 @@
     "howWaitlistWork" : "How does the waitlist work?",
     "howToChangeEmail": "How do I change my email?",
     "howToChangeAddress" : "How do I change my address?"
+  },
+  "404": {
+    "error": "Error",
+    "sorryNoPage": "Sorry, we couldn't find this page.",
+    "weHaveOtherPages": "But don't worry, you can find plenty of other things on our homepage.",
+    "backHome": "Back to homepage"
   }
 }
