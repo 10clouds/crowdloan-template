@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { Fragment } from 'react';
 import { useTimeLeft } from '@/hooks';
+import { singularize } from '@/utils';
 
 export interface Props {
   date: string | Date;
@@ -41,7 +42,7 @@ const TimeLeftTimer: FC<Props> = ({ date, variant = 'default' }) => {
             >
               {Math.floor(Number(value))}
             </div>
-            <p className="text-sm">{key}</p>
+            <p className="text-sm">{value === 1 ? singularize(key) : key}</p>
           </div>
           {idx !== arr.length - 1 && (
             <p
