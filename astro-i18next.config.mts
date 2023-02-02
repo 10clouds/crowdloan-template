@@ -9,7 +9,7 @@ const config: AstroI18nextConfig = {
     debug: false,
   },
   i18nextClient: {
-    debug: true,
+    debug: false,
   },
   i18nextServerPlugins: {
     '{initReactI18next}': 'react-i18next',
