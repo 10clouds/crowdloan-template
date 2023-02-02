@@ -1,6 +1,7 @@
 ---
 import Progress from '@/components/ui/Progress.astro';
 import Circle from '@/components/Icons/Circle.astro';
+import Section from '@/components/ui/Section.astro';
 
 export interface Props {
   id: string;
@@ -15,11 +16,8 @@ export interface Props {
 const { id = 'roadmap', timelinePoints = [], progressValue = 20 } = Astro.props;
 ---
 
-<section
-  id={id}
-  class="h-full w-full py-14 px-4 pb-28 text-base md:min-h-[calc(100%-92px)] md:px-32 xl:py-40"
->
-  <div class="mx-auto max-w-7xl">
+<Section id={id} class="py-40">
+  <div class="mx-auto max-w-7xl pb-20">
     <div class="section-title">Roadmap</div>
     <div class="relative mt-36">
       <Progress value={progressValue} />
@@ -56,4 +54,4 @@ const { id = 'roadmap', timelinePoints = [], progressValue = 20 } = Astro.props;
       </div>
     </div>
   </div>
-</section>
+</Section>
