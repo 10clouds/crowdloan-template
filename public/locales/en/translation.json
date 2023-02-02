@@ -2,11 +2,18 @@
   "titles": {
     "hero": "Building the future",
     "heroColorized": "of fin experiences",
-    "about": "About the Project"
+    "about": "About the Project",
+    "aboutToken": "About the token",
+    "roadmap": "Roadmap",
+    "rewards": "Reward distribution",
+    "contributors": "Recent contributors"
   },
   "descriptions": {
     "hero": "Describe what problems your project solves. Avoid using popular phrases or sentences. Instead, think of something by which people will remember you.",
-    "about": "The rise of the crypto economy promises a world where everyone has access to open and secure financial systems. But this future isn’t guaranteed, the bridge to this new world must be built."
+    "about": "The rise of the crypto economy promises a world where everyone has access to open and secure financial systems. But this future isn’t guaranteed, the bridge to this new world must be built.",
+    "aboutToken": "Share some details about tokenomics. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at ligula consequat ante pharetra eleifend ut et diam.",
+    "rewards": "All participants in the Project Crowdloan will receive DOTS as a reward for their contributions. The amount of the rewards will depend on the total amount of DOTS which has been contributed by others at the time of your contribution.",
+    "contributors": "Here you can shortly say something about the contributors"
   },
   "buttons": {
     "contribute": "Contribute"
@@ -19,10 +26,41 @@
   },
   "about": {
     "cards": {
-        "title1": "12",
-        "description1": "This is a feature description. How would that work? Why would that be useful? Who could use it? Think of the value.",
-        "title2": "2x",
-        "description2": "This is a feature description. How would that work? Why would that be useful? Who could use it? Think of the value."
+      "12": "12",
+      "description": "This is a feature description. How would that work? Why would that be useful? Who could use it? Think of the value.",
+      "2x": "2x"
     }
-  }
+  },
+  "aboutToken": {
+    "cards": {
+      "progress": {
+        "lp": "LP Rewards 40%",
+        "team": "Team 11%",
+        "ecosystem": "EcoSystem 4%",
+        "validationRewards": "Validation Rewards 30%",
+        "crowdloanFunds": "Crowdload Funds 15%"
+      },
+      "price": {
+        "price": "Price",
+        "totalSupply": "Total Supply",
+        "crowdloanRewardPool": "Crowdload Reward Pool",
+        "xOfTotalSupply": "{{value}}% of Total Supply"
+      }
+    }
+  },
+  "roadmap": {
+    "weAreHere": "We are here!",
+    "points": {
+      "start": "Start Date",
+      "testing": "Testing",
+      "auction": "Auction",
+      "end": "End Date"
+    }
+  },
+  "rewards": {
+    "dontWait": "Don't wait too long!"
+  },
+"contributors": {
+  "openPolka": "Open Polkascan"
+}
 }

@@ -1,4 +1,6 @@
 ---
+import { t } from 'i18next';
+
 import Layout from '@/layouts/PageLayout.astro';
 import Hero from '@/components/sections/Hero.astro';
 import About from '@/components/sections/About.astro';
@@ -76,72 +78,75 @@ const aboutData = {
   projectDescription: 'descriptions.about',
   cards: [
     {
-      title: 'about.cards.title1',
-      description: 'about.cards.description1',
+      title: 'about.cards.12',
+      description: 'about.cards.description',
     },
     {
-      title: 'about.cards.title2',
-      description: 'about.cards.description2',
+      title: 'about.cards.2x',
+      description: 'about.cards.description',
     },
   ],
 };
 
 let priceCard = [
   {
-    label: 'Price',
+    label: 'aboutToken.cards.price.price',
     body: '$0.0000 (1DOT - 10 XXX)',
   },
   {
-    label: 'Total Supply',
+    label: 'aboutToken.cards.price.totalSupply',
     body: '35 000 000 000 DOT',
   },
   {
-    label: 'Crowdloan Reward Pool',
+    label: 'aboutToken.cards.price.crowdloanRewardPool',
     body: '20 000 000 DOT',
-    subLabel: '62% of Total Supply',
+    subLabel: t('aboutToken.cards.price.xOfTotalSupply', { value: 62 }),
   },
 ];
+
 let progressCard = [
   {
-    label: 'LP Rewards 40%',
+    label: 'aboutToken.cards.progress.lp',
     progressValue: 40,
   },
   {
-    label: 'Team 11%',
+    label: 'aboutToken.cards.progress.team',
     progressValue: 11,
   },
   {
-    label: 'Ecosystem 4%',
+    label: 'aboutToken.cards.progress.ecosystem',
     progressValue: 4,
   },
   {
-    label: 'Validation Rewards 30%',
+    label: 'aboutToken.cards.progress.validationRewards',
     progressValue: 30,
   },
   {
-    label: 'Crowdloan Fund 15%',
+    label: 'aboutToken.cards.progress.crowdloanFunds',
     progressValue: 15,
   },
 ];
+
 let timelinePoints = [
   {
-    label: 'Start Date',
+    label: 'roadmap.points.start',
     body: '12.12.2022',
   },
   {
-    label: 'Testing',
+    label: 'roadmap.points.testing',
     body: '1.03.2023',
   },
   {
-    label: 'Auction',
+    label: 'roadmap.points.auction',
     body: '15.05.2023',
     isCurrentPoint: true,
   },
   {
-    label: 'End date',
+    label: 'roadmap.points.end',
     body: '1.08.2023',
   },
 ];
+
 const faq = [
   {
     question: 'How long does it take to verify my account?',

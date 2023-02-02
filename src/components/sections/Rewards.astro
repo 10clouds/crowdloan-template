@@ -1,4 +1,6 @@
 ---
+import { t } from 'i18next';
+
 import Section from '@/components/ui/Section.astro';
 import Card from '@/components/common/Card.astro';
 import Button from '@/components/ui/Button.astro';
@@ -30,12 +32,9 @@ const defaultSpace = 3;
 ---
 
 <Section id={id} class="bg-primary">
-  <div class="section-title">Reward distribution</div>
+  <div class="section-title">{t('titles.rewards')}</div>
   <p class="section-description">
-    All participants in the Project Crowdloan will receive DOTS as a reward for
-    their contributions. The amount of the rewards will depend on the total
-    amount of DOTS which has been contributed by others at the time of your
-    contribution.
+    {t('descriptions.rewards')}
   </p>
 
   <div class="grid grid-cols-1 gap-6 pt-16 lg:grid-cols-6">
@@ -51,7 +50,7 @@ const defaultSpace = 3;
   >
     <div class="flex flex-col items-center justify-center gap-10 py-24">
       <div class="text-3xl font-medium tracking-tight text-white lg:text-7xl">
-        Don’t wait too long!
+        {t('rewards.dontWait')}
       </div>
       <ButtonWrapper client:load>
         <Button variant="primary" />

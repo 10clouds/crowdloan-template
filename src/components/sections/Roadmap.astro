@@ -1,4 +1,6 @@
 ---
+import { t } from 'i18next';
+
 import Progress from '@/components/ui/Progress.astro';
 import Circle from '@/components/Icons/Circle.astro';
 import Section from '@/components/ui/Section.astro';
@@ -18,7 +20,7 @@ const { id = 'roadmap', timelinePoints = [], progressValue = 20 } = Astro.props;
 
 <Section id={id} class="py-40">
   <div class="mx-auto max-w-7xl pb-20">
-    <div class="section-title">Roadmap</div>
+    <div class="section-title">{t('titles.roadmap')}</div>
     <div class="relative mt-36">
       <Progress value={progressValue} />
       <div class="absolute -top-2.5 flex w-full justify-around">
@@ -34,7 +36,7 @@ const { id = 'roadmap', timelinePoints = [], progressValue = 20 } = Astro.props;
                     {isCurrentPoint && (
                       <>
                         <div class="drop-shadow-primary-small absolute -top-20 w-max rounded-lg bg-white px-5 py-2.5 text-3xl font-medium tracking-tight">
-                          We are here!
+                          {t('roadmap.weAreHere')}
                         </div>
                         <div class="bg-base absolute bottom-0 -top-20 -z-10 h-full w-0.5 " />
                       </>
@@ -43,7 +45,7 @@ const { id = 'roadmap', timelinePoints = [], progressValue = 20 } = Astro.props;
                       class="drop-shadow-primary-small"
                       fillColor={idx <= currPointIdx ? '#3B5EEA' : '#D4D4D8'}
                     />
-                    <label class="mt-5 text-lg font-medium">{label}</label>
+                    <label class="mt-5 text-lg font-medium">{t(label)}</label>
                     <p class="opacity-70">{body}</p>
                   </div>
                 </>
