@@ -1,4 +1,5 @@
 ---
+import { t } from 'i18next';
 export interface Props {
   ariaLabel?: string;
   class?: string;
@@ -10,7 +11,7 @@ type ButtonVariants = keyof typeof variants;
 const {
   ariaLabel = 'Button',
   class: className = '',
-  label = 'Contribute',
+  label = t('buttons.contribute'),
   variant = 'default',
 } = Astro.props;
 

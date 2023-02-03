@@ -1,4 +1,6 @@
 ---
+import { t } from 'i18next';
+
 import Layout from '@/layouts/PageLayout.astro';
 import Hero from '@/components/sections/Hero.astro';
 import About from '@/components/sections/About.astro';
@@ -9,15 +11,12 @@ import AboutToken from '@/components/sections/AboutToken.astro';
 import Roadmap from '@/components/sections/Roadmap.astro';
 import Logos from '@/components/Logos.astro';
 import FAQ from '@/components/sections/FAQ.astro';
-
 import { SITE } from '@/config';
-
 import MiroLogo from '@/assets/images/logos/Miro.svg';
 import MobbinLogo from '@/assets/images/logos/Mobbin.svg';
 import StripeLogo from '@/assets/images/logos/Stripe.svg';
 import WebflowLogo from '@/assets/images/logos/Webflow.svg';
 import MondayLogo from '@/assets/images/logos/Monday.svg';
-
 import Logo from '@/assets/Logo.svg';
 import TimerBanner from '@/components/sections/TimerBanner.astro';
 import ModalWrapper from '@/features/Contribution/ModalWrapper';
@@ -46,175 +45,159 @@ let logos = [
   },
 ];
 
-const tempCardsData = [
+const additionalLinksCardsData = [
   {
-    title: 'LitePapaer 2.0',
+    title: t('additionalLinks.titles.litePaper'),
     href: 'http://google.com/',
     bulletList: [
-      'Access to all basic features',
-      'Basic reporting and analytics',
-      'Up to 10 individual users',
+      t('additionalLinks.bulletLists.allFeatures'),
+      t('additionalLinks.bulletLists.basicReporting'),
+      t('additionalLinks.bulletLists.individualUsers'),
     ],
-    description:
-      'Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward.',
+    description: t('additionalLinks.descriptions.contribution8Dot'),
   },
   {
-    title: 'WhitePaper',
+    title: t('additionalLinks.titles.whitePaper'),
     href: 'http://google.com/',
     bulletList: [
-      'Access to all basic features',
-      'Basic reporting and analytics',
-      'Up to 10 individual users',
+      t('additionalLinks.bulletLists.allFeatures'),
+      t('additionalLinks.bulletLists.basicReporting'),
+      t('additionalLinks.bulletLists.individualUsers'),
     ],
   },
   {
-    title: 'Documentation',
+    title: t('additionalLinks.titles.documentation'),
     href: 'http://google.com/',
-    description:
-      'Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward.',
+    description: t('additionalLinks.descriptions.contribution8Dot'),
   },
 ];
 
-const tempAboutData = {
-  projectDescription:
-    'The rise of the crypto economy promises a world where everyone has access to open and secure financial systems. But this future isn’t guaranteed, the bridge to this new world must be built.',
+const aboutData = {
+  projectDescription: t('descriptions.about'),
   cards: [
     {
-      title: '12',
-      description:
-        'This is a feature description. How would that work?  Why would that be useful? Who could use it? Think of the value. ',
+      title: t('about.cards.12'),
+      description: t('about.cards.description'),
     },
     {
-      title: '2x',
-      description:
-        'This is a feature description. How would that work?  Why would that be useful? Who could use it? Think of the value. ',
+      title: t('about.cards.2x'),
+      description: t('about.cards.description'),
     },
   ],
 };
 
 let priceCard = [
   {
-    label: 'Price',
+    label: t('aboutToken.cards.price.price'),
     body: '$0.0000 (1DOT - 10 XXX)',
   },
   {
-    label: 'Total Supply',
+    label: t('aboutToken.cards.price.totalSupply'),
     body: '35 000 000 000 DOT',
   },
   {
-    label: 'Crowdloan Reward Pool',
+    label: t('aboutToken.cards.price.crowdloanRewardPool'),
     body: '20 000 000 DOT',
-    subLabel: '62% of Total Supply',
+    subLabel: t('aboutToken.cards.price.xOfTotalSupply', { value: 62 }),
   },
 ];
 
 let progressCard = [
   {
-    label: 'LP Rewards 40%',
+    label: t('aboutToken.cards.progress.lp'),
     progressValue: 40,
   },
   {
-    label: 'Team 11%',
+    label: t('aboutToken.cards.progress.team'),
     progressValue: 11,
   },
   {
-    label: 'Ecosystem 4%',
+    label: t('aboutToken.cards.progress.ecosystem'),
     progressValue: 4,
   },
   {
-    label: 'Validation Rewards 30%',
+    label: t('aboutToken.cards.progress.validationRewards'),
     progressValue: 30,
   },
   {
-    label: 'Crowdloan Fund 15%',
+    label: t('aboutToken.cards.progress.crowdloanFunds'),
     progressValue: 15,
   },
 ];
 
 let timelinePoints = [
   {
-    label: 'Start Date',
+    label: t('roadmap.points.start'),
     body: '12.12.2022',
   },
   {
-    label: 'Testing',
+    label: t('roadmap.points.testing'),
     body: '1.03.2023',
   },
   {
-    label: 'Auction',
+    label: t('roadmap.points.auction'),
     body: '15.05.2023',
     isCurrentPoint: true,
   },
   {
-    label: 'End date',
+    label: t('roadmap.points.end'),
     body: '1.08.2023',
   },
 ];
 
 const faq = [
   {
-    question: 'How long does it take to verify my account?',
-    answer:
-      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+    question: t('faq.howLongToVerify'),
+    answer: t('faq.howLongToVerifyAnswer'),
   },
   {
-    question: 'How long will my withdrawal take to show up in my bank account?',
-    answer:
-      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+    question: t('faq.howLongWithdrawl'),
+    answer: t('faq.howLongToVerifyAnswer'),
   },
   {
-    question: 'How do Boosts work?',
-    answer:
-      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+    question: t('faq.howBoostWork'),
+    answer: t('faq.howLongToVerifyAnswer'),
   },
   {
-    question: 'What is APY?',
-    answer:
-      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+    question: t('faq.whatIsApy'),
+    answer: t('faq.howLongToVerifyAnswer'),
   },
   {
-    question: 'How does the waitlist work?',
-    answer:
-      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+    question: t('faq.howWaitlistWork'),
+    answer: t('faq.howLongToVerifyAnswer'),
   },
   {
-    question: 'How do I change my email?',
-    answer:
-      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+    question: t('faq.howToChangeEmail'),
+    answer: t('faq.howLongToVerifyAnswer'),
   },
   {
-    question: 'How do I change my address?',
-    answer:
-      'Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.',
+    question: t('faq.howToChangeAddress'),
+    answer: t('faq.howLongToVerifyAnswer'),
   },
 ];
-
 const rewardsDistribution = [
   {
-    title: '31 DOT per 1 DOT',
-    topLabel: "WE'RE HERE!",
-    description:
-      'Contribution for the first 500,000 DOT will receive 12 DOT per contributed DOT as a reward.',
+    title: t('rewardsContribution.titles.xPerY', { value: 31 }),
+    topLabel: t('rewardsContribution.labels.weHere'),
+    description: t('rewardsContribution.descriptions.contribution12Dot'),
   },
   {
-    title: '8 DOT per 1 DOT',
-    topLabel: 'NEXT BLOCK',
-    description:
-      'Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward.',
+    title: t('rewardsContribution.titles.xPerY', { value: 8 }),
+    topLabel: t('rewardsContribution.labels.next'),
+    description: t('rewardsContribution.descriptions.contribution8Dot'),
   },
   {
-    title: '4 DOT per 1 DOT',
-    topLabel: 'NEXT BLOCK',
-    description:
-      'Contribution for the raised xxx between 1,500,000 - 3,000,000 DOT will receive 4 DOT per contributed DOT as a reward.',
+    title: t('rewardsContribution.titles.xPerY', { value: 4 }),
+    topLabel: t('rewardsContribution.labels.next'),
+    description: t('rewardsContribution.descriptions.contribution4Dot'),
     takeSpace: 2,
   },
   {
-    title: '31 DOT per 1 DOT',
-    topLabel: 'WHAT ELSE?',
+    title: t('rewardsContribution.titles.xPerY', { value: 31 }),
+    topLabel: t('rewardsContribution.labels.whatElse'),
     bulletList: [
-      'The failure compensation in Batch 1 and Batch 2 will be distributed by the Project team.',
-      'The compensation ratio is XXX : DOT = 0.12 : 1',
+      t('rewardsContribution.bulletLists.failureCompensation'),
+      t('rewardsContribution.bulletLists.compensationRatio'),
     ],
     takeSpace: 4,
   },
@@ -233,8 +216,8 @@ const rewardsDistribution = [
 
   <About
     id="about"
-    projectDescription={tempAboutData.projectDescription}
-    cards={tempAboutData.cards}
+    projectDescription={aboutData.projectDescription}
+    cards={aboutData.cards}
   />
   <AboutToken
     id="tokenomics"
@@ -244,7 +227,7 @@ const rewardsDistribution = [
   <Roadmap id="roadmap" timelinePoints={timelinePoints} progressValue={63} />
   <Rewards id="rewards" rewardsDistribution={rewardsDistribution} />
   <Contributors id="contributors" />
-  <AdditionalLinks id="additional" cardsData={tempCardsData} />
+  <AdditionalLinks id="additional" cardsData={additionalLinksCardsData} />
   <FAQ id="faq" faq={faq} />
   <TimerBanner />
   <ModalWrapper client:only><PolkadotForm client:only /></ModalWrapper>

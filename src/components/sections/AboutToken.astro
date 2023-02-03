@@ -1,4 +1,6 @@
 ---
+import { t } from 'i18next';
+
 import Section from '@/components/ui/Section.astro';
 import Container from '@/components/ui/Container.astro';
 import Progress from '@/components/ui/Progress.astro';
@@ -14,11 +16,9 @@ const { id = 'tokenomics', priceCard = [], progressCard = [] } = Astro.props;
 
 <Section id={id} class="bg-primary">
   <div>
-    <div class="section-title">About the token</div>
+    <div class="section-title">{t('titles.aboutToken')}</div>
     <p class="section-description">
-      Share some details about tokenomics. Lorem ipsum dolor sit amet,
-      consectetur adipiscing elit. Donec at ligula consequat ante pharetra
-      eleifend ut et diam.
+      {t('descriptions.aboutToken')}
     </p>
     <div
       class="mx-auto mt-14 flex w-full flex-col justify-center gap-6 lg:flex-row"

@@ -1,0 +1,182 @@
+{
+  "titles": {
+    "hero": "Building the future",
+    "heroColorized": "of fin experiences",
+    "about": "About the Project",
+    "aboutToken": "About the token",
+    "roadmap": "Roadmap",
+    "rewards": "Reward distribution",
+    "contributors": "Recent contributors",
+    "additionalLinks": "Additional links",
+    "faq": "Frequently Asked Questions"
+  },
+  "descriptions": {
+    "hero": "Describe what problems your project solves. Avoid using popular phrases or sentences. Instead, think of something by which people will remember you.",
+    "about": "The rise of the crypto economy promises a world where everyone has access to open and secure financial systems. But this future isn’t guaranteed, the bridge to this new world must be built.",
+    "aboutToken": "Share some details about tokenomics. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at ligula consequat ante pharetra eleifend ut et diam.",
+    "rewards": "All participants in the Project Crowdloan will receive DOTS as a reward for their contributions. The amount of the rewards will depend on the total amount of DOTS which has been contributed by others at the time of your contribution.",
+    "contributors": "Here you can shortly say something about the contributors",
+    "faq": "Have a question that is not answered? You can contact us at"
+  },
+  "buttons": {
+    "contribute": "Contribute",
+    "okGotIt": "OK, got it",
+    "done": "Done",
+    "cancel": "Cancel",
+    "signAndSend": "Sign and Send"
+  },
+  "timeUnits": {
+    "months_one": "month",
+    "months_other": "months",
+    "days_one": "day",
+    "days_other": "days",
+    "hours_one": "hour",
+    "hours_other": "hours",
+    "minutes_one": "minute",
+    "minutes_other": "minutes",
+    "seconds_one": "second",
+    "seconds_other": "seconds"
+  },
+  "navigation": {
+    "about": "About",
+    "rewards": "Rewards",
+    "contributors": "Contributors",
+    "Additional": "Additional",
+    "tokenomics": "Tokenomics",
+    "faq": "FAQ"
+  },
+  "hero": {
+    "contributed": "Contributed",
+    "cap": "CAP",
+    "leaseDuration": "Lease Duration",
+    "auctionStarted": "Auction started"
+  },
+  "about": {
+    "cards": {
+      "12": "12",
+      "description": "This is a feature description. How would that work? Why would that be useful? Who could use it? Think of the value.",
+      "2x": "2x"
+    }
+  },
+  "aboutToken": {
+    "cards": {
+      "progress": {
+        "lp": "LP Rewards 40%",
+        "team": "Team 11%",
+        "ecosystem": "EcoSystem 4%",
+        "validationRewards": "Validation Rewards 30%",
+        "crowdloanFunds": "Crowdload Funds 15%"
+      },
+      "price": {
+        "price": "Price",
+        "totalSupply": "Total Supply",
+        "crowdloanRewardPool": "Crowdload Reward Pool",
+        "xOfTotalSupply": "{{value}}% of Total Supply"
+      }
+    }
+  },
+  "roadmap": {
+    "weAreHere": "We are here!",
+    "points": {
+      "start": "Start Date",
+      "testing": "Testing",
+      "auction": "Auction",
+      "end": "End Date"
+    }
+  },
+  "rewards": {
+    "dontWait": "Don't wait too long!"
+  },
+  "contributors": {
+    "openPolka": "Open Polkascan"
+  },
+  "faq": {
+    "howLongToVerify": "How long does it take to verify my account?",
+    "howLongToVerifyAnswer": "Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.",
+    "howLongWithdrawl": "How long will my withdrawal take to show up in my bank account?",
+    "howBoostWork": "How do Boosts work?",
+    "whatIsApy": "What is APY?",
+    "howWaitlistWork": "How does the waitlist work?",
+    "howToChangeEmail": "How do I change my email?",
+    "howToChangeAddress": "How do I change my address?"
+  },
+  "rewardsContribution": {
+    "titles": {
+      "xPerY": "{{value}} DOT per 1 DOT"
+    },
+    "labels": {
+      "weHere": "WE'RE HERE!",
+      "next": "NEXT BLOCK",
+      "whatElse": "WHAT ELSE?"
+    },
+    "descriptions": {
+      "contribution12Dot": "Contribution for the first 500,000 DOT will receive 12 DOT per contributed DOT as a reward.",
+      "contribution8Dot": "Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward.",
+      "contribution4Dot": "Contribution for the raised xxx between 1,500,000 - 3,000,000 DOT will receive 4 DOT per contributed DOT as a reward."
+    },
+    "bulletLists": {
+      "failureCompensation": "The failure compensation in Batch 1 and Batch 2 will be distributed by the Project team.",
+      "compensationRatio": "The compensation ratio is XXX : DOT = 0.12 : 1"
+    }
+  },
+  "additionalLinks": {
+    "titles": {
+      "litePaper": "LitePaper 2.0",
+      "whitePaper": "WhitePaper",
+      "documentation": "Documentation"
+    },
+    "descriptions": {
+      "contribution8Dot": "Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward."
+    },
+    "bulletLists": {
+      "allFeatures": "Access to all basic features",
+      "basicReporting": "Basic reporting and analytics",
+      "individualUsers": "Up to 10 individual users"
+    }
+  },
+  "404": {
+    "error": "Error",
+    "sorryNoPage": "Sorry, we couldn't find this page.",
+    "weHaveOtherPages": "But don't worry, you can find plenty of other things on our homepage.",
+    "backHome": "Back to homepage"
+  },
+  "extension": {
+    "polkaDot": "Polkadot extension",
+    "connecting": "Connecting to extension...",
+    "error": {
+      "pleaseInstall": "Please install extension from",
+      "toMakeTransactions": "to make transactions"
+    }
+  },
+  "contribution": {
+    "contributions": "Contributions",
+    "submissionFee": "Submission fee",
+    "contributeToFund": "Contribute to fund",
+    "minimumAllowed": "Minimum allowed",
+    "remainingTillCap": "Remaining till cap",
+    "thankYouForContribution": "Thank you for your contribution!",
+    "success": "Success",
+    "error": "Error",
+    "theAboveContribution": "The above contribution should amount to more than minimum contribution and less than the remaining value.",
+    "mobileInfo": {
+      "contributeToFund": "Contribute to fund",
+      "inOrderToContribute": "In order to contribute to fund, copy the account address ID and open your dedicated Polkadot wallet app on your device and use this address to process transaction.",
+      "accountAddress": "Account address",
+      "contributionDescription": "The above contribution should amount to more than minimum contribution and less than the remaining value."
+    },
+    "loading": {
+      "processing": "Processing...",
+      "currentStatus": "Current Status"
+    },
+
+    "form": {
+      "description": "Select the account and the amount to contribute.",
+      "amountInputLabel": "Select the account and the amount to contribute.",
+      "selectAccInfo": "This account will contribute to the crowdloan",
+      "selectLabel": "Contribute from",
+      "selectPlaceholder": "Select Account",
+      "inputAmountInfo": "The amount to contribute",
+      "inputAmountLabel": "Contribution"
+    }
+  }
+}

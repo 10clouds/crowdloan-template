@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SITE } from '@/config';
 import {
   getBalance,
@@ -11,6 +12,7 @@ import type { GenericChainProperties } from '@polkadot/types';
 const defaultChainDecimals = 12 as const;
 
 const ContributedInfo = () => {
+  const { t } = useTranslation('translation');
   const { api } = useSetupPolkadot();
 
   const [balance, setBalance] = useState<BalanceExtracted>();
@@ -59,7 +61,7 @@ const ContributedInfo = () => {
         <div className="flex">
           <div className="flex flex-col">
             <div className="pb-2 text-xs opacity-50 md:text-sm">
-              Contributed
+              {t('hero.contributed')}
             </div>
             <span className="text-xl font-medium leading-[90%] text-primary md:text-[2rem]">
               <div className="flex">
@@ -69,9 +71,12 @@ const ContributedInfo = () => {
             </span>
           </div>
           <div className="flex flex-col">
-            <div className="pb-2 text-xs opacity-50 md:text-sm">CAP</div>
+            <div className="pb-2 text-xs opacity-50 md:text-sm">
+              {t('hero.cap')}
+            </div>
             <span className="text-xl font-medium leading-[90%] md:text-[2rem]">
-              {SITE.polkadotConfig.targetAmount.toFixed(4)} DOT
+              {SITE.polkadotConfig.targetAmount.toFixed(4)}{' '}
+              {chainInfo && String(chainInfo?.tokenSymbol?.toHuman())}
             </span>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Fragment } from 'react';
 import { useTimeLeft } from '@/hooks';
-import { singularize } from '@/utils';
+import { useTranslation } from 'react-i18next';
 
 export interface Props {
   date: string | Date;
@@ -29,6 +29,7 @@ const mapVariants = {
 
 const TimeLeftTimer: FC<Props> = ({ date, variant = 'default' }) => {
   const timeLeft = useTimeLeft(date);
+  const { t } = useTranslation('translation');
 
   return (
     <div className={`flex h-fit ${mapVariants[variant].gap}`}>
@@ -42,7 +43,7 @@ const TimeLeftTimer: FC<Props> = ({ date, variant = 'default' }) => {
             >
               {Math.floor(Number(value))}
             </div>
-            <p className="text-sm">{value === 1 ? singularize(key) : key}</p>
+            <p className="text-sm">{t(`timeUnits.${key}`, { count: value })}</p>
           </div>
           {idx !== arr.length - 1 && (
             <p

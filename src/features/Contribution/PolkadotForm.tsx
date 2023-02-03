@@ -33,6 +33,7 @@ import {
   isMobileDevice,
 } from '@/features/Contribution/utils';
 import type { FormData, SignAndSubmit } from '@features/Contribution/types';
+import { useTranslation } from 'react-i18next';
 
 const formDefaultState = {
   transferAmount: 0,
@@ -57,6 +58,7 @@ const inputOptions = {
 };
 
 const PolkadotForm = () => {
+  const { t } = useTranslation('translation');
   const { setIsModalOpen } = useIsModalVisible();
   const { accounts, api, isExtensionError } = useSetupPolkadot();
 
@@ -179,12 +181,18 @@ const PolkadotForm = () => {
     return (
       <div className="mb-2 flex h-full w-full min-w-[30vw] flex-col items-center justify-center p-10">
         <Loading />
-        Connecting to extension...
+        {t('extension.connecting')}
       </div>
     );
 
   if (transactionError)
-    return <FinalState description={transactionError} title="Error" isError />;
+    return (
+      <FinalState
+        description={transactionError}
+        title={t('contribution.error')}
+        isError
+      />
+    );
 
   if (transactionStatus && !transactionStatus.isFinalized)
     return <LoadingWithProgress transactionStatus={transactionStatus} />;
@@ -192,8 +200,8 @@ const PolkadotForm = () => {
   if (transactionStatus && transactionStatus.isFinalized)
     return (
       <FinalState
-        description="Thank you for your contribution."
-        title="Success"
+        description={t('contribution.thankYouForContribution')}
+        title={t('contribution.success')}
       />
     );
 
@@ -205,11 +213,9 @@ const PolkadotForm = () => {
       <div className="mb-8 flex justify-between">
         <div className="flex flex-col gap-2">
           <div className="text-3xl font-medium tracking-tight">
-            Contribute to fund
+            {t('contribution.contributeToFund')}
           </div>
-          <p className="text-gray-dark">
-            Select the account and the amount to contribute.
-          </p>
+          <p className="text-gray-dark">{t('contribution.form.description')}</p>
         </div>
         <Close onClick={closeModal} />
       </div>
@@ -222,8 +228,8 @@ const PolkadotForm = () => {
           />
         )}
         <Select
-          label="Contribute from"
-          placeholder="Select account"
+          label={t('contribution.form.selectLabel')}
+          placeholder={t('contribution.form.selectPlaceholder')}
           disabled={!!transactionInfo}
           value={() => getSelectedValue(transferFrom)}
         >
@@ -244,7 +250,7 @@ const PolkadotForm = () => {
           ))}
         </Select>
         <p className="px-4 text-end text-xs text-gray-dark">
-          This account will contribute to the crowdloan
+          {t('contribution.form.selectAccInfo')}
         </p>
         {!!errors.transferFrom && (
           <span className="ml-2  text-error">
@@ -253,7 +259,7 @@ const PolkadotForm = () => {
         )}
         <div>
           <Input
-            label="Contribution"
+            label={t('contribution.form.inputAmountLabel')}
             placeholder="0"
             type="number"
             {...register('transferAmount', inputOptions.amount)}
@@ -262,7 +268,7 @@ const PolkadotForm = () => {
           />
         </div>
         <p className="px-4 text-end text-xs text-gray-dark">
-          The amount to contribute
+          {t('contribution.form.inputAmountInfo')}
         </p>
         {!!errors.transferAmount && (
           <span className="ml-2 text-error">
@@ -270,8 +276,7 @@ const PolkadotForm = () => {
           </span>
         )}
         <p className="mt-6 mb-4 text-gray-dark">
-          The above contribution should amount to more than minimum contribution
-          and less than the remaining value.
+          {t('contribution.theAboveContribution')}
         </p>
         <ContributionMinInfo
           min={SITE.polkadotConfig.minAmount}
@@ -286,7 +291,7 @@ const PolkadotForm = () => {
           disabled={isLoading}
           onClick={closeModal}
         >
-          Cancel
+          {t('buttons.cancel')}
         </button>
 
         {!transactionInfo ? (
@@ -295,14 +300,14 @@ const PolkadotForm = () => {
             type="submit"
             disabled={isLoading}
           >
-            Contribute
+            {t('buttons.contribute')}
           </button>
         ) : (
           <button
             className="button-variant-default base-button ml-auto w-full"
             onClick={() => signAndSend(signAndSendData as SignAndSubmit)}
           >
-            Sign and Send
+            {t('buttons.signAndSend')}
           </button>
         )}
       </div>

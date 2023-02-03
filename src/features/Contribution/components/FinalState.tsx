@@ -1,6 +1,7 @@
 import Check from '@/components/Icons/Check';
 import Close from '@/components/Icons/Close';
 import { useIsModalVisible } from '@/store';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   title: string;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const FinalState = ({ title, description, isError = false }: Props) => {
+  const { t } = useTranslation('translation');
   const { setIsModalOpen } = useIsModalVisible();
 
   return (
@@ -22,7 +24,7 @@ const FinalState = ({ title, description, isError = false }: Props) => {
         className="base-button button-variant-default mt-4"
         onClick={() => setIsModalOpen(false)}
       >
-        OK got it
+        {t('buttons.okGotIt')}
       </button>
     </div>
   );
