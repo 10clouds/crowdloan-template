@@ -45,32 +45,30 @@ let logos = [
   },
 ];
 
-const tempCardsData = [
+const additionalLinksCardsData = [
   {
-    title: 'LitePapaer 2.0',
+    title: t('additionalLinks.titles.litePaper'),
     href: 'http://google.com/',
     bulletList: [
-      'Access to all basic features',
-      'Basic reporting and analytics',
-      'Up to 10 individual users',
+      t('additionalLinks.bulletLists.allFeatures'),
+      t('additionalLinks.bulletLists.basicReporting'),
+      t('additionalLinks.bulletLists.individualUsers'),
     ],
-    description:
-      'Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward.',
+    description: t('additionalLinks.descriptions.contribution8Dot'),
   },
   {
-    title: 'WhitePaper',
+    title: t('additionalLinks.titles.whitePaper'),
     href: 'http://google.com/',
     bulletList: [
-      'Access to all basic features',
-      'Basic reporting and analytics',
-      'Up to 10 individual users',
+      t('additionalLinks.bulletLists.allFeatures'),
+      t('additionalLinks.bulletLists.basicReporting'),
+      t('additionalLinks.bulletLists.individualUsers'),
     ],
   },
   {
-    title: 'Documentation',
+    title: t('additionalLinks.titles.documentation'),
     href: 'http://google.com/',
-    description:
-      'Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward.',
+    description: t('additionalLinks.descriptions.contribution8Dot'),
   },
 ];
 
@@ -229,7 +227,7 @@ const rewardsDistribution = [
   <Roadmap id="roadmap" timelinePoints={timelinePoints} progressValue={63} />
   <Rewards id="rewards" rewardsDistribution={rewardsDistribution} />
   <Contributors id="contributors" />
-  <AdditionalLinks id="additional" cardsData={tempCardsData} />
+  <AdditionalLinks id="additional" cardsData={additionalLinksCardsData} />
   <FAQ id="faq" faq={faq} />
   <TimerBanner />
   <ModalWrapper client:only><PolkadotForm client:only /></ModalWrapper>

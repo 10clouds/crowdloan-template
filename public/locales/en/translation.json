@@ -95,6 +95,21 @@
       "compensationRatio": "The compensation ratio is XXX : DOT = 0.12 : 1"
     }
   },
+  "additionalLinks": {
+    "titles": {
+      "litePaper": "LitePaper 2.0",
+      "whitePaper": "WhitePaper",
+      "documentation": "Documentation"
+    },
+    "descriptions": {
+      "contribution8Dot": "Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward."
+    },
+    "bulletLists": {
+      "allFeatures": "Access to all basic features",
+      "basicReporting": "Basic reporting and analytics",
+      "individualUsers": "Up to 10 individual users"
+    }
+  },
   "404": {
     "error": "Error",
     "sorryNoPage": "Sorry, we couldn't find this page.",
