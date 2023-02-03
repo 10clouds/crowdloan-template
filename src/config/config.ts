@@ -9,12 +9,13 @@ const CONFIG = {
   description: '🚀  Please add here a description',
 
   navLinks: [
-    { title: 'About', url: '#about' },
-    { title: 'Rewards', url: '#rewards' },
-    { title: 'Contributors', url: '#contributors' },
-    { title: 'Additional', url: '#additional' },
-    { title: 'Tokenomics', url: '#tokenomics' },
-    { title: 'FAQ', url: '#faq' },
+    // each title is translation key that is located in public/locales/en/translation.json
+    { title: 'navigation.about', url: '#about' },
+    { title: 'navigation.rewards', url: '#rewards' },
+    { title: 'navigation.contributors', url: '#contributors' },
+    { title: 'navigation.additional', url: '#additional' },
+    { title: 'navigation.tokenomics', url: '#tokenomics' },
+    { title: 'navigation.faq', url: '#faq' },
   ],
 
   // this can be any date format that is accepted by new Date()

@@ -37,6 +37,14 @@
     "seconds_one": "second",
     "seconds_other": "seconds"
   },
+  "navigation": {
+    "about": "About",
+    "rewards": "Rewards",
+    "contributors": "Contributors",
+    "Additional": "Additional",
+    "tokenomics": "Tokenomics",
+    "faq": "FAQ"
+  },
   "hero": {
     "contributed": "Contributed",
     "cap": "CAP",
