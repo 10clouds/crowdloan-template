@@ -19,7 +19,11 @@
     "faq": "Have a question that is not answered? You can contact us at"
   },
   "buttons": {
-    "contribute": "Contribute"
+    "contribute": "Contribute",
+    "okGotIt": "OK, got it",
+    "done": "Done",
+    "cancel": "Cancel",
+    "signAndSend": "Sign and Send"
   },
   "timeUnits": {
     "months_one": "month",
@@ -127,5 +131,43 @@
     "sorryNoPage": "Sorry, we couldn't find this page.",
     "weHaveOtherPages": "But don't worry, you can find plenty of other things on our homepage.",
     "backHome": "Back to homepage"
+  },
+  "extension": {
+    "polkaDot": "Polkadot extension",
+    "connecting": "Connecting to extension...",
+    "error": {
+      "pleaseInstall": "Please install extension from",
+      "toMakeTransactions": "to make transactions"
+    }
+  },
+  "contribution": {
+    "contributions": "Contributions",
+    "submissionFee": "Submission fee",
+    "contributeToFund": "Contribute to fund",
+    "minimumAllowed": "Minimum allowed",
+    "remainingTillCap": "Remaining till cap",
+    "thankYouForContribution": "Thank you for your contribution!",
+    "success": "Success",
+    "theAboveContribution": "The above contribution should amount to more than minimum contribution and less than the remaining value.",
+    "mobileInfo": {
+      "contributeToFund": "Contribute to fund",
+      "inOrderToContribute": "In order to contribute to fund, copy the account address ID and open your dedicated Polkadot wallet app on your device and use this address to process transaction.",
+      "accountAddress": "Account address",
+      "contributionDescription": "The above contribution should amount to more than minimum contribution and less than the remaining value."
+    },
+    "loading": {
+      "processing": "Processing...",
+      "currentStatus": "Current Status"
+    },
+
+    "form": {
+      "description": "Select the account and the amount to contribute.",
+      "amountInputLabel": "Select the account and the amount to contribute.",
+      "selectAccInfo": "This account will contribute to the crowdloan",
+      "selectLabel": "Contribute from",
+      "selectPlaceholder": "Select Account",
+      "inputAmountInfo": "The amount to contribute",
+      "inputAmountLabel": "Contribution"
+    }
   }
 }

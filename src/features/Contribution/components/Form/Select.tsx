@@ -3,7 +3,7 @@ import useOnClickOutside from '@/hooks/useOnClickOutside';
 
 interface Props {
   label: string;
-  placeholder?: string;
+  placeholder: string;
   value: () => string | ReactNode;
   children: ReactNode[];
   disabled?: boolean;

@@ -3,6 +3,7 @@ import { useIsModalVisible } from '@/store';
 import ContributionMinInfo from './ContributionMinInfo';
 import Copy from '@/components/Icons/Copy';
 import { copyToClipboard } from '../utils';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   tokenSymbol: string;
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const MobileInfo = ({ tokenSymbol, max }: Props) => {
+  const { t } = useTranslation('translation');
   const { setIsModalOpen } = useIsModalVisible();
 
   function copyToCb() {
@@ -21,14 +23,14 @@ const MobileInfo = ({ tokenSymbol, max }: Props) => {
     <div className="flex w-full max-w-2xl flex-col justify-between overflow-y-auto px-6 py-10">
       <div>
         <span className="mb-2 text-3xl font-medium tracking-tight">
-          Contribute to fund
+          {t('contribution.mobileInfo.contributeToFund')}
         </span>
         <p className="mb-6 text-gray-dark">
-          In order to contribute to fund, copy the account address ID and open
-          your dedicated Polkadot wallet app on your device and use this address
-          to process transaction.
+          {t('contribution.mobileInfo.inOrderToContribute')}
         </p>
-        <div className="ml-4 text-xs opacity-50">Account address</div>
+        <div className="ml-4 text-xs opacity-50">
+          {t('contribution.mobileInfo.inOrderToContribute')}
+        </div>
         <div className="flex rounded-2xl border text-sm" onClick={copyToCb}>
           <div className="flex-1 p-4">
             {SITE.polkadotConfig.targetAccountAddress.slice(0, 20) + '...'}
@@ -41,8 +43,7 @@ const MobileInfo = ({ tokenSymbol, max }: Props) => {
           </button>
         </div>
         <p className="mt-6 mb-4 text-gray-dark">
-          The above contribution should amount to more than minimum contribution
-          and less than the remaining value.
+          {t('contribution.mobileInfo.contributionDescription')}
         </p>
         <ContributionMinInfo
           min={SITE.polkadotConfig.minAmount}
@@ -50,7 +51,7 @@ const MobileInfo = ({ tokenSymbol, max }: Props) => {
           tokenSymbol={tokenSymbol}
         />
         <div className="my-6 text-gray-dark">
-          Thank you for your contribution!
+          {t('contribution.thankYouForContribution')}
         </div>
       </div>
 
@@ -58,7 +59,7 @@ const MobileInfo = ({ tokenSymbol, max }: Props) => {
         className="base-button button-variant-default mx-auto mt-auto "
         onClick={() => setIsModalOpen(false)}
       >
-        Done
+        {t('buttons.done')}
       </button>
     </div>
   );
