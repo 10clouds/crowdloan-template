@@ -179,30 +179,27 @@ const faq = [
 ];
 const rewardsDistribution = [
   {
-    title: '31 DOT per 1 DOT',
-    topLabel: "WE'RE HERE!",
-    description:
-      'Contribution for the first 500,000 DOT will receive 12 DOT per contributed DOT as a reward.',
+    title: t('rewardsContribution.titles.xPerY', { value: 31 }),
+    topLabel: t('rewardsContribution.labels.weHere'),
+    description: t('rewardsContribution.descriptions.contribution12Dot'),
   },
   {
-    title: '8 DOT per 1 DOT',
-    topLabel: 'NEXT BLOCK',
-    description:
-      'Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward.',
+    title: t('rewardsContribution.titles.xPerY', { value: 8 }),
+    topLabel: t('rewardsContribution.labels.next'),
+    description: t('rewardsContribution.descriptions.contribution8Dot'),
   },
   {
-    title: '4 DOT per 1 DOT',
-    topLabel: 'NEXT BLOCK',
-    description:
-      'Contribution for the raised xxx between 1,500,000 - 3,000,000 DOT will receive 4 DOT per contributed DOT as a reward.',
+    title: t('rewardsContribution.titles.xPerY', { value: 4 }),
+    topLabel: t('rewardsContribution.labels.next'),
+    description: t('rewardsContribution.descriptions.contribution4Dot'),
     takeSpace: 2,
   },
   {
-    title: '31 DOT per 1 DOT',
-    topLabel: 'WHAT ELSE?',
+    title: t('rewardsContribution.titles.xPerY', { value: 31 }),
+    topLabel: t('rewardsContribution.labels.whatElse'),
     bulletList: [
-      'The failure compensation in Batch 1 and Batch 2 will be distributed by the Project team.',
-      'The compensation ratio is XXX : DOT = 0.12 : 1',
+      t('rewardsContribution.bulletLists.failureCompensation'),
+      t('rewardsContribution.bulletLists.compensationRatio'),
     ],
     takeSpace: 4,
   },

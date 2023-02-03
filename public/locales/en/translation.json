@@ -70,11 +70,30 @@
     "howLongToVerify": "How long does it take to verify my account?",
     "howLongToVerifyAnswer": "Your deposits are instantly converted to US Dollar Coin (USDC). 1 USDC = $1 Dollar. We build on top of USDC technology that enables higher interest rates, faster transfers, and no fees.",
     "howLongWithdrawl": "How long will my withdrawal take to show up in my bank account?",
-    "howBoostWork" : "How do Boosts work?",
+    "howBoostWork": "How do Boosts work?",
     "whatIsApy": "What is APY?",
-    "howWaitlistWork" : "How does the waitlist work?",
+    "howWaitlistWork": "How does the waitlist work?",
     "howToChangeEmail": "How do I change my email?",
-    "howToChangeAddress" : "How do I change my address?"
+    "howToChangeAddress": "How do I change my address?"
+  },
+  "rewardsContribution": {
+    "titles": {
+      "xPerY": "{{value}} DOT per 1 DOT"
+    },
+    "labels": {
+      "weHere": "WE'RE HERE!",
+      "next": "NEXT BLOCK",
+      "whatElse": "WHAT ELSE?"
+    },
+    "descriptions": {
+      "contribution12Dot": "Contribution for the first 500,000 DOT will receive 12 DOT per contributed DOT as a reward.",
+      "contribution8Dot": "Contribution for the raised xxx between 500,000 - 1,500,000 DOT will receive 8 DOT per contributed DOT as a reward.",
+      "contribution4Dot": "Contribution for the raised xxx between 1,500,000 - 3,000,000 DOT will receive 4 DOT per contributed DOT as a reward."
+    },
+    "bulletLists": {
+      "failureCompensation": "The failure compensation in Batch 1 and Batch 2 will be distributed by the Project team.",
+      "compensationRatio": "The compensation ratio is XXX : DOT = 0.12 : 1"
+    }
   },
   "404": {
     "error": "Error",
