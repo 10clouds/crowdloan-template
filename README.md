@@ -12,6 +12,7 @@ Core technologies Parity Template is based on are:
 - [React](https://reactjs.org/) - a JavaScript library for building user interfaces.
 - [TailwindCSS](https://tailwindcss.com/) - a CSS framework of utility classes.
 - [Polkadot.js](https://polkadot.js.org/docs/) - a collection of tools for interacting with the Polkadot network.
+- [Astro-i18next](https://astro-i18next.yassinedoghri.com/) - An astro integration of i18next + some utility components to help you translate website
 
 ## Project structure
 
