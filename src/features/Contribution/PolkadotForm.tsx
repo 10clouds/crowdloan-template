@@ -186,7 +186,13 @@ const PolkadotForm = () => {
     );
 
   if (transactionError)
-    return <FinalState description={transactionError} title="Error" isError />;
+    return (
+      <FinalState
+        description={transactionError}
+        title={t('contribution.error')}
+        isError
+      />
+    );
 
   if (transactionStatus && !transactionStatus.isFinalized)
     return <LoadingWithProgress transactionStatus={transactionStatus} />;

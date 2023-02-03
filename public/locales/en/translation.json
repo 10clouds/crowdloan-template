@@ -148,6 +148,7 @@
     "remainingTillCap": "Remaining till cap",
     "thankYouForContribution": "Thank you for your contribution!",
     "success": "Success",
+    "error": "Error",
     "theAboveContribution": "The above contribution should amount to more than minimum contribution and less than the remaining value.",
     "mobileInfo": {
       "contributeToFund": "Contribute to fund",
