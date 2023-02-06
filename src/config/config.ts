@@ -50,6 +50,13 @@ const polkadotConfig = {
 
   // amount that you want to reach in full DOT
   targetAmount: 35,
+
+  // change this address to network that your account id connected
+  // more network info - https://support.subscan.io/#introduction
+  apiScanUrl: 'https://westend.webapi.subscan.io/api/v2/scan/transfers',
+
+  openScanLink:
+    'https://westend.subscan.io/account/5CVT9Q7HrnpMCFRts82EWuTvZD66KHUjCxkDwAPn7HauZ2L5',
 };
 
 export const SITE = { ...CONFIG, footerLinks, polkadotConfig };

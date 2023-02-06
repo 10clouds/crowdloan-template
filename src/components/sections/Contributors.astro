@@ -1,46 +1,14 @@
 ---
 import { t } from 'i18next';
 import Section from '@/components/ui/Section.astro';
-import Table from '@/components/ui/Table.astro';
+import Table from '@/components/ui/Table';
+import { SITE } from '@/config';
 
 export interface Props {
   id: string;
 }
 
 const { id = 'contributors' } = Astro.props;
-
-const tableData = [
-  {
-    rank: '1',
-    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
-    date: '7.12.2022',
-    contributed: '189,185.44 DOT',
-  },
-  {
-    rank: '1',
-    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
-    date: '7.12.2022',
-    contributed: '189,185.44 DOT',
-  },
-  {
-    rank: '1',
-    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
-    date: '7.12.2022',
-    contributed: '189,185.44 DOT',
-  },
-  {
-    rank: '1',
-    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
-    date: '7.12.2022',
-    contributed: '189,185.44 DOT',
-  },
-  {
-    rank: '1',
-    account: '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
-    date: '7.12.2022',
-    contributed: '189,185.44 DOT',
-  },
-];
 ---
 
 <Section id={id} class="bg-primary">
@@ -51,12 +19,12 @@ const tableData = [
     </div>
   </div>
   <div class="mx-auto mt-16 block">
-    <Table tableData={tableData} />
+    <Table client:load />
   </div>
   <div class="flex justify-center">
     <a
       rel="nofollow"
-      href="https://explorer.polkascan.io/polkadot"
+      href={SITE.polkadotConfig.openScanLink}
       target="_blank"
       class="mt-14 text-center text-lg font-medium text-primary transition duration-300 ease-in-out hover:cursor-pointer hover:underline"
       >{t('contributors.openPolka')}</a
