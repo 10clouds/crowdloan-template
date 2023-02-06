@@ -1,4 +1,5 @@
 import { SITE } from '@/config';
+import { getErrorMessage } from '@/features/Contribution/utils';
 import type { TransferData, Transfers } from '@/types';
 import { useState, useEffect } from 'react';
 
@@ -17,6 +18,7 @@ const bodyContent = JSON.stringify({
 
 const Table = () => {
   const [tableData, setTableData] = useState<TransferData[]>();
+  const [error, setError] = useState<string>();
 
   useEffect(() => {
     let isCurrent = true;
@@ -40,6 +42,7 @@ const Table = () => {
       })
       .catch((err) => {
         console.error(err);
+        setError(getErrorMessage(err));
       });
 
     return () => {
@@ -109,6 +112,7 @@ const Table = () => {
           )}
         </tbody>
       </table>
+      {!!error && <div className="p-4 text-center text-error">{error}</div>}
     </div>
   );
 };
