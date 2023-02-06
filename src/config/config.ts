@@ -5,8 +5,9 @@ const CONFIG = {
   basePathname: '/',
   trailingSlash: false,
 
-  title: 'Please add here a title',
-  description: '🚀  Please add here a description',
+  // each title is translation key that is located in public/locales/en/translation.json
+  title: 'seo.title', // page title
+  description: 'seo.description', // page description
 
   navLinks: [
     // each title is translation key that is located in public/locales/en/translation.json
