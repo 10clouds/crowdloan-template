@@ -2,6 +2,8 @@ import { SITE } from '@/config';
 import { getErrorMessage } from '@/features/Contribution/utils';
 import type { TransferData, Transfers } from '@/types';
 import { useState, useEffect } from 'react';
+import { DateTime } from 'luxon';
+import i18next from 'i18next';
 
 const howManyResults = 5;
 
@@ -51,7 +53,6 @@ const Table = () => {
   }, []);
 
   const tHeaders = ['Account', 'Date', 'Contributed'];
-  const milliseconds = 1000;
 
   return (
     <div className="mx-auto w-full max-w-4xl overflow-x-auto rounded-lg border border-gray bg-white drop-shadow-primary">
@@ -102,9 +103,9 @@ const Table = () => {
                   {from_account_display?.address?.slice(0, 24) + '...'}
                 </td>
                 <td className="pr-11">
-                  {new Date(
-                    block_timestamp * milliseconds
-                  )?.toLocaleDateString()}
+                  {DateTime.fromSeconds(block_timestamp)
+                    .setLocale(i18next.language)
+                    .toLocaleString()}
                 </td>
                 <td className="pr-8">{`${amount} ${asset_symbol}`}</td>
               </tr>
