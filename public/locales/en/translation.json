@@ -45,6 +45,10 @@
     "tokenomics": "Tokenomics",
     "faq": "FAQ"
   },
+  "seo": {
+    "title": "Parity Crowdloan.",
+    "description": "Crowdloan is a simple lorem ipsum es dolor "
+  },
   "hero": {
     "contributed": "Contributed",
     "cap": "CAP",
