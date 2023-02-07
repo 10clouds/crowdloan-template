@@ -48,7 +48,7 @@ To configure the address for contributions go to `src/config/config.ts` and fill
 
 ## Polkadotjs API
 
-Project is setup to work with test network connected using [Polkadot.js](https://polkadot.js.org/docs/) in this case test network is `westend` on development server and it uses live network after build on production mode. If you would like to change connection address please refer to `src/features/Contribution/api/api.ts`
+Project is setup to work with test network connected using [Polkadot.js](https://polkadot.js.org/docs/) in this case test network is `westend` on the development server and it uses live network after build on production mode. If you would like to change connection address please refer to `src/features/Contribution/api/api.ts`
 
 ## External API
 
@@ -85,3 +85,7 @@ npm run preview
 ```
 
 As with any static website you can deploy your built site to a number of hosts like Netlify, GitHub Pages, Vercel and more. For a detailed instruction regarding deployment process, please refer to [the Astro docs](https://docs.astro.build/en/guides/deploy/).
+
+## License
+
+React is [MIT](./LICENSE)
