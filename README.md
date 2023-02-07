@@ -48,7 +48,7 @@ To configure the address for contributions go to `src/config/config.ts` and fill
 
 ## Polkadotjs API
 
-Project is setup to work with test network connected using [Polkadot.js](https://polkadot.js.org/docs/) in this case test network is `westend` on development server and it uses live network after build on production mode. If you would like to change connection address please refer to `src/features/Contribution/api/api.ts`
+Project is setup to work with test network connected using [Polkadot.js](https://polkadot.js.org/docs/) in this case test network is `westend` on the development server and it uses live network after build on production mode. If you would like to change connection address please refer to `src/features/Contribution/api/api.ts`
 
 ## External API
 
