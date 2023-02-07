@@ -88,4 +88,4 @@ As with any static website you can deploy your built site to a number of hosts l
 
 ## License
 
-React is [MIT](./LICENSE)
+Project is [MIT](./LICENSE)
