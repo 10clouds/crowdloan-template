@@ -42,9 +42,15 @@ Static assets, like images, can be placed in the `public/` directory.
 
 ## Template theming, customization and internationalization
 
-You can adjust styles for your template any way you want but we recommend sticking with TailwindCSS and customizing eiter through modification of defauts in `./tailwind.config.cjs`, or simily changing utility classes used on the elements.
+You can adjust styles for your template any way you want but we recommend sticking with TailwindCSS and customizing either through modification of defaults in `./tailwind.config.cjs`, or simily changing utility classes used on the elements.
 
 To configure the address for contributions go to `src/config/config.ts` and fill `targetAccountAddress`. There you can also change the minimum and target amount for contributions and the end date of your auction.
+
+## API
+
+Project is setup to work on test network in this case it is `westend`. If you would like to change connection address please refer to `src/features/Contribution/api/api.ts`
+
+We are also displaying latest contributors information using [subscan - transfers endpoint](https://support.subscan.io/#transfers), on test network is free to use, but on any other live network you need to create account on [subscan](https://pro.subscan.io/signup), and then get a free API key that includes higher quotas or start your trial with other available plans at [plans info](https://pro.subscan.io/). To adjust endpoint please refer to `apiScanUrl` located in `src/config/config.ts`
 
 ## Getting started
 
