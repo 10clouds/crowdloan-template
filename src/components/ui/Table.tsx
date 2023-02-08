@@ -11,13 +11,13 @@ const Table = () => {
 
   return (
     <div className="mx-auto w-full max-w-4xl overflow-x-auto rounded-lg border border-gray bg-white drop-shadow-primary">
-      <div className="h-2 w-full bg-timer-gradient opacity-60"></div>
       <table className="w-full table-auto">
-        <thead className="rounded-lg border bg-gray text-xs font-medium text-gray-dark">
+        <thead className="relative rounded-lg bg-gray text-xs font-medium text-gray-dark">
+          <div className="absolute top-0 h-2 w-full bg-timer-gradient opacity-60"></div>
           <tr>
             {tHeaders.map((label) => (
               <th
-                className="border-b-[1px] border-gray py-4 text-start uppercase first-of-type:px-4 last-of-type:pr-4"
+                className="border-b-[1px] border-gray pb-4 pt-5 text-start uppercase first-of-type:px-4 last-of-type:pr-4"
                 key={label}
               >
                 {label}
