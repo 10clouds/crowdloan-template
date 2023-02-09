@@ -4,7 +4,6 @@ import type { DurationObjectUnits } from 'luxon';
 import { getDuration } from '@/utils';
 
 const defaultState = {
-  months: 0,
   days: 0,
   hours: 0,
   minutes: 0,
