@@ -8,7 +8,7 @@ const ButtonWrapper = ({ children }: { children: ReactNode }) => {
       onClick={() => {
         setIsModalOpen(true);
       }}
-      className="w-fit"
+      className="w-auto"
     >
       {children}
     </div>

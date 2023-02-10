@@ -28,9 +28,11 @@ const { id = 'tokenomics', priceCard = [], progressCard = [] } = Astro.props;
           {
             priceCard.map(({ label, subLabel, body }) => (
               <div>
-                <label class="text-lg opacity-50">{label}</label>
-                <div class="text-3xl font-medium tracking-tight">{body}</div>
-                {subLabel && <p>{subLabel}</p>}
+                <label class="text-sm opacity-50 md:text-lg">{label}</label>
+                <div class="text-2xl font-medium tracking-tight md:text-3xl">
+                  {body}
+                </div>
+                {subLabel && <p class="text-xs md:text-base ">{subLabel}</p>}
               </div>
             ))
           }
@@ -57,6 +59,6 @@ const { id = 'tokenomics', priceCard = [], progressCard = [] } = Astro.props;
 
 <style>
   .cardContainer {
-    @apply flex flex-col gap-8 px-6 py-8;
+    @apply flex flex-col gap-4 px-6 py-8 md:gap-8;
   }
 </style>
