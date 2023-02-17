@@ -13,7 +13,7 @@ const Table = () => {
     <div className="mx-auto w-full max-w-4xl overflow-x-auto rounded-lg border border-gray bg-white drop-shadow-primary">
       <table className="w-full table-auto">
         <thead className="relative rounded-lg bg-gray text-xs font-medium text-gray-dark">
-          <div className="absolute top-0 h-2 w-full bg-timer-gradient opacity-60"></div>
+          <tr className="absolute top-0 h-2 w-full bg-timer-gradient opacity-60"></tr>
           <tr>
             {tHeaders.map((label) => (
               <th

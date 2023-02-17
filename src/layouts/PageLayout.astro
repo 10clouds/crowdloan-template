@@ -13,7 +13,6 @@ export interface Props {
   description: string;
   navLinks: NavLink[];
   footerLinks: FooterLinks;
-  logo: string;
 }
 
 const {
@@ -21,12 +20,11 @@ const {
   description = '',
   navLinks = [],
   footerLinks,
-  logo = '',
 } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
-  <Navbar navLinks={navLinks} logo={logo} />
+  <Navbar navLinks={navLinks} />
   <main>
     <slot />
   </main>

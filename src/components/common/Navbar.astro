@@ -4,13 +4,13 @@ import ToggleMenu from '@/components/common/ToggleMenu.astro';
 import type { NavLink } from '@/types';
 import Button from '@/components/ui/Button.astro';
 import ButtonWrapper from '@/features/Contribution/ButtonWrapper';
-
+import Logo from '@/assets/Logo.svg';
+import { Image } from '@astrojs/image/components';
 export interface Props {
   navLinks: NavLink[];
-  logo: string;
 }
 
-const { navLinks = [], logo } = Astro.props;
+const { navLinks = [] } = Astro.props;
 ---
 
 <header
@@ -22,7 +22,7 @@ const { navLinks = [], logo } = Astro.props;
   >
     <div class="flex justify-between">
       <a class="flex items-center" href="#">
-        <img src={logo} alt="crowload logotype" />
+        <Image width={120} height={62} src={Logo} alt="crowload logotype" />
       </a>
       <div class="flex items-center lg:hidden">
         <ToggleMenu />
