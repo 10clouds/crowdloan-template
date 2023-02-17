@@ -12,38 +12,9 @@ import Roadmap from '@/components/sections/Roadmap.astro';
 import Logos from '@/components/Logos.astro';
 import FAQ from '@/components/sections/FAQ.astro';
 import { SITE } from '@/config';
-import MiroLogo from '@/assets/images/logos/Miro.svg';
-import MobbinLogo from '@/assets/images/logos/Mobbin.svg';
-import StripeLogo from '@/assets/images/logos/Stripe.svg';
-import WebflowLogo from '@/assets/images/logos/Webflow.svg';
-import MondayLogo from '@/assets/images/logos/Monday.svg';
-import Logo from '@/assets/Logo.svg';
 import TimerBanner from '@/components/sections/TimerBanner.astro';
 import ModalWrapper from '@/features/Contribution/ModalWrapper';
 import PolkadotForm from '@/features/Contribution/PolkadotForm';
-
-let logos = [
-  {
-    src: MiroLogo,
-    alt: '',
-  },
-  {
-    src: MobbinLogo,
-    alt: '',
-  },
-  {
-    src: StripeLogo,
-    alt: '',
-  },
-  {
-    src: WebflowLogo,
-    alt: '',
-  },
-  {
-    src: MondayLogo,
-    alt: '',
-  },
-];
 
 const additionalLinksCardsData = [
   {
@@ -209,10 +180,9 @@ const rewardsDistribution = [
   title={t(SITE.title)}
   description={t(SITE.description)}
   footerLinks={SITE.footerLinks}
-  logo={Logo}
 >
   <Hero id="hero" />
-  <Logos logos={logos} class="mt-auto" />
+  <Logos class="mt-auto" />
 
   <About
     id="about"
