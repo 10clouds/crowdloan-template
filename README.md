@@ -86,6 +86,10 @@ npm run preview
 
 As with any static website you can deploy your built site to a number of hosts like Netlify, GitHub Pages, Vercel and more. For a detailed instruction regarding deployment process, please refer to [the Astro docs](https://docs.astro.build/en/guides/deploy/).
 
+## Troubleshooting
+
+In case of unexpected errors during the payment process, the first step should always be updating the polkadot browser extension and libraries included in the `package.json` file.
+
 ## License
 
 Project is [MIT](./LICENSE)
