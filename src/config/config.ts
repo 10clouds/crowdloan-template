@@ -12,10 +12,10 @@ const CONFIG = {
   navLinks: [
     // each title is translation key that is located in public/locales/en/translation.json
     { title: 'navigation.about', url: '#about' },
+    { title: 'navigation.tokenomics', url: '#tokenomics' },
     { title: 'navigation.rewards', url: '#rewards' },
     { title: 'navigation.contributors', url: '#contributors' },
     { title: 'navigation.additional', url: '#additional' },
-    { title: 'navigation.tokenomics', url: '#tokenomics' },
     { title: 'navigation.faq', url: '#faq' },
   ],
 
@@ -49,7 +49,7 @@ const polkadotConfig = {
   minAmount: 1,
 
   // amount that you want to reach in full DOT
-  targetAmount: 35,
+  targetAmount: 45,
 
   // change this address to network that your account id connected
   // more network info - https://support.subscan.io/#introduction

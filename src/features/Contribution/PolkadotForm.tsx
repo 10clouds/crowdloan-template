@@ -127,7 +127,11 @@ const PolkadotForm = () => {
 
   const handleFormSubmit = handleSubmit(async (formData) => {
     try {
-      // if there is any transaction error, please in first place check if there is an update to @polkadotjs lib
+      /*
+        In case of unexpected errors during the payment process,
+        the first step should always be updating the @polkadot libraries 
+        included in the `package.json` file.
+      */
       setIsLoading(true);
 
       const fromAcc = accounts.find((a) => a.address === formData.transferFrom);
