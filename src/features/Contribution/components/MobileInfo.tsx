@@ -20,16 +20,16 @@ const MobileInfo = ({ tokenSymbol, max }: Props) => {
   }
 
   return (
-    <div className="flex w-full max-w-2xl flex-col justify-between overflow-y-auto px-6 py-10">
-      <div>
-        <span className="mb-2 text-3xl font-medium tracking-tight">
+    <div className="flex max-h-[600px] w-full max-w-2xl flex-col justify-between overflow-y-auto px-6 py-10">
+      <div className="overflow-y-auto">
+        <h1 className="mb-2 text-3xl font-medium tracking-tight">
           {t('contribution.mobileInfo.contributeToFund')}
-        </span>
+        </h1>
         <p className="mb-6 text-gray-dark">
           {t('contribution.mobileInfo.inOrderToContribute')}
         </p>
         <div className="ml-4 text-xs opacity-50">
-          {t('contribution.mobileInfo.inOrderToContribute')}
+          {t('contribution.mobileInfo.accountAddress')}
         </div>
         <div className="flex rounded-2xl border text-sm" onClick={copyToCb}>
           <div className="flex-1 p-4">
