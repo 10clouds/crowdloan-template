@@ -11,6 +11,7 @@ interface Props {
   disabled?: boolean;
   onChange: InputHTMLAttributes<HTMLInputElement>['onChange'];
   onBlur: InputHTMLAttributes<HTMLInputElement>['onBlur'];
+  step?: InputHTMLAttributes<HTMLInputElement>['step'];
 }
 
 const Input = forwardRef<
@@ -27,6 +28,7 @@ const Input = forwardRef<
       disabled = false,
       onChange,
       onBlur,
+      step = 'any',
     }: Props,
     ref
   ) => {
@@ -47,6 +49,7 @@ const Input = forwardRef<
             onChange={onChange}
             onBlur={onBlur}
             disabled={disabled}
+            step={step}
             className={`inline-flex w-full min-w-full rounded-2xl border border-gray bg-white px-4 py-3 ${
               disabled ? 'text-gray' : 'text-base'
             } focus-within:border-blue-500`}
