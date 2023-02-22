@@ -49,7 +49,7 @@ const polkadotConfig = {
   minAmount: 1,
 
   // amount that you want to reach in full DOT
-  targetAmount: 35,
+  targetAmount: 45,
 
   // change this address to network that your account id connected
   // more network info - https://support.subscan.io/#introduction
