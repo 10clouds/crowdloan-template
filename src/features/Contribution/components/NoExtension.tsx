@@ -12,6 +12,8 @@ const NoExtension = () => {
         <a
           href="https://polkadot.js.org/extension/"
           className="text-center text-primary hover:underline"
+          target="_blank"
+          rel="noreferrer"
         >
           {t('extension.polkaDot')}&nbsp;
         </a>
