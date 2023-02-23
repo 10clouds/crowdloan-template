@@ -41,6 +41,7 @@ const ModalWrapper = ({ children }: Props) => {
           width: 'fit-content',
           height: 'fit-content',
           overflowX: 'hidden',
+          inset: '0',
         },
       }}
     >
