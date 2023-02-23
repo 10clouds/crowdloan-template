@@ -20,7 +20,7 @@ const MobileInfo = ({ tokenSymbol, max }: Props) => {
   }
 
   return (
-    <div className="flex max-h-[600px] w-full max-w-2xl flex-col justify-between overflow-y-auto px-6 py-10">
+    <div className="flex max-h-[600px] w-full max-w-xs flex-col justify-between overflow-y-auto px-6 py-10 md:max-w-2xl">
       <div className="overflow-y-auto">
         <h1 className="mb-2 text-3xl font-medium tracking-tight">
           {t('contribution.mobileInfo.contributeToFund')}
