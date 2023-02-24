@@ -2,7 +2,7 @@
 
 # Welcome to Parity template
 
-This template enables you to quickly create a front-end landing page to easily showcase your project and make it encouraging for your future contributors.
+This template enables you to quickly create a front-end landing page to easily showcase your project and encourage your future contributors to donate.
 
 ## Tech stack
 
