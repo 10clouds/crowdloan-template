@@ -16,7 +16,7 @@ Core technologies Parity Template is based on are:
 
 ## Project structure
 
-Astrtos archtecture enables you to use a framework of your choice for writing components. We've opted for React but it can as easily be Svelte, Vue, Solid and more. Please refer to [Astro's documentation](https://docs.astro.build/en/concepts/why-astro/#easy-to-use) to learn more.
+Astros architecture enables you to use a framework of your choice for writing components. We've opted for React but it can as easily be Svelte, Vue, Solid and more. Please refer to [Astro's documentation](https://docs.astro.build/en/concepts/why-astro/#easy-to-use) to learn more.
 
 Inside of your Astro project, you'll see the following folders and files:
 
@@ -42,17 +42,17 @@ Static assets, like images, can be placed in the `public/` directory.
 
 ## Template theming, customization and internationalization
 
-You can adjust styles for your template any way you want but we recommend sticking with TailwindCSS and customizing either through modification of defaults in `./tailwind.config.cjs`, or simily changing utility classes used on the elements.
+You can adjust styles for your template any way you want but we recommend sticking with TailwindCSS and customizing either through modifying the defaults in `./tailwind.config.cjs`, or by simply changing utility classes used on the elements.
 
 To configure the address for contributions go to `src/config/config.ts` and fill `targetAccountAddress`. There you can also change the minimum and target amount for contributions and the end date of your auction.
 
 ## Polkadotjs API
 
-Project is setup to work with test network connected using [Polkadot.js](https://polkadot.js.org/docs/) in this case test network is `westend` on the development server and it uses live network after build on production mode. If you would like to change connection address please refer to `src/features/Contribution/api/api.ts`
+The project is set up to work with the test network connected using [Polkadot.js](https://polkadot.js.org/docs/). By default, the `westend` test network on the development server is used. After building on production mode, the live network is used. If you would like to change the connection address please refer to `src/features/Contribution/api/api.ts`.
 
 ## External API
 
-We are also displaying latest contributors information using [subscan - transfers endpoint](https://support.subscan.io/#transfers), on test network is free to use, to get live network data get a free API key that includes higher quotas or start your trial with other available plans at [plans info](https://pro.subscan.io/). To adjust endpoint please refer to `apiScanUrl` located in `src/config/config.ts`
+We are also displaying the latest contributors information using [subscan - transfers endpoint](https://support.subscan.io/#transfers) - on the test network it's free to use, to get live network data get a free API key that includes higher quotas or start your trial with other available plans at [plans info](https://pro.subscan.io/). To adjust endpoint please refer to `apiScanUrl` located in `src/config/config.ts`
 
 ## Getting started
 
