@@ -20,7 +20,7 @@ const CONFIG = {
   ],
 
   // this can be any date format that is accepted by new Date()
-  crowdLoadEndDate: '2023-03-13',
+  crowdLoanEndDate: '2023-08-19 13:32',
 };
 
 const footerLinks = {

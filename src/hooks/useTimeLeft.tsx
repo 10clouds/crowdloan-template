@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import type { DurationObjectUnits } from 'luxon';
-import { getDuration } from '@/utils';
+import { getDuration, isDateInPast } from '@/utils';
 
 const defaultState = {
   days: 0,
@@ -14,12 +14,20 @@ export function useTimeLeft(eventDate: Date | string): DurationObjectUnits {
   const [timeLeft, setTimeLeft] = useState<DurationObjectUnits>(defaultState);
 
   useEffect(() => {
+    if (isDateInPast(eventDate)) return;
+
     const interval = setInterval(() => {
       const duration = getDuration(eventDate);
-      setTimeLeft(duration);
+
+      if (isDateInPast(eventDate)) {
+        clearInterval(interval);
+      } else {
+        setTimeLeft(duration);
+      }
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
+
   return timeLeft;
 }
