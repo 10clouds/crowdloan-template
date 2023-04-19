@@ -1,18 +1,18 @@
 ![image](https://user-images.githubusercontent.com/34003/216074063-d84fa812-5ceb-44dc-96d9-161976cda631.png)
 
-# Welcome to Parity template
+# Welcome to the Crowdloan Template
 
 This template enables you to quickly create a front-end landing page to easily showcase your project and encourage your future contributors to donate.
 
 ## Tech stack
 
-Core technologies Parity Template is based on are:
+Core technologies Crowdloan Template is based on are:
 
 - [Astro](https://astro.build/) - a web framework for building static websites.
 - [React](https://reactjs.org/) - a JavaScript library for building user interfaces.
 - [TailwindCSS](https://tailwindcss.com/) - a CSS framework of utility classes.
 - [Polkadot.js](https://polkadot.js.org/docs/) - a collection of tools for interacting with the Polkadot network.
-- [Astro-i18next](https://astro-i18next.yassinedoghri.com/) - An astro integration of i18next + some utility components to help you translate website
+- [Astro-i18next](https://astro-i18next.yassinedoghri.com/) - An Astro integration of i18next + some utility components to help you translate website
 
 ## Project structure
 

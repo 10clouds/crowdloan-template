@@ -1,5 +1,5 @@
 {
-  "name": "parity-crowdloan-template",
+  "name": "crowdloan-template",
   "type": "module",
   "version": "0.0.1",
   "private": true,
