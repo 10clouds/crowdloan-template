@@ -53,6 +53,8 @@
     "contributed": "Contributed",
     "cap": "CAP",
     "leaseDuration": "Lease Duration",
+    "weeks_one": "{{count}} week",
+    "weeks_other": "{{count}} weeks",
     "auctionStarted": "Auction started"
   },
   "about": {

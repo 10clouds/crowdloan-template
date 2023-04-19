@@ -3,7 +3,7 @@ import { t } from 'i18next';
 
 import TimeLeftTimer from '@/components/common/TimeLeftTimer';
 import Section from '@/components/ui/Section.astro';
-import { getDuration } from '@/utils';
+import { getDuration, isDateInPast } from '@/utils';
 import { SITE } from '@/config';
 import Button from '@/components/ui/Button.astro';
 import Container from '@/components/ui/Container.astro';
@@ -17,6 +17,9 @@ export interface Props {
 const { id = 'hero' } = Astro.props;
 
 const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
+const leaseDuration = isDateInPast(SITE.crowdLoadEndDate)
+  ? 0
+  : Math.floor(Number(weeksLeft.weeks ?? 0));
 ---
 
 <Section id={id} class="bg-primary flex flex-col md:flex-row relative">
@@ -56,7 +59,7 @@ const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
               {t('hero.leaseDuration')}
             </div>
             <span class="text-xl font-medium leading-[90%] md:text-[2rem]"
-              >{Math.floor(Number(weeksLeft.weeks ?? 0))} weeks</span
+              >{t('hero.weeks', { count: leaseDuration })}</span
             >
           </div>
           <div class="flex flex-col">
