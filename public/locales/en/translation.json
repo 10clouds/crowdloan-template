@@ -71,12 +71,12 @@
         "team": "Team 11%",
         "ecosystem": "EcoSystem 4%",
         "validationRewards": "Validation Rewards 30%",
-        "crowdloanFunds": "Crowdload Funds 15%"
+        "crowdloanFunds": "Crowdloan Funds 15%"
       },
       "price": {
         "price": "Price",
         "totalSupply": "Total Supply",
-        "crowdloanRewardPool": "Crowdload Reward Pool",
+        "crowdloanRewardPool": "Crowdloan Reward Pool",
         "xOfTotalSupply": "{{value}}% of Total Supply"
       }
     }

@@ -16,8 +16,8 @@ export interface Props {
 
 const { id = 'hero' } = Astro.props;
 
-const weeksLeft = getDuration(SITE.crowdLoadEndDate, 'weeks');
-const leaseDuration = isDateInPast(SITE.crowdLoadEndDate)
+const weeksLeft = getDuration(SITE.crowdLoanEndDate, 'weeks');
+const leaseDuration = isDateInPast(SITE.crowdLoanEndDate)
   ? 0
   : Math.floor(Number(weeksLeft.weeks ?? 0));
 ---
@@ -48,7 +48,7 @@ const leaseDuration = isDateInPast(SITE.crowdLoadEndDate)
         class="mx-auto h-min w-full min-w-min max-w-max drop-shadow-primary md:ml-auto md:w-1/2 md:max-w-min"
       >
         <Container class="mt-6 md:mt-0">
-          <TimeLeftTimer date={SITE.crowdLoadEndDate} client:load />
+          <TimeLeftTimer date={SITE.crowdLoanEndDate} client:load />
         </Container>
 
         <ContributedInfo client:only />

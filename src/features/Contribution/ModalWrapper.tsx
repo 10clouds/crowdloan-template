@@ -17,7 +17,7 @@ const ModalWrapper = ({ children }: Props) => {
       onRequestClose={() => {
         setIsModalOpen(false);
       }}
-      contentLabel="Crowdload Contribution"
+      contentLabel="Crowdloan Contribution"
       style={{
         overlay: {
           position: 'fixed',
